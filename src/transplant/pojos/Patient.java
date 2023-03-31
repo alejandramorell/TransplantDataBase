@@ -108,4 +108,8 @@ public class Patient implements Serializable{
 	
 	
 
+	public Patient() {
+		
+	}
+	
 }
