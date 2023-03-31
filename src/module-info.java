@@ -6,4 +6,5 @@
  *
  */
 module TransplantDataBase {
+	requires java.sql;
 }
