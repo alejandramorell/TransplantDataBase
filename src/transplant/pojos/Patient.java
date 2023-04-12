@@ -16,9 +16,11 @@ public class Patient implements Serializable{
 	private Date ingressDate;
 	private String adress;
 	private Integer phone;
+	
 	public Patient() {
 		super();
 	}
+	
 	public Patient(Integer id, String sex, String name, Date dateOfBirth, String disease, String bloodType,
 			Date ingressDate, String adress, Integer phone) {
 		super();
@@ -100,16 +102,6 @@ public class Patient implements Serializable{
 			return false;
 		Patient other = (Patient) obj;
 		return Objects.equals(id, other.id);
-	}
-	
-	
-	
-	
-	
-	
-
-	public Patient() {
-		
 	}
 	
 }
