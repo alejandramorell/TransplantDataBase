@@ -1,6 +1,7 @@
 package transplant.pojos;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 public class Donor implements Serializable{
@@ -11,20 +12,20 @@ public class Donor implements Serializable{
 	private String adress;
 	private Integer phone;
 	private String livingState;
+	private List<Organ> organs;
 	
-	public Donor(Integer id, String name, String adress, Integer phone, String livingState) {
+	public Donor() {
+		super();
+	}
+	public Donor(Integer id, String name, String adress, Integer phone, String livingState, List<Organ> organs) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.adress = adress;
 		this.phone = phone;
 		this.livingState = livingState;
+		this.organs = organs;
 	}
-
-	public Donor() {
-		super();
-	}
-
 	public Integer getId() {
 		return id;
 	}
@@ -55,7 +56,12 @@ public class Donor implements Serializable{
 	public void setLivingState(String livingState) {
 		this.livingState = livingState;
 	}
-	
+	public List<Organ> getOrgans() {
+		return organs;
+	}
+	public void setOrgans(List<Organ> organs) {
+		this.organs = organs;
+	}
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -72,6 +78,4 @@ public class Donor implements Serializable{
 		return Objects.equals(id, other.id);
 	}
 	
-	
-
 }

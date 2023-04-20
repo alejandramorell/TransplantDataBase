@@ -9,6 +9,18 @@ public class Theatre implements Serializable {
 	private Integer id;
 	private Integer floor;
 	private Integer number;
+	
+	public Theatre() {
+		super();
+	}
+	
+	public Theatre(Integer id, Integer floor, Integer number) {
+		super();
+		this.id = id;
+		this.floor = floor;
+		this.number = number;
+	}
+
 	public Integer getId() {
 		return id;
 	}
@@ -27,15 +39,7 @@ public class Theatre implements Serializable {
 	public void setNumber(Integer number) {
 		this.number = number;
 	}
-	public Theatre() {
-		super();
-	}
-	public Theatre(Integer id, Integer floor, Integer number) {
-		super();
-		this.id = id;
-		this.floor = floor;
-		this.number = number;
-	}
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -51,8 +55,6 @@ public class Theatre implements Serializable {
 		Theatre other = (Theatre) obj;
 		return Objects.equals(id, other.id);
 	}
-	
-	
-	
+
 
 }

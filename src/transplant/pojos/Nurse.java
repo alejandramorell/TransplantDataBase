@@ -11,6 +11,10 @@ public class Nurse implements Serializable {
 	private String adress;
 	private Integer phone;
 	
+	public Nurse() {
+		super();
+	}
+	
 	public Nurse(Integer id, String name, String adress, Integer phone) {
 		super();		
 		this.id = id;
@@ -18,9 +22,7 @@ public class Nurse implements Serializable {
 		this.adress = adress;
 		this.phone = phone;
 	}
-	public Nurse() {
-		super();
-	}
+	
 	public Integer getId() {
 		return id;
 	}
