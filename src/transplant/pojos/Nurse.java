@@ -5,7 +5,7 @@ import java.util.Objects;
 
 public class Nurse implements Serializable {
 
-	private static final long serialVersionUID = -4515928946764738500L;
+	private static final long serialVersionUID = -4062894783010869655L;
 	private Integer id;
 	private String name;
 	private String adress;

@@ -5,7 +5,8 @@ import java.util.Objects;
 
 public class RequestedOrgan implements Serializable{
 
-	private static final long serialVersionUID = 235152316789116909L;
+	
+	private static final long serialVersionUID = 4031768231552830582L;
 	private Integer id;
 	private String type;
 	private Patient patient;

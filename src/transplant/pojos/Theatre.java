@@ -5,7 +5,8 @@ import java.util.Objects;
 
 public class Theatre implements Serializable {
 
-	private static final long serialVersionUID = 6808253216227863665L;
+	
+	private static final long serialVersionUID = 3081191966672640367L;
 	private Integer id;
 	private Integer floor;
 	private Integer number;

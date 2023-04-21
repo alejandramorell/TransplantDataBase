@@ -6,7 +6,10 @@ import java.util.Objects;
 
 public class Donor implements Serializable{
 	
-	private static final long serialVersionUID = -8208053288652575928L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6939768601635036985L;
 	private Integer id;
 	private String name;
 	private String adress;

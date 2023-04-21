@@ -5,8 +5,8 @@ import java.util.Objects;
 
 public class Organ implements Serializable{
 
-	private static final long serialVersionUID = -3310068065836406234L;
 	
+	private static final long serialVersionUID = 1681924843119231105L;
 	private Integer id; 
 	private String name;
 	private String adress;

@@ -7,7 +7,7 @@ import java.util.Objects;
 
 public class WaitingList implements Serializable {
 
-	
+	private static final long serialVersionUID = -1063817808595222025L;
 	private Integer id; 
 	private Date registrationDate;
 	private String Urgency; 

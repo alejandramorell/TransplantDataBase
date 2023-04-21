@@ -6,7 +6,8 @@ import java.util.Objects;
 
 public class Transplant implements Serializable {
 
-	private static final long serialVersionUID = 3257926599369942939L;
+
+	private static final long serialVersionUID = 6640455937191882784L;
 	private Integer id; 
 	private Date registrationDate;
 	private RequestedOrgan requestedOrgan; 
