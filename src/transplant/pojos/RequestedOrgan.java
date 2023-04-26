@@ -10,6 +10,7 @@ public class RequestedOrgan implements Serializable{
 	private Integer id;
 	private String type;
 	private Patient patient;
+	
 	public RequestedOrgan() {
 		super();
 	}
