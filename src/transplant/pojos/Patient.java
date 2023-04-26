@@ -8,9 +8,11 @@ import java.util.Objects;
 public class Patient implements Serializable{
 	
 	private static final long serialVersionUID = -6037002940808004660L;
+	
 	private Integer id;
 	private String sex;
 	private String name;
+	private String surname;
 	private Date dateOfBirth;
 	private String disease;
 	private String bloodType;
@@ -24,12 +26,13 @@ public class Patient implements Serializable{
 		super();
 	}
 
-	public Patient(Integer id, String sex, String name, Date dateOfBirth, String disease, String bloodType,
+	public Patient(Integer id, String sex, String name, String surname, Date dateOfBirth, String disease, String bloodType,
 			Date ingressDate, String adress, Integer phone, WaitingList waitingList, List<Organ> requestedOrgan) {
 		super();
 		this.id = id;
 		this.sex = sex;
 		this.name = name;
+		this.surname = surname;
 		this.dateOfBirth = dateOfBirth;
 		this.disease = disease;
 		this.bloodType = bloodType;
@@ -64,6 +67,14 @@ public class Patient implements Serializable{
 		this.name = name;
 	}
 
+	public String getSurname() {
+		return surname;
+	}
+
+	public void setSurname(String surname) {
+		this.surname = surname;
+	} 
+	
 	public Date getDateOfBirth() {
 		return dateOfBirth;
 	}
@@ -143,7 +154,8 @@ public class Patient implements Serializable{
 			return false;
 		Patient other = (Patient) obj;
 		return Objects.equals(id, other.id);
-	} 
+	}
+
 	
 	
 }
