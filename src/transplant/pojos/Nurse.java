@@ -5,11 +5,15 @@ import java.util.Objects;
 
 public class Nurse implements Serializable {
 
-	private static final long serialVersionUID = -4515928946764738500L;
+	private static final long serialVersionUID = -4062894783010869655L;
 	private Integer id;
 	private String name;
 	private String adress;
 	private Integer phone;
+	
+	public Nurse() {
+		super();
+	}
 	
 	public Nurse(Integer id, String name, String adress, Integer phone) {
 		super();		
@@ -18,9 +22,7 @@ public class Nurse implements Serializable {
 		this.adress = adress;
 		this.phone = phone;
 	}
-	public Nurse() {
-		super();
-	}
+	
 	public Integer getId() {
 		return id;
 	}
