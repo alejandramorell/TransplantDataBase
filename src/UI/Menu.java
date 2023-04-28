@@ -1,10 +1,13 @@
-package transplant.pojos;
+package UI;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+
+import transplant.pojos.Surgeon;
+
 import java.sql.Date;
 
 public class Menu {
@@ -83,4 +86,4 @@ public class Menu {
 
 	}
 
-}
+
