@@ -1,6 +1,7 @@
 package transplant.pojos;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -19,6 +20,7 @@ public class Donor implements Serializable{
 	
 	public Donor() {
 		super();
+		organs = new ArrayList<Organ>();
 	}
 	public Donor(Integer id, String name, String adress, Integer phone, String livingState, List<Organ> organs) {
 		super();
