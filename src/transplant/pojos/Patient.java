@@ -154,8 +154,6 @@ public class Patient implements Serializable{
 			return false;
 		Patient other = (Patient) obj;
 		return Objects.equals(id, other.id);
-	}
-
-	
+	}	
 	
 }
