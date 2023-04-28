@@ -33,6 +33,16 @@ public class Surgeon implements Serializable {
 	}
 
 
+	public Surgeon(String name, String adress, Integer phone, String speciality, Date hiring_date) {
+		super();
+		this.name = name;
+		this.adress = adress;
+		this.phone = phone;
+		this.speciality = speciality;
+		this.hiring_date = hiring_date;
+	}
+
+
 	public Integer getId() {
 		return id;
 	}

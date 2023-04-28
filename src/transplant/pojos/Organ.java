@@ -5,11 +5,11 @@ import java.io.Serializable;
 import java.util.List;
 =======
 import java.util.Objects;
->>>>>>> branch 'master' of https://github.com/alejandramorell/TransplantDataBase.git
+
 
 public class Organ implements Serializable{
 
-<<<<<<< HEAD
+
 	private static final long serialVersionUID = -3310068065836406234L;
 	private Integer id;
 	private String bloodType;
@@ -19,8 +19,6 @@ public class Organ implements Serializable{
 		super();
 		// TODO Auto-generated constructor stub
 	}
-=======
->>>>>>> branch 'master' of https://github.com/alejandramorell/TransplantDataBase.git
 	
 	private static final long serialVersionUID = 1681924843119231105L;
 	private Integer id; 
