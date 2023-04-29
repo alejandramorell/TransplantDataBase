@@ -6,6 +6,8 @@ import java.io.InputStreamReader;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import ifaces.SurgeonManager;
+import jdbc.JDBCSurgeonManager;
 import transplant.pojos.Surgeon;
 
 import java.sql.Date;
@@ -13,13 +15,14 @@ import java.sql.Date;
 public class Menu {
 	private static BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
 	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-
+	private static SurgeonManager surgeonMan; //it is and interface so i need to assign to surgeonMan a class that implements the interface 
 
 
 	public static void main(String[] args) {
 		
 		try {
 			// TODO Auto-generated method stub
+			surgeonMan = new JDBCSurgeonManager();
 			System.out.println("Welcome to the transplant application for hospitals");
 			System.out.println("Choose an option:");
 			System.out.println("1: LOG IN");
@@ -75,9 +78,7 @@ public class Menu {
 			LocalDate hiringDate = LocalDate.parse(date, formatter);
 			
 			Surgeon s = new Surgeon(name, adress, phone, speciality, Date.valueOf(hiringDate))); //look for the constructor with and without id
-			
-			
-			//TODO Insert Surgeon in the dataBase
+			surgeonMan.insertSurgeon(s);
 			
 			
 			
