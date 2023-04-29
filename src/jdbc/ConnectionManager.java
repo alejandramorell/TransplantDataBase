@@ -29,6 +29,7 @@ public class ConnectionManager {
 		
 		//TODO pol please could you change the queries according to our tables in sql
 		try {
+			//c.setAutoCommit(false); when i want to make a change, the db is not going to do it inmediatly
 			Statement s = c.createStatement();
 			String table = "CREATE TABLE owners (id INTEGER PRIMARY KEY AUTOINCREMENT," + " name TEXT NOT NULL,"
 					+ " phone INTEGER," + " email TEXT NOT NULL)";
@@ -42,6 +43,8 @@ public class ConnectionManager {
 			String table4 = "CREATE TABLE dogsVets (" + " dogId INTEGER REFERENCES dogs(id) ON DELETE CASCADE,"
 					+ " vetId INTEGER REFERENCES vets(id) ON DELETE CASCADE)";
 			s.executeUpdate(table4);
+			//c.commit(); changes that were waiting will be made at the same time
+			//later he remove this autocomit things
 			s.close();
 		} catch (SQLException e) {
 			// Check if the exception is because the tables already exist

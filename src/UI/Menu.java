@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 import ifaces.SurgeonManager;
 import jdbc.JDBCSurgeonManager;
@@ -77,10 +78,24 @@ public class Menu {
 			String date = r.readLine();
 			LocalDate hiringDate = LocalDate.parse(date, formatter);
 			
-			Surgeon s = new Surgeon(name, adress, phone, speciality, Date.valueOf(hiringDate))); //look for the constructor with and without id
+			Surgeon s = new Surgeon(name, adress, phone, speciality, Date.valueOf(hiringDate)); //look for the constructor with and without id
 			surgeonMan.insertSurgeon(s);
 			
 			
+			
+		}
+		
+		public static void selectSurgeon() throws IOException{
+			
+			
+			System.out.println("Let´s search by name: ");
+			System.out.println("Name: ");
+			String name = r.readLine();
+			List<Surgeon> listS = surgeonMan.searchSurgeonByName(name);
+			System.out.println(listS);
+			System.out.println("Please choose an owner, type it id: ");
+			Integer id = Integer.parseInt(r.readLine());
+			//	
 			
 		}
 		

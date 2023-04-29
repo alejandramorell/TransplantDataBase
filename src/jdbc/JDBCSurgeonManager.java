@@ -3,8 +3,11 @@ package jdbc;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import ifaces.SurgeonManager;
@@ -46,12 +49,32 @@ public class JDBCSurgeonManager implements SurgeonManager {
 		}
 	}
 	public List<Surgeon> searchSurgeonByName(String name){
-		//TODO Auto-generated method stub
-		return null;
 		
-	}
-	public Surgeon getSurgeon(int id) {
-		return null;
+		List<Surgeon> list = new ArrayList<Surgeon>();
+		try {
+			String sql = "SELECT * FROM SURGEON WHERE name LIKE ?";
+			PreparedStatement p = c.prepareStatement(sql);
+			p.setString(1, "%" + name + "%"); 
+			ResultSet rs = p.executeQuery(); //
+			while (rs.next()) {
+				// Create a new Owner
+				Integer id = rs.getInt("id");
+				String n = rs.getString("name");
+				String adress = rs.getString("email");
+				Integer phone = rs.getInt("phone");
+				String speciality = rs.getString("speciality");
+				Date hiringDate = rs.getDate("hiring date");
+
+				Surgeon s = new Surgeon(id, n, adress, phone, speciality, hiringDate);
+				// IMPORTANT: I don't have the dogs
+				// Add the Surgeon to the list
+				list.add(s);
+			}
+		} catch (SQLException e) {
+			System.out.println("Database error.");
+			e.printStackTrace();
+		}
+		return list;
 	}
 	
 
