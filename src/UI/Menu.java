@@ -93,7 +93,7 @@ public class Menu {
 			String name = r.readLine();
 			List<Surgeon> listS = surgeonMan.searchSurgeonByName(name);
 			System.out.println(listS);
-			System.out.println("Please choose an owner, type it id: ");
+			System.out.println("Please choose a surgeon, type it id: ");
 			Integer id = Integer.parseInt(r.readLine());
 			//	
 			

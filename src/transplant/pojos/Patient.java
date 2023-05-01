@@ -2,7 +2,6 @@ package transplant.pojos;
 
 import java.io.Serializable;
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -18,6 +17,7 @@ public class Patient implements Serializable{
 	private String disease;
 	private String bloodType;
 	private Date ingressDate;
+	//TODO change ingressDate to admissionDate everywhere
 	private String adress;
 	private Integer phone;
     private WaitingList waitingList; 
@@ -25,7 +25,6 @@ public class Patient implements Serializable{
     
 	public Patient() {
 		super();
-		requestedOrgan = new ArrayList<Organ>();
 	}
 
 	public Patient(Integer id, String sex, String name, String surname, Date dateOfBirth, String disease, String bloodType,
