@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import transplant.pojos.Surgeon;
+
 public class ConnectionManager {
 	
 	private Connection c;
@@ -13,7 +15,7 @@ public class ConnectionManager {
 	public ConnectionManager() { 
 		try {
 			Class.forName("org.sqlite.JDBC");
-			c = DriverManager.getConnection("jdbc:sqlite:./db/dogclinic.db");
+			c = DriverManager.getConnection("jdbc:sqlite:./db/TransplantDataBase.db");
 			c.createStatement().execute("PRAGMA foreign_keys=ON");
 			System.out.println("Database connection opened.");
 			createTables();
@@ -21,8 +23,6 @@ public class ConnectionManager {
 			System.out.println("Database access error");
 			e.printStackTrace();
 		}
-	
-
 	}
 	
 	private void createTables() {
@@ -31,11 +31,23 @@ public class ConnectionManager {
 		try {
 			//c.setAutoCommit(false); when i want to make a change, the db is not going to do it inmediatly
 			Statement s = c.createStatement();
-			String table = "CREATE TABLE owners (id INTEGER PRIMARY KEY AUTOINCREMENT," + " name TEXT NOT NULL,"
-					+ " phone INTEGER," + " email TEXT NOT NULL)";
+			String table = "CREATE TABLE surgeons (id INTEGER PRIMARY KEY AUTOINCREMENT, "
+					+ "name TEXT NOT NULL, "
+					+ "adress TEXT, "
+					+ "phone INTEGER, "
+					+ "speciality TEXT, "
+					+ "hiring_date DATE)";
 			s.executeUpdate(table);
-			String table2 = "CREATE TABLE dogs (id INTEGER PRIMARY KEY AUTOINCREMENT," + " name TEXT NOT NULL,"
-					+ " dob DATE NOT NULL," + " breed TEXT," + " ownerId INTEGER REFERENCES owners(id))";
+			String table2 = "CREATE TABLE patients (id INTEGER PRIMARY KEY AUTOINCREMENT, "
+				    + "sex TEXT NOT NULL, "
+			        + "name TEXT NOT NULL,"
+					+ "surname TEXT, "
+					+ "dateOfBirth DATE, "
+					+ "diasease TEXT, "
+					+ "bloodType TEXT NOT NULL, "
+					+ "admissionDate DATE, "	
+					//TODO change ingressDate to admissionDate everywhere
+					+ "adress TEXT, )";
 			s.executeUpdate(table2);
 			String table3 = "CREATE TABLE vets (id INTEGER PRIMARY KEY AUTOINCREMENT," + " name TEXT NOT NULL,"
 					+ " phone INTEGER," + " email TEXT NOT NULL," + " speciality TEXT)";
@@ -68,7 +80,4 @@ public class ConnectionManager {
 			e.printStackTrace();
 		}
 	}
-	
-	
-
 }

@@ -33,29 +33,6 @@ public class JDBCSurgeonManager implements SurgeonManager {
 		
 	}
 	
-	private void createTables() {
-		//TODO i think afterwards Rodrigo creates a general class where all tables are created so i did it yet but i think he would move this method to the other class in the future
-	//Clase 01/05/2023
-	String table = "CREATE TABLE surgeons (id INTEGER PRIMARY KEY AUTOINCREMENT, "
-			+ "name TEXT NOT NULL, "
-			+ "adress TEXT, "
-			+ "phone INTEGER, "
-			+ "speciality TEXT, "
-			+ "hiring_date DATE)"; 
-	
-	table = "CREATE TABLE patients (id INTEGER PRIMARY KEY AUTOINCREMENT, "
-		    + "sex TEXT NOT NULL, "
-	        + "name TEXT NOT NULL,"
-			+ "surname TEXT, "
-			+ "dateOfBirth DATE, "
-			+ "diasease TEXT, "
-			+ "bloodType TEXT NOT NULL, "
-			+ "admissionDate DATE, "	
-			//TODO change ingressDate to admissionDate everywhere
-			+ "adress TEXT, )";
-	//TODO finish creating all the tables of our database 
-	}
-	
 	public void insertSurgeon(Surgeon surgeon) {
 		try {
 			Statement s = c.createStatement();
@@ -68,6 +45,7 @@ public class JDBCSurgeonManager implements SurgeonManager {
 			e.printStackTrace();
 		}
 	}
+	
 	public List<Surgeon> searchSurgeonByName(String name){
 		
 		List<Surgeon> list = new ArrayList<Surgeon>();
