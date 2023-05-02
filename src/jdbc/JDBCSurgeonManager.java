@@ -33,6 +33,7 @@ public class JDBCSurgeonManager implements SurgeonManager {
 		
 	}
 	
+	
 	public void insertSurgeon(Surgeon surgeon) {
 		try {
 			Statement s = c.createStatement();
