@@ -7,6 +7,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import dogclinic.pojos.Owner;
+import dogclinic.pojos.User;
 import ifaces.SurgeonManager;
 import jdbc.JDBCSurgeonManager;
 import transplant.pojos.Surgeon;
@@ -14,6 +16,7 @@ import transplant.pojos.Surgeon;
 import java.sql.Date;
 
 public class Menu {
+	
 	private static BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
 	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 	private static SurgeonManager surgeonMan; //it is and interface so i need to assign to surgeonMan a class that implements the interface 
@@ -34,12 +37,11 @@ public class Menu {
 			
 			switch(choice) {
 			case 1:{
-				logIn();
-				//TODO register
+				login();
 				break;
 			}
 			case 2:{
-				//TODO log in
+				//TODO register
 				break;
 			}
 			case 3:{
@@ -58,11 +60,42 @@ public class Menu {
 		
 	}
 	
-	public static void logIn() {
+	public static void login() throws IOException {
+		while (true) {
+			
+			System.out.println("Who do you want to log in as?:");
+			System.out.println("1. Surgeon");
+			System.out.println("2. Nurse");
+			System.out.println("3. Transplant unit");
 		
-		patientMenu();
-		nurseMenu();
-		tuMenu();
+			int choice = Integer.parseInt(r.readLine());
+
+			switch (choice) {
+			case 1: {
+				System.out.println("Name:");
+				String username = r.readLine();
+				surgeonMenu();
+				
+				break;
+			}
+			case 2: {
+				System.out.println("Name:");
+				String username = r.readLine();
+				nurseMenu();
+				break;
+			}
+			case 3: {
+				//TODO how do we identify the transplant unit?
+				transplantUnitMenu();
+				break;
+			}
+			
+			
+			case 0: {
+				return;
+			}
+			}
+		}
 	}
 	
 	
@@ -103,7 +136,125 @@ public class Menu {
 			
 		}
 		
+		
+		public static void surgeonMenu(int id) {
+			while (true) {
+				try {
 
+					System.out.println("What do you want to do as the surgeon?:");
+					System.out.println("1. Check patient information");
+					System.out.println("2. View transplant information");
+					
+					int choice = Integer.parseInt(r.readLine());
+
+					switch (choice) {
+					case 1: {
+						showPatient(id);
+						break;
+					}
+					case 2: {
+						showTransplant(id);
+						break;
+					}
+					case 0: {
+						return;
+					}
+					}
+
+				} catch (NumberFormatException e) {
+					System.out.println("Incorrect number");
+					e.printStackTrace();
+				} catch (IOException e) {
+					System.out.println("I/O Exception.");
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		public static void nurseMenu(int id) {
+			while (true) {
+				try {
+
+					System.out.println("What do you want to do as the nurse?:");
+					System.out.println("1. View transplant information");
+					System.out.println("2. Set new transplant");
+					System.out.println("3. Modify transplant");
+					System.out.println("4. Assign surgeon to transplant");
+					System.out.println("5. Assign nurse to transplant");
+					
+					
+					int choice = Integer.parseInt(r.readLine());
+
+					switch (choice) {
+					case 1: {
+						showTransplant(id);
+						break;
+					}
+					case 2: {
+						insertTransplant(transplant);
+						break;
+					}
+					case 3: {
+						updateTransplant(id);
+						break;
+					}
+					case 4: {
+						//TODO assignSurgeon(Surgeon id, transplant id);
+						break;
+					}
+					case 5: {
+						//TODO assignNurse(Nurse id, transplant id);
+						break;
+					}
+					case 0: {
+						return;
+					}
+					}
+
+				} catch (NumberFormatException e) {
+					System.out.println("Incorrect number");
+					e.printStackTrace();
+				} catch (IOException e) {
+					System.out.println("I/O Exception.");
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		
+		public static void transplantUnitMenu(int id) {
+			while (true) {
+				try {
+
+					System.out.println("What do you want to do as the transplant unit?:");
+					System.out.println("1. Search for compatibility");
+					System.out.println("2. Register new organ");
+					
+					int choice = Integer.parseInt(r.readLine());
+
+					switch (choice) {
+					case 1: {
+						//TODO create the method "search for compatibility"
+						break;
+					}
+					case 2: {
+						insertOrgan(organ);
+						break;
+					}
+					case 0: {
+						return;
+					}
+					}
+
+				} catch (NumberFormatException e) {
+					System.out.println("Incorrect number");
+					e.printStackTrace();
+				} catch (IOException e) {
+					System.out.println("I/O Exception.");
+					e.printStackTrace();
+				}
+			}
+		}
 	}
 
 
