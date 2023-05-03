@@ -18,11 +18,10 @@ public class JDBCSurgeonManager implements SurgeonManager {
 	Connection c;
 	
 	public JDBCSurgeonManager()  {
-		//TODO connect with the database
-		//change the company.db thing
+		
 		try {
 			Class.forName("org.sqlite.JDBC");
-			c = DriverManager.getConnection("jdbc:sqlite:./db/dogclininc.db"); //creates the connection
+			c = DriverManager.getConnection("jdbc:sqlite:./db/TransplantDataBase.db"); //creates the connection
 			c.createStatement().execute("PRAGMA foreign_keys=ON");
 			System.out.println("Database connection opened.");
 		} catch (Exception e) {
