@@ -8,7 +8,7 @@ public interface SurgeonManager {
 	
 	public void insertSurgeon(Surgeon surgeon);
 	public List<Surgeon> searchSurgeonByName(String name);
-	public Surgeon getSurgeon(int id);
+	public Surgeon getSurgeon(Integer id);
 	
 
 }

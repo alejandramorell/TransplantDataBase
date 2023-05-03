@@ -58,7 +58,7 @@ public class JDBCSurgeonManager implements SurgeonManager {
 				// Create a new Owner
 				Integer id = rs.getInt("id");
 				String n = rs.getString("name");
-				String adress = rs.getString("email");
+				String adress = rs.getString("adress");
 				Integer phone = rs.getInt("phone");
 				String speciality = rs.getString("speciality");
 				Date hiringDate = rs.getDate("hiring date");
@@ -76,8 +76,26 @@ public class JDBCSurgeonManager implements SurgeonManager {
 	}
 
 	@Override
-	public Surgeon getSurgeon(int id) {
-		// TODO Auto-generated method stub
+	public Surgeon getSurgeon(Integer id) { //TODO ask for the type of the paramether id
+		try {
+			String sql = "SELECT * FROM SURGEON WHERE id = ?";
+			PreparedStatement p = c.prepareStatement(sql);
+			p.setInt(1, id);
+			ResultSet rs = p.executeQuery();
+			rs.next();
+			String name = rs.getString("name");
+			String adress = rs.getString("adress");
+			Integer phone = rs.getInt("phone");
+			String speciality = rs.getString("speciality");
+			Date hiringDate = rs.getDate("hiring date");
+			Surgeon s = new Surgeon(id, name, adress, phone, speciality, hiringDate);
+			rs.close();
+			p.close();
+			return s;
+		} catch (SQLException e) {
+			System.out.println("Database error.");
+			e.printStackTrace();
+		}
 		return null;
 	}
 	
