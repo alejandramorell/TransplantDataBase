@@ -34,7 +34,7 @@ public class Menu {
 			
 			switch(choice) {
 			case 1:{
-				registerSurgeon();
+				logIn();
 				//TODO register
 				break;
 			}
@@ -48,11 +48,6 @@ public class Menu {
 			}
 		
 			
-				
-				
-			
-			
-			
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -62,6 +57,15 @@ public class Menu {
 		}
 		
 	}
+	
+	public static void logIn() {
+		
+		patientMenu();
+		nurseMenu();
+		tuMenu();
+	}
+	
+	
 		public static void registerSurgeon() throws IOException{
 			
 			
