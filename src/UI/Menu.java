@@ -7,8 +7,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-import dogclinic.pojos.Owner;
-import dogclinic.pojos.User;
 import ifaces.SurgeonManager;
 import jdbc.JDBCSurgeonManager;
 import transplant.pojos.Surgeon;
