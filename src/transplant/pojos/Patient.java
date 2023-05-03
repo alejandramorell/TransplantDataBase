@@ -16,7 +16,7 @@ public class Patient implements Serializable{
 	private Date dateOfBirth;
 	private String disease;
 	private String bloodType;
-	private Date ingressDate;
+	private Date admissionDate;
 	//TODO change ingressDate to admissionDate everywhere
 	private String adress;
 	private Integer phone;
@@ -28,7 +28,7 @@ public class Patient implements Serializable{
 	}
 
 	public Patient(Integer id, String sex, String name, String surname, Date dateOfBirth, String disease, String bloodType,
-			Date ingressDate, String adress, Integer phone, WaitingList waitingList, List<Organ> requestedOrgan) {
+			Date admissionDate, String adress, Integer phone, WaitingList waitingList, List<Organ> requestedOrgan) {
 		super();
 		this.id = id;
 		this.sex = sex;
@@ -37,7 +37,7 @@ public class Patient implements Serializable{
 		this.dateOfBirth = dateOfBirth;
 		this.disease = disease;
 		this.bloodType = bloodType;
-		this.ingressDate = ingressDate;
+		this.admissionDate = admissionDate;
 		this.adress = adress;
 		this.phone = phone;
 		this.waitingList = waitingList;
@@ -100,12 +100,12 @@ public class Patient implements Serializable{
 		this.bloodType = bloodType;
 	}
 
-	public Date getIngressDate() {
-		return ingressDate;
+	public Date getAdmissionDate() {
+		return admissionDate;
 	}
 
-	public void setIngressDate(Date ingressDate) {
-		this.ingressDate = ingressDate;
+	public void setAdmissionDate(Date ingressDate) {
+		this.admissionDate = ingressDate;
 	}
 
 	public String getAdress() {
