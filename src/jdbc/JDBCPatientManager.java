@@ -181,6 +181,13 @@ public class JDBCPatientManager implements PatientManager{
 			e.printStackTrace();
 		}
 	}
+
+
+	@Override
+	public void removePatient(int id) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 
 

@@ -11,5 +11,7 @@ public interface PatientManager {
 	public Patient getPatient(int id);
 	public void showPatient(Patient id); 
 	public void updatePatient(Patient patient);
+	public void removePatient(int id);
+
 	
 }
