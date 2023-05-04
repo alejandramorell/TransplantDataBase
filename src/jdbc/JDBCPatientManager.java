@@ -185,7 +185,17 @@ public class JDBCPatientManager implements PatientManager{
 
 	@Override
 	public void removePatient(int id) {
-		// TODO Auto-generated method stub
+			try {
+				String sql = "DELETE FROM PATIENT WHERE id = ?";
+				PreparedStatement p;
+				p = c.prepareStatement(sql);
+				p.setInt(1, id);
+				p.executeUpdate();
+				p.close();
+			} catch (SQLException e) {
+				System.out.println("Database error.");
+				e.printStackTrace();
+			}
 		
 	}
 	

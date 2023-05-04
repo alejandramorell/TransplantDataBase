@@ -27,7 +27,6 @@ public class ConnectionManager {
 	
 	private void createTables() {
 		
-		//TODO pol please could you change the queries according to our tables in sql
 		try {
 			//c.setAutoCommit(false); when i want to make a change, the db is not going to do it inmediatly
 			Statement s = c.createStatement();
