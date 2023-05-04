@@ -28,11 +28,26 @@ public class Patient implements Serializable{
 		super();
 		requestedOrgan = new ArrayList<Organ>();
 	}
-
 	public Patient(Integer id, String sex, String name, String surname, Date dateOfBirth, String disease, String bloodType,
-			Date admissionDate, String adress, Integer phone, WaitingList waitingList) {
+			Date admissionDate, String adress, Integer phone) {
 		super();
 		this.id = id;
+		this.sex = sex;
+		this.name = name;
+		this.surname = surname;
+		this.dateOfBirth = dateOfBirth;
+		this.disease = disease;
+		this.bloodType = bloodType;
+		this.admissionDate = admissionDate;
+		this.adress = adress;
+		this.phone = phone;
+		requestedOrgan = new ArrayList<Organ>();
+	
+	}
+
+	public Patient(String sex, String name, String surname, Date dateOfBirth, String disease, String bloodType,
+			Date admissionDate, String adress, Integer phone, WaitingList waitingList) {
+		super();
 		this.sex = sex;
 		this.name = name;
 		this.surname = surname;
