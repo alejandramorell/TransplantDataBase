@@ -18,7 +18,7 @@ public class RequestedOrgan implements Serializable{
 		super();
 		this.id = id;
 		this.type = type;
-		this.patient = patient;
+	
 	}
 	
 	public RequestedOrgan(String type, Patient patient) {

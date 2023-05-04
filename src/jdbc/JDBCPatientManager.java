@@ -99,7 +99,7 @@ public class JDBCPatientManager implements PatientManager{
 			ResultSet rs = p.executeQuery(); //
 			while (rs.next()) {
 				// Create a new patient
-				
+			
 				Integer id = rs.getInt("id");
 				String sex = rs.getString("sex");
 				String n = rs.getString("name");
@@ -109,13 +109,11 @@ public class JDBCPatientManager implements PatientManager{
 				String bloodType = rs.getString("blood type");
 				Date admissionDate = rs.getDate("date of admission");
 				String adress = rs.getString("adress");
-				//WaitingList waitinglist = 
-				//what to do with the waiting list
-
-				Patient p = new Patient(id, sex, n, surname, dob, disease, bloodType, admissionDate, adress, waitingList);
+				Integer phone= rs.getInt("phone");
+				Patient p1 = new Patient(id, sex, n, surname, dob, disease, bloodType, admissionDate, adress,phone);
 				// IMPORTANT: I don't have the requested organs
 				// Add the Patient to the list
-				list.add(p);
+				list.add(p1);
 			}
 		} catch (SQLException e) {
 			System.out.println("Database error.");
@@ -126,10 +124,33 @@ public class JDBCPatientManager implements PatientManager{
 
 
 	@Override
-	public Surgeon getPatient(int id) {
-		// TODO Auto-generated method stub
+	public Patient getPatient(int id) {
+		try {
+			String sql = "SELECT * FROM PATIENT WHERE id = ?";
+			PreparedStatement p = c.prepareStatement(sql);
+			p.setInt(1, id);
+			ResultSet rs = p.executeQuery();
+			rs.next();
+			String sex = rs.getString("sex");
+			String n = rs.getString("name");
+			String surname = rs.getString("surname");
+			Date dob = rs.getDate("date of birth");
+			String disease = rs.getString("disease");
+			String bloodType = rs.getString("blood type");
+			Date admissionDate = rs.getDate("date of admission");
+			String adress = rs.getString("adress");
+			Integer phone= rs.getInt("phone");
+			Patient p1 = new Patient(id, sex, n, surname, dob, disease, bloodType, admissionDate, adress,phone);
+			rs.close();
+			p.close();
+			return p1;
+		} catch (SQLException e) {
+			System.out.println("Database error.");
+			e.printStackTrace();
+		}
 		return null;
 	}
+	
 
 
 	@Override
@@ -162,12 +183,6 @@ public class JDBCPatientManager implements PatientManager{
 	}
 	
 
-	
-	//@Override
-	//TODO error raro con patient(dice noseque de surgeon)
-	//public Patient getPatient(int id) {
-		// TODO Auto-generated method stub
-		//return null;
-	//}
+
 
 }
