@@ -14,9 +14,15 @@ public class RequestedOrgan implements Serializable{
 	public RequestedOrgan() {
 		super();
 	}
-	public RequestedOrgan(Integer id, String type, Patient patient) {
+	public RequestedOrgan(Integer id, String type) {
 		super();
 		this.id = id;
+		this.type = type;
+		this.patient = patient;
+	}
+	
+	public RequestedOrgan(String type, Patient patient) {
+		super();
 		this.type = type;
 		this.patient = patient;
 	}

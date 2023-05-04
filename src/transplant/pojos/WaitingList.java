@@ -2,6 +2,7 @@ package transplant.pojos;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -16,6 +17,8 @@ public class WaitingList implements Serializable {
 	
 	public WaitingList() {
 		super();
+		patients = new ArrayList<Patient>();
+
 	}
 	
 	public WaitingList(Integer id, Date registrationDate, String urgency, Date dateOfBirth, List<Patient> patients) {
@@ -24,7 +27,7 @@ public class WaitingList implements Serializable {
 		this.registrationDate = registrationDate;
 		Urgency = urgency;
 		this.dateOfBirth = dateOfBirth;
-		this.patients = patients;
+		patients = new ArrayList<Patient>();
 	}
 	public Integer getId() {
 		return id;

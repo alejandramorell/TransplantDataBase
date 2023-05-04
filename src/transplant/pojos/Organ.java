@@ -11,6 +11,15 @@ public class Organ implements Serializable{
 	private String bloodType;
 	private Donor donor;
 	
+	
+	public Organ(Integer id,String type, String bloodType) {
+		super();
+		this.id = id;
+		this.type = type;
+		this.bloodType = bloodType;
+		
+	}
+	
 	public Organ(String type, String bloodType, Donor donor) {
 		super();
 		this.type = type;

@@ -55,7 +55,7 @@ public class JDBCSurgeonManager implements SurgeonManager {
 			p.setString(1, "%" + name + "%"); 
 			ResultSet rs = p.executeQuery(); //
 			while (rs.next()) {
-				// Create a new Owner
+				// Create a new Surgeon
 				Integer id = rs.getInt("id");
 				String n = rs.getString("name");
 				String adress = rs.getString("adress");

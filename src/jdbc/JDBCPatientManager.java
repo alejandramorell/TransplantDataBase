@@ -50,6 +50,7 @@ public class JDBCPatientManager implements PatientManager{
 		}
 	}
 	
+	//metodo no definido en la interfaz?
 	public List<Patient> searchPatientById(Integer id){
 		
 		List<Patient> list = new ArrayList<Patient>();
@@ -86,12 +87,87 @@ public class JDBCPatientManager implements PatientManager{
 		}
 		return list;
 	}
-	
+
+
 	@Override
-	//TODO error raro con patient(dice noseque de surgeon)
-	//public Patient getPatient(int id) {
+	public List<Patient> searchPatientByName(String name) {
+		List<Patient> list = new ArrayList<Patient>();
+		try {
+			String sql = "SELECT * FROM PATIENT WHERE name LIKE ?";
+			PreparedStatement p = c.prepareStatement(sql);
+			p.setString(1, "%" + name + "%"); 
+			ResultSet rs = p.executeQuery(); //
+			while (rs.next()) {
+				// Create a new patient
+				
+				Integer id = rs.getInt("id");
+				String sex = rs.getString("sex");
+				String n = rs.getString("name");
+				String surname = rs.getString("surname");
+				Date dob = rs.getDate("date of birth");
+				String disease = rs.getString("disease");
+				String bloodType = rs.getString("blood type");
+				Date admissionDate = rs.getDate("date of admission");
+				String adress = rs.getString("adress");
+				//WaitingList waitinglist = 
+				//what to do with the waiting list
+
+				Patient p = new Patient(id, sex, n, surname, dob, disease, bloodType, admissionDate, adress, waitingList);
+				// IMPORTANT: I don't have the requested organs
+				// Add the Patient to the list
+				list.add(p);
+			}
+		} catch (SQLException e) {
+			System.out.println("Database error.");
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+
+	@Override
+	public Surgeon getPatient(int id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
+	@Override
+	public void showPatient(Patient id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void updatePatient(Patient patient) {
+		try {
+			String sql = "UPDATE PATIENT SET" + " sex = ?, " + " name = ?, " + " surname = ? " + " date of birth = ? " + " disease = ? " + " blood type = ? " + " date of admission = ? " + " adress = ? " + " WHERE id = ?";
+			PreparedStatement p;
+			p = c.prepareStatement(sql);
+			p.setString(1, patient.getSex());
+			p.setString(2, patient.getName());
+			p.setString(3, patient.getSurname());
+			p.setDate(4, patient.getDateOfBirth());
+			p.setString(5, patient.getDisease());
+			p.setString(6, patient.getBloodType());
+			p.setDate(7, patient.getAdmissionDate());
+			p.setString(8, patient.getAdress());
+			p.executeUpdate();
+			p.close();
+		} catch (SQLException e) {
+			System.out.println("Database error.");
+			e.printStackTrace();
+		}
+	}
+	
+
+	
+	//@Override
+	//TODO error raro con patient(dice noseque de surgeon)
+	//public Patient getPatient(int id) {
+		// TODO Auto-generated method stub
+		//return null;
+	//}
 
 }

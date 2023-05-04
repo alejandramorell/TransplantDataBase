@@ -126,16 +126,16 @@ public class Menu {
 			System.out.println("Let´s search by name: ");
 			System.out.println("Name: ");
 			String name = r.readLine();
-			List<Surgeon> listS = surgeonMan.searchSurgeonByName(name);
-			System.out.println(listS);
-			System.out.println("Please choose a surgeon, type it id: ");
+			List<Surgeon> listSur = surgeonMan.searchSurgeonByName(name);
+			System.out.println(listSur);
+			System.out.println("Please choose a surgeon, type its Id: ");
 			Integer id = Integer.parseInt(r.readLine());
-			//	
-			
+			//Go to the surgeon's menu
+			surgeonMenu(id);
 		}
 		
-		
 		public static void surgeonMenu(int id) {
+			//TODO offer the surgeon options
 			while (true) {
 				try {
 

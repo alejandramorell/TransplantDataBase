@@ -22,14 +22,14 @@ public class Donor implements Serializable{
 		super();
 		organs = new ArrayList<Organ>();
 	}
-	public Donor(Integer id, String name, String adress, Integer phone, String livingState, List<Organ> organs) {
+	public Donor(Integer id, String name, String adress, Integer phone, String livingState) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.adress = adress;
 		this.phone = phone;
 		this.livingState = livingState;
-		this.organs = organs;
+		organs = new ArrayList<Organ>();
 	}
 	public Integer getId() {
 		return id;

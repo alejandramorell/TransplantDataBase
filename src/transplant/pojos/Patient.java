@@ -3,6 +3,7 @@ package transplant.pojos;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class Patient implements Serializable{
@@ -25,10 +26,11 @@ public class Patient implements Serializable{
     
 	public Patient() {
 		super();
+		requestedOrgan = new ArrayList<Organ>();
 	}
 
 	public Patient(Integer id, String sex, String name, String surname, Date dateOfBirth, String disease, String bloodType,
-			Date admissionDate, String adress, Integer phone, WaitingList waitingList, List<Organ> requestedOrgan) {
+			Date admissionDate, String adress, Integer phone, WaitingList waitingList) {
 		super();
 		this.id = id;
 		this.sex = sex;
@@ -41,7 +43,8 @@ public class Patient implements Serializable{
 		this.adress = adress;
 		this.phone = phone;
 		this.waitingList = waitingList;
-		this.requestedOrgan = requestedOrgan;
+		requestedOrgan = new ArrayList<Organ>();
+	
 	}
 
 	public Integer getId() {
