@@ -76,7 +76,7 @@ public class JDBCSurgeonManager implements SurgeonManager {
 	}
 
 	@Override
-	public Surgeon getSurgeon(Integer id) { //TODO ask for the type of the paramether id
+	public Surgeon getSurgeon(int id) { 
 		try {
 			String sql = "SELECT * FROM SURGEON WHERE id = ?";
 			PreparedStatement p = c.prepareStatement(sql);
