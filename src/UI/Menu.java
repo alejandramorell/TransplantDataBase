@@ -69,6 +69,8 @@ public class Menu {
 			System.out.println("1. Surgeon");
 			System.out.println("2. Nurse");
 			System.out.println("3. Transplant unit");
+			System.out.println("0. Go back");
+
 		
 			int choice = Integer.parseInt(r.readLine());
 
@@ -101,60 +103,116 @@ public class Menu {
 	}
 	
 	
-		public static void registerSurgeon() throws IOException{
-			
-			System.out.println("Please input surgeon data: ");
-			System.out.println("Name: ");
-			String name = r.readLine();
-			System.out.println("Adress: ");
-			String adress = r.readLine();
-			System.out.println("Phone: ");
-			Integer phone = Integer.parseInt(r.readLine());
-			System.out.println("Speciality: ");
-			String speciality = r.readLine();
-			System.out.println("Hiring date: ");	
-			String date = r.readLine();
-			LocalDate hiringDate = LocalDate.parse(date, formatter);
-			
-			Surgeon s = new Surgeon(name, adress, phone, speciality, Date.valueOf(hiringDate)); //look for the constructor with and without id
-			surgeonMan.insertSurgeon(s);
-			
-		}
+	public static void register() throws IOException {
 		
-public static void registerPatient() throws IOException{
-			
-			System.out.println("Please input patient data: ");
-			System.out.println("Id: ");
-			Integer id = Integer.parseInt(r.readLine());
-			//TODO metodo que compruebe si hay id repetido
-			System.out.println("Sex: ");
-			
-			String sex = r.readLine();
-			System.out.println("Name: ");
-			String name = r.readLine();
-			System.out.println("Surname: ");
-			String surname = r.readLine();
-			System.out.println("Date of birth: ");	
-			String date = r.readLine();
-			LocalDate dateOfBirth = LocalDate.parse(date, formatter);
-			System.out.println("Disease: ");
-			String disease = r.readLine();
-			System.out.println("Blood type: ");
-			String bloodType = r.readLine();
-			System.out.println("Admission date: ");
-			String date2 = r.readLine();
-			LocalDate admissionDate = LocalDate.parse(date2, formatter);
-			System.out.println("Speciality: ");
-			String address = r.readLine();
-			System.out.println("Phone: ");
-			Integer phone = Integer.parseInt(r.readLine());
-			
-			//TODO corregir esto
-			Patient p = new Patient( id,  sex,  name,  surname,  dateOfBirth,  disease,  bloodType, admissionDate, address, phone);
-			patientMan.insertPatient(p);
-			
-			
+		System.out.println("Who do you want to register as?:");
+		System.out.println("1. Surgeon");
+		System.out.println("2. Nurse");
+		System.out.println("3. Transplant unit");
+		System.out.println("0. Go back");
+
+	
+		int choice = Integer.parseInt(r.readLine());
+
+		switch (choice) {
+		case 1: {
+			registerSurgeon();			
+			break;
 		}
+		case 2: {
+			registerNurse();
+			break;
+		}
+		case 3: {
+			registerPatient();
+			break;
+		}		
+		
+		case 0: {
+			return;
+		}
+		}
+	}
+
+		
+	
+	
+	public static void registerSurgeon() throws IOException{
+			
+		System.out.println("Please input surgeon data: ");
+		System.out.println("Name: ");
+		String name = r.readLine();
+		System.out.println("Adress: ");
+		String adress = r.readLine();
+		System.out.println("Phone: ");
+		Integer phone = Integer.parseInt(r.readLine());
+		System.out.println("Speciality: ");
+		String speciality = r.readLine();
+		System.out.println("Hiring date: ");	
+		String date = r.readLine();
+		LocalDate hiringDate = LocalDate.parse(date, formatter);
+			
+		Surgeon s = new Surgeon(name, adress, phone, speciality, Date.valueOf(hiringDate)); //look for the constructor with and without id
+		surgeonMan.insertSurgeon(s);
+			
+	}
+		
+	public static void registerNurse() throws IOException{
+			
+		System.out.println("Please input nurse data: ");
+		System.out.println("Name: ");
+		String name = r.readLine();
+		
+		System.out.println("Adress: ");
+		String adress = r.readLine();
+		
+		System.out.println("Phone: ");
+		Integer phone = Integer.parseInt(r.readLine());
+		System.out.println("Speciality: ");
+		String speciality = r.readLine();
+		System.out.println("Hiring date: ");	
+		String date = r.readLine();
+		LocalDate hiringDate = LocalDate.parse(date, formatter);
+		
+		Surgeon s = new Surgeon(name, adress, phone, speciality, Date.valueOf(hiringDate)); //look for the constructor with and without id
+		surgeonMan.insertSurgeon(s);
+			
+	}
+		
+		
+	public static void registerPatient() throws IOException{
+			
+		System.out.println("Please input patient data: ");
+		System.out.println("Id: ");
+		Integer id = Integer.parseInt(r.readLine());
+		//TODO metodo que compruebe si hay id repetido
+		System.out.println("Sex: ");
+		
+		String sex = r.readLine();
+		System.out.println("Name: ");
+		String name = r.readLine();
+		System.out.println("Surname: ");
+		String surname = r.readLine();
+		System.out.println("Date of birth: ");	
+		String date = r.readLine();
+		LocalDate dateOfBirth = LocalDate.parse(date, formatter);
+		System.out.println("Disease: ");
+		String disease = r.readLine();
+		System.out.println("Blood type: ");
+		String bloodType = r.readLine();
+		System.out.println("Admission date: ");
+		String date2 = r.readLine();
+		LocalDate admissionDate = LocalDate.parse(date2, formatter);
+		System.out.println("Speciality: ");
+		String address = r.readLine();
+		System.out.println("Phone: ");
+		Integer phone = Integer.parseInt(r.readLine());
+		
+		//TODO corregir esto
+		Patient p = new Patient( id, sex,  name,  surname,  Date.valueOf(dateOfBirth),  disease,  bloodType, Date.valueOf(admissionDate), address, phone);
+		//patientMan.insertPatient(p);
+					
+	}
 
 		
 		
