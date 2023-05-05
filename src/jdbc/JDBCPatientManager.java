@@ -40,7 +40,7 @@ public class JDBCPatientManager implements PatientManager{
 			Statement s = c.createStatement();
 			String sql = "INSERT INTO PATIENT (id, sex, name, surname, date_of_birth, disease, blood_type, admission_date, address, phone )"
 					+ " VALUES ('" + patient.getId() + "',"+ patient.getSex()+"', "+ patient.getName() + "', "+ patient.getSurname() +"', "+ 
-					patient.getDisease() + "', "+ patient.getBloodType() + "', "+ patient.getAdmissionDate() + "', "+ patient.getAdress() + 
+					patient.getDisease() + "', "+ patient.getBloodType() + "', "+ patient.getAdmissionDate() + "', "+ patient.getAddress() + 
 					", '" + patient.getPhone() +"')";
 			s.executeUpdate(sql);
 			s.close();
@@ -173,7 +173,7 @@ public class JDBCPatientManager implements PatientManager{
 			p.setString(5, patient.getDisease());
 			p.setString(6, patient.getBloodType());
 			p.setDate(7, patient.getAdmissionDate());
-			p.setString(8, patient.getAdress());
+			p.setString(8, patient.getAddress());
 			p.executeUpdate();
 			p.close();
 		} catch (SQLException e) {

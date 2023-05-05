@@ -61,9 +61,6 @@ public class Nurse implements Serializable {
 			return false;
 		Nurse other = (Nurse) obj;
 		return Objects.equals(id, other.id);
-	}
-	
-	
-	
+	}	
 
 }
