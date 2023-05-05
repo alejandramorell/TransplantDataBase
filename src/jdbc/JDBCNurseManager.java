@@ -12,6 +12,8 @@ import java.util.List;
 
 import ifaces.NurseManager;
 import transplant.pojos.Nurse;
+import transplant.pojos.Surgeon;
+import transplant.pojos.Transplant;
 
 public class JDBCNurseManager implements NurseManager{
 	
@@ -90,6 +92,37 @@ public class JDBCNurseManager implements NurseManager{
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	@Override
+	public void assignNurseTransplant(int nurse_id,int transplant_id) {
+			try {
+				String sql = "INSERT INTO TRANSPLANT_NURSE (transplant_id, nurse_id) VALUES (?,?)";
+				PreparedStatement p = c.prepareStatement(sql);
+				p.setInt(1, transplant_id);
+				p.setInt(2, nurse_id);
+				p.executeUpdate();
+				p.close();
+			} catch (SQLException e) {
+				System.out.println("Database error.");
+				e.printStackTrace();
+			}
+	}
+
+	@Override
+	public void assignSurgeonTransplant(int surgeon_id, int transplant_id) {
+		try {
+			String sql = "INSERT INTO TRANSPLANT_NURSE (surgeon_id, transplant_id) VALUES (?,?)";
+			PreparedStatement p = c.prepareStatement(sql);
+			p.setInt(1, surgeon_id);
+			p.setInt(2, transplant_id);
+			p.executeUpdate();
+			p.close();
+		} catch (SQLException e) {
+			System.out.println("Database error.");
+			e.printStackTrace();
+		}
+		
 	}
 
 }
