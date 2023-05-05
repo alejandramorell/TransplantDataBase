@@ -41,6 +41,7 @@ public class Menu {
 			}
 			case 2:{
 				//TODO register
+				register();
 				break;
 			}
 			case 3:{
@@ -73,14 +74,14 @@ public class Menu {
 			case 1: {
 				System.out.println("Name:");
 				String username = r.readLine();
-				surgeonMenu();
+				surgeonMenu(id);
 				
 				break;
 			}
 			case 2: {
 				System.out.println("Name:");
 				String username = r.readLine();
-				nurseMenu();
+				nurseMenu(id);
 				break;
 			}
 			case 3: {
@@ -96,6 +97,45 @@ public class Menu {
 			}
 		}
 	}
+	
+		public static void register() throws IOException {
+			while (true) {
+				
+				System.out.println("Who do you want to register as?:");
+				System.out.println("1. Surgeon");
+				System.out.println("2. Nurse");
+				System.out.println("3. Patient");
+			
+				int choice = Integer.parseInt(r.readLine());
+
+				switch (choice) {
+				case 1: {
+					
+					String username = r.readLine();
+					registerSurgeon();
+					
+					break;
+				}
+				case 2: {
+
+					String username = r.readLine();
+					registerNurse();
+					break;
+				}
+				case 3: {
+
+					String username = r.readLine();
+					registerPatient();
+					break;
+				}
+				
+				
+				case 0: {
+					return;
+				}
+				}
+			}
+		}
 	
 	
 		public static void registerSurgeon() throws IOException{
@@ -222,6 +262,7 @@ public class Menu {
 		
 		
 		public static void transplantUnitMenu(int id) {
+			
 			while (true) {
 				try {
 
