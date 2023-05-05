@@ -17,7 +17,11 @@ import transplant.pojos.Transplant;
 
 public class JDBCNurseManager implements NurseManager{
 	
-	Connection c;
+	private Connection c;
+	
+	public JDBCNurseManager(Connection c) {
+		this.c = c;
+	}
 	
 	public JDBCNurseManager()  {
 		
