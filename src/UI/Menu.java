@@ -23,6 +23,7 @@ public class Menu {
 
 	public static void main(String[] args) {
 		
+		while(true) {
 		try {
 			// TODO Auto-generated method stub
 			surgeonMan = new JDBCSurgeonManager();
@@ -56,7 +57,7 @@ public class Menu {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		}
 	}
 	
 	

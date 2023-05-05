@@ -50,43 +50,7 @@ public class JDBCPatientManager implements PatientManager{
 		}
 	}
 	
-	//metodo no definido en la interfaz?
-	public List<Patient> searchPatientById(Integer id){
 		
-		List<Patient> list = new ArrayList<Patient>();
-		try {
-			String sql = "SELECT * FROM PATIENT WHERE id LIKE ?";
-			PreparedStatement p = c.prepareStatement(sql);
-			p.setString(1, "%" + id + "%"); 
-			ResultSet rs = p.executeQuery(); 
-			while (rs.next()) {
-				// Create a new Owner
-						
-			    String sex = rs.getString("sex");
-			    String name = rs.getString("name");
-			    String surname = rs.getString("surname");
-			    Date dateOfBirth = rs.getDate("dateOfBirth");
-			    String disease = rs.getString("disease");
-			    String bloodType = rs.getString("bloodType");
-			    Date admissionDate = rs.getDate("admissionDate");
-				String address = rs.getString("address");
-				Integer phone = rs.getInt("phone");
-				//TODO correct how to do rs.get... for waitingList & requestedOrgan
-				//WaitingList waitingList = 
-				//List<Organ> requestedOrgan = 
-	
-				//Patient p = new Patient(id, sex, name, surname, dateOfBirth, disease, bloodType,
-						//admissionDate, address, phone, waitingList, requestedOrgan);
-	
-				// Add the Patient to the list:
-				//list.add(p);
-			}
-		} catch (SQLException e) {
-			System.out.println("Database error.");
-			e.printStackTrace();
-		}
-		return list;
-	}
 
 
 	@Override
