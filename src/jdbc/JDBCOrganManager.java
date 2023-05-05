@@ -13,7 +13,11 @@ import transplant.pojos.Organ;
 
 public class JDBCOrganManager implements OrganManager {
 	
-	Connection c;
+	private Connection c;
+	
+	public JDBCOrganManager(Connection c) {
+		this.c = c;
+	}
 
 	
 

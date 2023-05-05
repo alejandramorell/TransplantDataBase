@@ -15,7 +15,11 @@ import transplant.pojos.Transplant;
 
 public class JDBCTransplantManager {
 	
-	Connection c;
+	private Connection c;
+	
+	public JDBCTransplantManager(Connection c) {
+		this.c = c;
+	}
 	
 	public JDBCTransplantManager()  {
 		
