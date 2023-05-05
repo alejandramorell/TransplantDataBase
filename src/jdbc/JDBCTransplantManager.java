@@ -15,7 +15,11 @@ import transplant.pojos.Transplant;
 
 public class JDBCTransplantManager {
 	
-	Connection c;
+	private Connection c;
+	
+	public JDBCTransplantManager(Connection c) {
+		this.c = c;
+	}
 	
 	public JDBCTransplantManager()  {
 		
@@ -56,9 +60,9 @@ public class JDBCTransplantManager {
 			p = c.prepareStatement(sql);
 			p.setDate(1, transplant.getRegistrationDate());
 			//TODO check if the methods with another type of data need a cast
-			p.setRequestedOrgan(2, transplant.getRequestedOrgan());
-			p.setOrgan(3, transplant.getOrgan());
-			p.setTheatre(4, transplant.getTheatre());
+			p.setString(2, transplant.getRequestedOrgan().getType());
+			p.setString(3, transplant.getOrgan().getType());
+			p.setInt(4, transplant.getTheatre().getFloor());
 			p.close();
 		} catch (SQLException e) {
 			System.out.println("Database error.");

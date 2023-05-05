@@ -11,7 +11,7 @@ public class ConnectionManager {
 	
 	private Connection c;
 	
-	//TODO specify our database and connect to it
+
 	public ConnectionManager() { 
 		try {
 			Class.forName("org.sqlite.JDBC");
