@@ -123,8 +123,7 @@ public class Menu {
 		
 public static void registerPatient() throws IOException{
 			
-			
-			System.out.println("Please input surgeon data: ");
+			System.out.println("Please input patient data: ");
 			System.out.println("Id: ");
 			Integer id = Integer.parseInt(r.readLine());
 			//TODO metodo que compruebe si hay id repetido
@@ -155,6 +154,8 @@ public static void registerPatient() throws IOException{
 			
 			
 		}
+
+		
 		
 		
 		public static void selectSurgeon() throws IOException{
