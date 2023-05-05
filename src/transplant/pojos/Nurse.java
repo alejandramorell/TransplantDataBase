@@ -23,6 +23,13 @@ public class Nurse implements Serializable {
 		this.phone = phone;
 	}
 	
+	public Nurse(String name, String adress, Integer phone) {
+		super();		
+		this.name = name;
+		this.adress = adress;
+		this.phone = phone;
+	}
+	
 	public Integer getId() {
 		return id;
 	}

@@ -7,9 +7,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-import dogclinic.pojos.User;
 import ifaces.SurgeonManager;
 import jdbc.JDBCSurgeonManager;
+import transplant.pojos.Nurse;
 import transplant.pojos.Patient;
 import transplant.pojos.Surgeon;
 
@@ -65,23 +65,12 @@ public class Menu {
 	
 	public static void login()throws IOException {
 		while (true) {
-<<<<<<< HEAD
-			
-			System.out.println("Who do you want to log in as?:");
-			System.out.println("1. Surgeon");
-			System.out.println("2. Nurse");
-			System.out.println("3. Transplant unit");
-			System.out.println("0. Go back");
 
-		
-			int choice = Integer.parseInt(r.readLine());
-=======
 			System.out.println("Write the name and password of your user:");
 			System.out.println("Username:");
 			String username = r.readLine();
 			System.out.println("Password:");
 			String password = r.readLine();
->>>>>>> branch 'master' of https://github.com/alejandramorell/TransplantDataBase
 
 			transplant.pojos.User user = userMan.login(username, password);
 			
@@ -104,9 +93,7 @@ public class Menu {
 	}
 	
 	
-<<<<<<< HEAD
-	public static void register() throws IOException {
-=======
+
 		public static void register() throws IOException {
 			while (true) {
 				
@@ -119,121 +106,26 @@ public class Menu {
 
 				switch (choice) {
 				case 1: {
-					String username = r.readLine();
 					registerSurgeon();
 					break;
 				}
 				case 2: {
-
-					String username = r.readLine();
 					registerNurse();
 					break;
 				}
 				case 3: {
-
-					String username = r.readLine();
 					registerPatient();
 					break;
 				}
-				
-				
 				case 0: {
 					return;
 				}
 				}
 			}
 		}
-	
-	
-		public static void registerSurgeon() throws IOException{
-			
-			System.out.println("Please input surgeon data: ");
-			System.out.println("Name: ");
-			String name = r.readLine();
-			System.out.println("Adress: ");
-			String adress = r.readLine();
-			System.out.println("Phone: ");
-			Integer phone = Integer.parseInt(r.readLine());
-			System.out.println("Speciality: ");
-			String speciality = r.readLine();
-			System.out.println("Hiring date: ");	
-			String date = r.readLine();
-			LocalDate hiringDate = LocalDate.parse(date, formatter);
-			
-			Surgeon s = new Surgeon(name, adress, phone, speciality, Date.valueOf(hiringDate)); //look for the constructor with and without id
-			surgeonMan.insertSurgeon(s);
-			
-		}
->>>>>>> branch 'master' of https://github.com/alejandramorell/TransplantDataBase
-		
-<<<<<<< HEAD
-		System.out.println("Who do you want to register as?:");
-		System.out.println("1. Surgeon");
-		System.out.println("2. Nurse");
-		System.out.println("3. Transplant unit");
-		System.out.println("0. Go back");
 
-	
-		int choice = Integer.parseInt(r.readLine());
-
-		switch (choice) {
-		case 1: {
-			registerSurgeon();			
-			break;
-=======
-public static void registerPatient() throws IOException{
-			
-			
-			System.out.println("Please input surgeon data: ");
-			System.out.println("Id: ");
-			Integer id = Integer.parseInt(r.readLine());
-			//TODO metodo que compruebe si hay id repetido
-			System.out.println("Sex: ");
-			String sex = r.readLine();
-			System.out.println("Name: ");
-			String name = r.readLine();
-			System.out.println("Surname: ");
-			String surname = r.readLine();
-			System.out.println("Date of birth: ");	
-			String date = r.readLine();
-			LocalDate dateOfBirth = LocalDate.parse(date, formatter);
-			System.out.println("Disease: ");
-			String disease = r.readLine();
-			System.out.println("Blood type: ");
-			String bloodType = r.readLine();
-			System.out.println("Admission date: ");
-			String date2 = r.readLine();
-			LocalDate admissionDate = LocalDate.parse(date2, formatter);
-			System.out.println("Speciality: ");
-			String address = r.readLine();
-			System.out.println("Phone: ");
-			Integer phone = Integer.parseInt(r.readLine());
-			
-			//TODO corregir esto
-			Patient p = new Patient( id,  sex,  name,  surname,  dateOfBirth,  disease,  bloodType, admissionDate, address, phone);
-			patientMan.insertPatient(p);
-			
-			
->>>>>>> branch 'master' of https://github.com/alejandramorell/TransplantDataBase
-		}
-<<<<<<< HEAD
-		case 2: {
-			registerNurse();
-			break;
-		}
-		case 3: {
-			registerPatient();
-			break;
-		}		
-		
-		case 0: {
-			return;
-		}
-		}
-	}
 
 		
-	
 	
 	public static void registerSurgeon() throws IOException{
 			
@@ -266,14 +158,9 @@ public static void registerPatient() throws IOException{
 		
 		System.out.println("Phone: ");
 		Integer phone = Integer.parseInt(r.readLine());
-		System.out.println("Speciality: ");
-		String speciality = r.readLine();
-		System.out.println("Hiring date: ");	
-		String date = r.readLine();
-		LocalDate hiringDate = LocalDate.parse(date, formatter);
 		
-		Surgeon s = new Surgeon(name, adress, phone, speciality, Date.valueOf(hiringDate)); //look for the constructor with and without id
-		surgeonMan.insertSurgeon(s);
+		Nurse n = new Nurse(name, adress, phone);
+		nurseMan.insertNurse(n); //TODO nurseMan
 			
 	}
 		
@@ -308,18 +195,10 @@ public static void registerPatient() throws IOException{
 		
 		//TODO corregir esto
 		Patient p = new Patient( id, sex,  name,  surname,  Date.valueOf(dateOfBirth),  disease,  bloodType, Date.valueOf(admissionDate), address, phone);
-		//patientMan.insertPatient(p);
+		//patientMan.insertPatient(p); //TODO patientMan
 					
 	}
-=======
-<<<<<<< HEAD
->>>>>>> branch 'master' of https://github.com/alejandramorell/TransplantDataBase
 
-
-=======
-		
-		
->>>>>>> branch 'master' of https://github.com/alejandramorell/TransplantDataBase
 		public static void selectSurgeon() throws IOException{
 			
 			
@@ -331,7 +210,7 @@ public static void registerPatient() throws IOException{
 			System.out.println("Please choose a surgeon, type its Id: ");
 			Integer id = Integer.parseInt(r.readLine());
 			//Go to the surgeon's menu
-			surgeonMenu(id);
+			surgeonMenu(email);
 		}
 		
 		public static void surgeonMenu(String email) {
