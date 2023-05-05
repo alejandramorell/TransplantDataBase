@@ -19,7 +19,7 @@ public class Patient implements Serializable{
 	private String bloodType;
 	private Date admissionDate;
 	//TODO change ingressDate to admissionDate everywhere
-	private String adress;
+	private String address;
 	private Integer phone;
     private WaitingList waitingList; 
     private List<Organ> requestedOrgan;
@@ -29,7 +29,7 @@ public class Patient implements Serializable{
 		requestedOrgan = new ArrayList<Organ>();
 	}
 	public Patient(Integer id, String sex, String name, String surname, Date dateOfBirth, String disease, String bloodType,
-			Date admissionDate, String adress, Integer phone) {
+			Date admissionDate, String address, Integer phone) {
 		super();
 		this.id = id;
 		this.sex = sex;
@@ -39,14 +39,14 @@ public class Patient implements Serializable{
 		this.disease = disease;
 		this.bloodType = bloodType;
 		this.admissionDate = admissionDate;
-		this.adress = adress;
+		this.address = address;
 		this.phone = phone;
 		requestedOrgan = new ArrayList<Organ>();
 	
 	}
 
 	public Patient(String sex, String name, String surname, Date dateOfBirth, String disease, String bloodType,
-			Date admissionDate, String adress, Integer phone, WaitingList waitingList) {
+			Date admissionDate, String address, Integer phone, WaitingList waitingList) {
 		super();
 		this.sex = sex;
 		this.name = name;
@@ -55,7 +55,7 @@ public class Patient implements Serializable{
 		this.disease = disease;
 		this.bloodType = bloodType;
 		this.admissionDate = admissionDate;
-		this.adress = adress;
+		this.address = address;
 		this.phone = phone;
 		this.waitingList = waitingList;
 		requestedOrgan = new ArrayList<Organ>();
@@ -126,12 +126,12 @@ public class Patient implements Serializable{
 		this.admissionDate = ingressDate;
 	}
 
-	public String getAdress() {
-		return adress;
+	public String getAddress() {
+		return address;
 	}
 
-	public void setAdress(String adress) {
-		this.adress = adress;
+	public void setAddress(String adress) {
+		this.address = adress;
 	}
 
 	public Integer getPhone() {

@@ -9,6 +9,7 @@ import java.util.List;
 
 import ifaces.SurgeonManager;
 import jdbc.JDBCSurgeonManager;
+import transplant.pojos.Patient;
 import transplant.pojos.Surgeon;
 
 import java.sql.Date;
@@ -59,6 +60,8 @@ public class Menu {
 		}
 		}
 	}
+	
+	
 	
 	public static void login() throws IOException {
 		while (true) {
@@ -140,7 +143,6 @@ public class Menu {
 	
 		public static void registerSurgeon() throws IOException{
 			
-			
 			System.out.println("Please input surgeon data: ");
 			System.out.println("Name: ");
 			String name = r.readLine();
@@ -157,9 +159,44 @@ public class Menu {
 			Surgeon s = new Surgeon(name, adress, phone, speciality, Date.valueOf(hiringDate)); //look for the constructor with and without id
 			surgeonMan.insertSurgeon(s);
 			
+		}
+		
+public static void registerPatient() throws IOException{
+			
+			System.out.println("Please input patient data: ");
+			System.out.println("Id: ");
+			Integer id = Integer.parseInt(r.readLine());
+			//TODO metodo que compruebe si hay id repetido
+			System.out.println("Sex: ");
+			String sex = r.readLine();
+			System.out.println("Name: ");
+			String name = r.readLine();
+			System.out.println("Surname: ");
+			String surname = r.readLine();
+			System.out.println("Date of birth: ");	
+			String date = r.readLine();
+			LocalDate dateOfBirth = LocalDate.parse(date, formatter);
+			System.out.println("Disease: ");
+			String disease = r.readLine();
+			System.out.println("Blood type: ");
+			String bloodType = r.readLine();
+			System.out.println("Admission date: ");
+			String date2 = r.readLine();
+			LocalDate admissionDate = LocalDate.parse(date2, formatter);
+			System.out.println("Speciality: ");
+			String address = r.readLine();
+			System.out.println("Phone: ");
+			Integer phone = Integer.parseInt(r.readLine());
+			
+			//TODO corregir esto
+			Patient p = new Patient( id,  sex,  name,  surname,  dateOfBirth,  disease,  bloodType, admissionDate, address, phone);
+			patientMan.insertPatient(p);
 			
 			
 		}
+
+		
+		
 		
 		public static void selectSurgeon() throws IOException{
 			
