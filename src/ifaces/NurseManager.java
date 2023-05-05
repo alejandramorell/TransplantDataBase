@@ -9,7 +9,6 @@ public interface NurseManager {
 	public void insertNurse(Nurse nurse);
 	public List<Nurse> searchNurseByName(String name);
 	public Nurse getNurse(Integer id);
-	//public void assignSurgeon(Surgeon id, transplant id); 
-	//public void assignNurse();
-
+	public void assignSurgeonTransplant(int surgeon_id, int transplant_id); 
+	public void assignNurseTransplant(int nurse_id,int transplant_id);
 }

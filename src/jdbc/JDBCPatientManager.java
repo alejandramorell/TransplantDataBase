@@ -17,7 +17,11 @@ import transplant.pojos.Surgeon;
 import transplant.pojos.WaitingList;
 
 public class JDBCPatientManager implements PatientManager{
-	Connection c;
+	private Connection c;
+	
+	public JDBCPatientManager(Connection c) {
+		this.c = c;
+	}
 	
 	public JDBCPatientManager()  {
 		
