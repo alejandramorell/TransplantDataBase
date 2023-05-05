@@ -128,6 +128,7 @@ public static void registerPatient() throws IOException{
 			Integer id = Integer.parseInt(r.readLine());
 			//TODO metodo que compruebe si hay id repetido
 			System.out.println("Sex: ");
+			
 			String sex = r.readLine();
 			System.out.println("Name: ");
 			String name = r.readLine();
