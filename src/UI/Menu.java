@@ -184,9 +184,7 @@ public static void registerPatient() throws IOException{
 			
 		}
 
-		
-		
-		
+
 		public static void selectSurgeon() throws IOException{
 			
 			
