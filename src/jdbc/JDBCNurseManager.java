@@ -112,7 +112,7 @@ public class JDBCNurseManager implements NurseManager{
 	@Override
 	public void assignSurgeonTransplant(int surgeon_id, int transplant_id) {
 		try {
-			String sql = "INSERT INTO TRANSPLANT_NURSE (surgeon_id, transplant_id) VALUES (?,?)";
+			String sql = "INSERT INTO TRANSPLANT_SURGEON (surgeon_id, transplant_id) VALUES (?,?)";
 			PreparedStatement p = c.prepareStatement(sql);
 			p.setInt(1, surgeon_id);
 			p.setInt(2, transplant_id);
