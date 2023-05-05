@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import dogclinic.pojos.User;
 import ifaces.SurgeonManager;
 import jdbc.JDBCSurgeonManager;
 import transplant.pojos.Patient;
@@ -62,44 +63,34 @@ public class Menu {
 	}
 	
 	
-	
-	public static void login() throws IOException {
+	public static void login()throws IOException {
 		while (true) {
-			
-			System.out.println("Who do you want to log in as?:");
-			System.out.println("1. Surgeon");
-			System.out.println("2. Nurse");
-			System.out.println("3. Transplant unit");
-		
-			int choice = Integer.parseInt(r.readLine());
+			System.out.println("Write the name and password of your user:");
+			System.out.println("Username:");
+			String username = r.readLine();
+			System.out.println("Password:");
+			String password = r.readLine();
 
-			switch (choice) {
-			case 1: {
-				System.out.println("Name:");
-				String username = r.readLine();
-				surgeonMenu(id);
+			transplant.pojos.User user = userMan.login(username, password);
+			
+			if (user != null) {
+				if (user.getRole().getName().equals("surgeon")) {
+					surgeonMenu(user.getEmail());
+				}
 				
-				break;
+				else if (user.getRole().getName().equals("nurse")) {
+					nurseMenu(user.getEmail());
+				}
+				else if (user.getRole().getName().equals("transplant unit")) {
+					transplantUnitMenu(user.getEmail()); 
+				}
 			}
-			case 2: {
-				System.out.println("Name:");
-				String username = r.readLine();
-				nurseMenu(id);
-				break;
-			}
-			case 3: {
-				//TODO how do we identify the transplant unit?
-				transplantUnitMenu();
-				break;
-			}
-			
-			
-			case 0: {
-				return;
-			}
+			else {
+				System.out.println("Wrong username/password combination.");
 			}
 		}
 	}
+	
 	
 		public static void register() throws IOException {
 			while (true) {
@@ -113,10 +104,8 @@ public class Menu {
 
 				switch (choice) {
 				case 1: {
-					
 					String username = r.readLine();
 					registerSurgeon();
-					
 					break;
 				}
 				case 2: {
@@ -212,7 +201,7 @@ public static void registerPatient() throws IOException{
 			surgeonMenu(id);
 		}
 		
-		public static void surgeonMenu(int id) {
+		public static void surgeonMenu(String email) {
 			//TODO offer the surgeon options
 			while (true) {
 				try {
@@ -247,7 +236,7 @@ public static void registerPatient() throws IOException{
 			}
 		}
 		
-		public static void nurseMenu(int id) {
+		public static void nurseMenu(String email) {
 			while (true) {
 				try {
 
@@ -298,7 +287,7 @@ public static void registerPatient() throws IOException{
 		}
 		
 		
-		public static void transplantUnitMenu(int id) {
+		public static void transplantUnitMenu(String email) {
 			
 			while (true) {
 				try {
