@@ -8,8 +8,7 @@ public interface PatientManager {
 
 	public void insertPatient(Patient patient);
 	public List<Patient> searchPatientByName(String name);
-	public Patient getPatient(int id);
-	public void showPatient(Patient id); 
+	public Patient getPatient(int id); 
 	public void updatePatient(Patient patient);
 	public void removePatient(int id);
 

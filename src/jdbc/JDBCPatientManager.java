@@ -121,11 +121,7 @@ public class JDBCPatientManager implements PatientManager{
 	
 
 
-	@Override
-	public void showPatient(Patient id) {
-		// TODO Auto-generated method stub
-		
-	}
+
 
 
 	@Override

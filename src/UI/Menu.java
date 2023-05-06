@@ -329,7 +329,7 @@ public class Menu {
 					switch (choice) {
 					case 1: {
 						//TODO use the same method as surgeon menu case 2
-						showTransplant(id);
+						checkTransplant(id);
 						break;
 					}
 					case 2: {
@@ -382,7 +382,8 @@ public class Menu {
 						break;
 					}
 					case 2: {
-						insertOrgan(organ);
+						//TODO revise this method
+						registerOrgan();
 						break;
 					}
 					case 0: {
