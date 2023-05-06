@@ -15,7 +15,11 @@ import transplant.pojos.Surgeon;
 
 public class JDBCSurgeonManager implements SurgeonManager {
 	
-	Connection c;
+	private Connection c;
+	
+	public JDBCSurgeonManager(Connection c) {
+		this.c = c;
+	}
 	
 	public JDBCSurgeonManager()  {
 		
@@ -32,7 +36,7 @@ public class JDBCSurgeonManager implements SurgeonManager {
 		
 	}
 	
-	
+	@Override
 	public void insertSurgeon(Surgeon surgeon) {
 		try {
 			Statement s = c.createStatement();
@@ -46,6 +50,7 @@ public class JDBCSurgeonManager implements SurgeonManager {
 		}
 	}
 	
+	@Override
 	public List<Surgeon> searchSurgeonByName(String name){
 		
 		List<Surgeon> list = new ArrayList<Surgeon>();

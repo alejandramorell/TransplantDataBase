@@ -7,9 +7,10 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-import ifaces.SurgeonManager;
-import jdbc.JDBCSurgeonManager;
+import ifaces.*;
+import jdbc.*;
 import transplant.pojos.Nurse;
+import transplant.pojos.Organ;
 import transplant.pojos.Patient;
 import transplant.pojos.Surgeon;
 
@@ -19,15 +20,27 @@ public class Menu {
 	
 	private static BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
 	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+	
 	private static SurgeonManager surgeonMan; //it is and interface so i need to assign to surgeonMan a class that implements the interface 
-
+	private static NurseManager nurseMan;
+	private static PatientManager patientMan;
+	private static OrganManager organMan;
+	private static TransplantManager transplantMan;
 
 	public static void main(String[] args) {
+		ConnectionManager conMan = new ConnectionManager();
+		surgeonMan = new JDBCSurgeonManager(conMan.getConnection());
+		nurseMan = new JDBCNurseManager(conMan.getConnection());
+		patientMan = new JDBCPatientManager(conMan.getConnection());
+		organMan = new JDBCOrganManager(conMan.getConnection());
+		transplantMan = new JDBCTransplantManager(conMan.getConnection());
+		
+		
 		
 		while(true) {
 		try {
 			// TODO Auto-generated method stub
-			surgeonMan = new JDBCSurgeonManager();
+			
 			System.out.println("Welcome to the transplant application for hospitals");
 			System.out.println("Choose an option:");
 			System.out.println("1: LOG IN");
@@ -46,14 +59,16 @@ public class Menu {
 				register();
 				break;
 			}
-			case 3:{
-				return;
+			case 0:{
+				conMan.closeConnection();
+				break;
 			}
 			}
 		
 			
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
+			System.out.println("Please type a numer!");
 			e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -62,7 +77,7 @@ public class Menu {
 		}
 	}
 	
-	
+	//TODO finish this method
 	public static void login()throws IOException {
 		while (true) {
 
@@ -160,7 +175,46 @@ public class Menu {
 		Integer phone = Integer.parseInt(r.readLine());
 		
 		Nurse n = new Nurse(name, adress, phone);
-		nurseMan.insertNurse(n); //TODO nurseMan
+		nurseMan.insertNurse(n); 
+			
+	}
+	public static void registerOrgan() throws IOException{
+		
+		System.out.println("Please input new organ's data: ");
+		System.out.println("Type: ");
+		String type = r.readLine();
+		
+		System.out.println("Blood type: ");
+		String bloodType = r.readLine();
+		
+		System.out.println("Donor id: ");
+		Donor donor = Integer.parseInt(r.readLine());
+		
+		//TODO revise the donor ID, we will need a getDonor(idDonor)?
+		Organ o = new Organ(type, bloodType, idDonor);
+		nurseMan.insertOrgan(o);
+			
+	}
+	
+	//TODO finsh this method revising first the pojo's atributes
+	public static void registerTransplant() throws IOException{
+		
+		System.out.println("Please input new transplant's data: ");
+		System.out.println("Date: ");
+		String date = r.readLine();
+		LocalDate hiringDate = LocalDate.parse(date, formatter);
+		
+		System.out.println("Surgeon id: ");
+		Integer surId = Integer.parseInt(r.readLine());
+		Surgeon s = surgeonMan.getSurgeon(surId);
+		
+		
+		
+		System.out.println("Phone: ");
+		Integer phone = Integer.parseInt(r.readLine());
+		
+		Nurse n = new Nurse(name, adress, phone);
+		nurseMan.insertNurse(n); 
 			
 	}
 		
@@ -193,14 +247,14 @@ public class Menu {
 		System.out.println("Phone: ");
 		Integer phone = Integer.parseInt(r.readLine());
 		
-		//TODO corregir esto
+		
 		Patient p = new Patient( id, sex,  name,  surname,  Date.valueOf(dateOfBirth),  disease,  bloodType, Date.valueOf(admissionDate), address, phone);
-		//patientMan.insertPatient(p); //TODO patientMan
+		patientMan.insertPatient(p);
 					
 	}
 
+		//TODO revise this method
 		public static void selectSurgeon() throws IOException{
-			
 			
 			System.out.println("Let´s search by name: ");
 			System.out.println("Name: ");
@@ -217,8 +271,8 @@ public class Menu {
 			//TODO offer the surgeon options
 			while (true) {
 				try {
-
-					System.out.println("What do you want to do as the surgeon?:");
+					System.out.println("Welcome surgeon");
+					System.out.println("Choose an option please:");
 					System.out.println("1. Check patient information");
 					System.out.println("2. View transplant information");
 					
@@ -226,11 +280,14 @@ public class Menu {
 
 					switch (choice) {
 					case 1: {
-						showPatient(id);
+						System.out.println("Please input the patient's id: ");
+						int id = Integer.parseInt(r.readLine());
+						checkPatient(id);
 						break;
 					}
 					case 2: {
-						showTransplant(id);
+						//TODO this method
+						checkTransplant(id);
 						break;
 					}
 					case 0: {
@@ -246,6 +303,13 @@ public class Menu {
 					e.printStackTrace();
 				}
 			}
+		}
+		
+		public static void checkPatient(int id) throws IOException {
+			System.out.println("Patient: " + id + " information: ");
+			Patient patient = patientMan.getPatient(id);
+			System.out.println(patient);
+			
 		}
 		
 		public static void nurseMenu(String email) {
@@ -264,11 +328,13 @@ public class Menu {
 
 					switch (choice) {
 					case 1: {
+						//TODO use the same method as surgeon menu case 2
 						showTransplant(id);
 						break;
 					}
 					case 2: {
-						insertTransplant(transplant);
+						//TODO finish this method
+						registerTransplant(transplant);
 						break;
 					}
 					case 3: {
@@ -331,6 +397,8 @@ public class Menu {
 					System.out.println("I/O Exception.");
 					e.printStackTrace();
 				}
+				
+				
 			}
 		}
 	}

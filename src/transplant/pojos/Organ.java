@@ -68,6 +68,13 @@ public class Organ implements Serializable{
 	public int hashCode() {
 		return Objects.hash(id);
 	}
+	
+	
+
+	@Override
+	public String toString() {
+		return "Organ [id=" + id + ", type=" + type + ", bloodType=" + bloodType + "]";
+	}
 
 	@Override
 	public boolean equals(Object obj) {

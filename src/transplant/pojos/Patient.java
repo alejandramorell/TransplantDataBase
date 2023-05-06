@@ -157,7 +157,15 @@ public class Patient implements Serializable{
 	public void setRequestedOrgan(List<Organ> requestedOrgan) {
 		this.requestedOrgan = requestedOrgan;
 	}
+	
+	
 
+	@Override
+	public String toString() {
+		return "Patient [id=" + id + ", sex=" + sex + ", name=" + name + ", surname=" + surname + ", dateOfBirth="
+				+ dateOfBirth + ", disease=" + disease + ", bloodType=" + bloodType + ", admissionDate=" + admissionDate
+				+ ", address=" + address + ", phone=" + phone + ", requestedOrgan=" + requestedOrgan + "]";
+	}
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);

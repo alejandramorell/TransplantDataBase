@@ -58,6 +58,13 @@ public class Nurse implements Serializable {
 	public int hashCode() {
 		return Objects.hash(id);
 	}
+	
+	
+	@Override
+	public String toString() {
+		return "Nurse [id=" + id + ", name=" + name + ", adress=" + adress + ", phone=" + phone + "]";
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

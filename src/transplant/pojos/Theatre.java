@@ -41,6 +41,13 @@ public class Theatre implements Serializable {
 		this.number = number;
 	}
 	
+	
+	
+	@Override
+	public String toString() {
+		return "Theatre [id=" + id + ", floor=" + floor + ", number=" + number + "]";
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);

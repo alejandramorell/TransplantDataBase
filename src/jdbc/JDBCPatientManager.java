@@ -38,7 +38,7 @@ public class JDBCPatientManager implements PatientManager{
 		
 	}
 	
-	
+	@Override
 	public void insertPatient(Patient patient) {
 		try {
 			Statement s = c.createStatement();

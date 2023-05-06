@@ -105,6 +105,13 @@ public class Surgeon implements Serializable {
 
 	
 	@Override
+	public String toString() {
+		return "Surgeon [id=" + id + ", name=" + name + ", adress=" + adress + ", phone=" + phone + ", speciality="
+				+ speciality + ", hiring_date=" + hiring_date + "]";
+	}
+
+
+	@Override
 	public int hashCode() {
 		return Objects.hash(id);
 	}

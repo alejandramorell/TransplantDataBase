@@ -11,18 +11,22 @@ public class Transplant implements Serializable {
 	private Integer id; 
 	private Date registrationDate;
 	private RequestedOrgan requestedOrgan; 
-	private Organ organ; 
 	private Theatre theatre;
 	
 	public Transplant() {
 		super();
 	}
-	public Transplant(Integer id, Date registrationDate, RequestedOrgan requestedOrgan, Organ organ, Theatre theatre) {
+	public Transplant(Integer id, Date registrationDate) {
 		super();
 		this.id = id;
 		this.registrationDate = registrationDate;
+		
+	}
+	
+	public Transplant(Date registrationDate, RequestedOrgan requestedOrgan, Organ organ, Theatre theatre) {
+		super();
+		this.registrationDate = registrationDate;
 		this.requestedOrgan = requestedOrgan;
-		this.organ = organ;
 		this.theatre = theatre;
 	}
 	public Integer getId() {
@@ -58,6 +62,12 @@ public class Transplant implements Serializable {
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
+	}
+	
+	
+	@Override
+	public String toString() {
+		return "Transplant [id=" + id + ", registrationDate=" + registrationDate + "]";
 	}
 	@Override
 	public boolean equals(Object obj) {

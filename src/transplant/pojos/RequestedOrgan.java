@@ -44,6 +44,12 @@ public class RequestedOrgan implements Serializable{
 	public void setPatient(Patient patient) {
 		this.patient = patient;
 	}
+	
+	
+	@Override
+	public String toString() {
+		return "RequestedOrgan [id=" + id + ", type=" + type + "]";
+	}
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);

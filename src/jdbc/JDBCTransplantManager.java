@@ -10,10 +10,12 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import transplant.pojos.Organ;
 import transplant.pojos.Patient;
 import transplant.pojos.Transplant;
+import ifaces.*;
 
-public class JDBCTransplantManager {
+public class JDBCTransplantManager implements TransplantManager{
 	
 	private Connection c;
 	
@@ -36,6 +38,7 @@ public class JDBCTransplantManager {
 		
 	}	
 	
+	@Override
 	public void insertTransplant(Transplant transplant) {
 		try {
 			Statement s = c.createStatement();
@@ -52,7 +55,7 @@ public class JDBCTransplantManager {
 	
 	//public void showTransplant(Transplant id); 
 	
-	
+	@Override
 	public void updateInformation(Transplant transplant) {
 		try {
 			String sql = "UPDATE TRANSPLANT SET" + " date = ?, " + " requested_organ = ?, " + " organ_id = ? " + " theatre_id = ? ";
@@ -66,6 +69,29 @@ public class JDBCTransplantManager {
 			p.close();
 		} catch (SQLException e) {
 			System.out.println("Database error.");
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void showTransplant(Transplant id) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
+	public void insertOrgan(Organ organ ) {
+		// IMPORTANT: Organ must have a donor
+		try {
+			String sql = "INSERT INTO ORGAN (type, bloodType, donorID) VALUES (?, ?, ?, ?)";
+			PreparedStatement p = c.prepareStatement(sql);
+			p.setString(1, organ.getType());
+			p.setString(2, organ.getBloodType());
+			p.setInt(3, organ.getDonor().getId());
+			p.executeUpdate();
+			p.close();
+		} catch (SQLException e) {
+			System.out.println("Database exception.");
 			e.printStackTrace();
 		}
 	}

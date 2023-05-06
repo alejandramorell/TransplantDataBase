@@ -67,6 +67,13 @@ public class Donor implements Serializable{
 	public void setOrgans(List<Organ> organs) {
 		this.organs = organs;
 	}
+	
+	
+	@Override
+	public String toString() {
+		return "Donor [id=" + id + ", name=" + name + ", adress=" + adress + ", phone=" + phone + ", livingState="
+				+ livingState + ", organs=" + organs + "]";
+	}
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);

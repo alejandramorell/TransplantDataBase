@@ -77,7 +77,7 @@ public class JDBCNurseManager implements NurseManager{
 	}
 
 	@Override
-	public Nurse getNurse(Integer id) {
+	public Nurse getNurse(int id) {
 		try {
 			String sql = "SELECT * FROM NURSE WHERE id = ?";
 			PreparedStatement p = c.prepareStatement(sql);
