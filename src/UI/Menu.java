@@ -180,6 +180,7 @@ public class Menu {
 	}
 	public static void registerOrgan() throws IOException{
 		
+		//Organ must be linked with it's donor
 		System.out.println("Please input new organ's data: ");
 		System.out.println("Type: ");
 		String type = r.readLine();
@@ -371,14 +372,14 @@ public class Menu {
 				try {
 
 					System.out.println("What do you want to do as the transplant unit?:");
-					System.out.println("1. Search for compatibility");
+					System.out.println("1. Search for compatibility(assign organ to patient)");
 					System.out.println("2. Register new organ");
 					
 					int choice = Integer.parseInt(r.readLine());
 
 					switch (choice) {
 					case 1: {
-						//TODO create the method "search for compatibility"
+						//TODO create the method assignOrgan()"
 						break;
 					}
 					case 2: {
