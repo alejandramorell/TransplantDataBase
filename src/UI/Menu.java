@@ -178,7 +178,7 @@ public class Menu {
 		nurseMan.insertNurse(n); 
 			
 	}
-	public static void registerOrgan() throws IOException{
+	public static void registerOrgan(int id) throws IOException{
 		
 		//Organ must be linked with it's donor
 		System.out.println("Please input new organ's data: ");
@@ -192,7 +192,7 @@ public class Menu {
 		Donor donor = Integer.parseInt(r.readLine());
 		
 		//TODO revise the donor ID, we will need a getDonor(idDonor)?
-		Organ o = new Organ(type, bloodType, idDonor);
+		Organ o = new Organ(type, bloodType,);
 		nurseMan.insertOrgan(o);
 			
 	}
@@ -320,9 +320,9 @@ public class Menu {
 					System.out.println("What do you want to do as the nurse?:");
 					System.out.println("1. View transplant information");
 					System.out.println("2. Set new transplant");
-					System.out.println("3. Modify transplant");
-					System.out.println("4. Assign surgeon to transplant");
-					System.out.println("5. Assign nurse to transplant");
+					System.out.println("3. Modify transplant data");
+					System.out.println("4. Modify patient data");
+					System.out.println(". Assign surgeon to transplant");
 					
 					
 					int choice = Integer.parseInt(r.readLine());
@@ -374,18 +374,35 @@ public class Menu {
 					System.out.println("What do you want to do as the transplant unit?:");
 					System.out.println("1. Search for compatibility(assign organ to patient)");
 					System.out.println("2. Register new organ");
+					System.out.println("3. Remove organ");
+					System.out.println("4. Remove patient");
+					
 					
 					int choice = Integer.parseInt(r.readLine());
 
 					switch (choice) {
 					case 1: {
-						//TODO create the method assignOrgan()"
+						System.out.println("Please input the patient's id: ");
+						int id = Integer.parseInt(r.readLine());
+						Patient t = patientMan.getPatient(id);
+						assignOrgan(id, t.getBloodType());
 						break;
 					}
 					case 2: {
 						//TODO revise this method
 						registerOrgan();
 						break;
+					}
+					case 3:{
+						System.out.println("Please input the organ's id to remove it: ");
+						int id = Integer.parseInt(r.readLine());
+						removeOrgan(id);
+					}
+					case 4:{
+						System.out.println("Please input the patient's id to remove it: ");
+						int id = Integer.parseInt(r.readLine());
+						removePatient(id);
+						
 					}
 					case 0: {
 						return;
@@ -403,6 +420,31 @@ public class Menu {
 				
 			}
 		}
-	}
+		
+		
+			
+			public static void removeOrgan(int id) throws IOException {
+				organMan.removeOrgan(id);
+				System.out.println("The organ has been removed. :(");
+			}
+			
+			public static void removePatient(int id) throws IOException {
+				patientMan.removePatient(id);
+				System.out.println("The patient has been removed. :(");
+			}
+			
+			
+			public static void assignOrgan(int patientId, String patientBloodType) throws IOException {
+				System.out.println("Let's search a compatible organ for the patient having in account that the patient has a blood type: " + patientBloodType);
+				String type= r.readLine();
+				List<Organ> listOrgan = organMan.searchOrganByType(type);
+				System.out.println(listOrgan);
+				System.out.println("Please choose an organ, type its Id:");
+				Integer organId = Integer.parseInt(r.readLine());
+				// Go to the owner's menu
+				organMan.assignOrganToPatient(organId, patientId);
+			}
+		}
+	
 
 

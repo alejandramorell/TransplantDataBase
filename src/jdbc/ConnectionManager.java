@@ -110,6 +110,11 @@ public class ConnectionManager {
 					+ "FOREIGN KEY (patient_id) REFERENCES PATIENT(id))"; 
 			
 			s.executeUpdate(table11);
+			String table12 = "CREATE TABLE ORGAN_PATIENT (organ_id INTEGER REFERENCES ORGAN(id),"
+					+ "patient_id INTEGER REFERENCES PATIENT(id),"
+					+ "PRIMARY KEY (organ_id,patient_id))";
+			
+			s.executeUpdate(table12);
 			s.close();
 			//c.commit(); changes that were waiting will be made at the same time
 			//later he remove this autocomit things
