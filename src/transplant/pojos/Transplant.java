@@ -47,12 +47,6 @@ public class Transplant implements Serializable {
 	public void setRequestedOrgan(RequestedOrgan requestedOrgan) {
 		this.requestedOrgan = requestedOrgan;
 	}
-	public Organ getOrgan() {
-		return organ;
-	}
-	public void setOrgan(Organ organ) {
-		this.organ = organ;
-	}
 	public Theatre getTheatre() {
 		return theatre;
 	}
