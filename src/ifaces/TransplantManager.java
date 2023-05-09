@@ -1,6 +1,6 @@
 package ifaces;
 
-import transplant.pojos.*;
+import transplant.pojos.Transplant;
 
 public interface TransplantManager {
 
