@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ifaces.OrganManager;
+import transplant.pojos.Donor;
 import transplant.pojos.Organ;
 
 public class JDBCOrganManager implements OrganManager {
@@ -74,6 +75,28 @@ public class JDBCOrganManager implements OrganManager {
 			rs.close();
 			p.close();
 			return o;
+		} catch (SQLException e) {
+			System.out.println("Database error.");
+			e.printStackTrace();
+		}
+		return null;
+	}
+	@Override
+	public Donor getDonor(int id) {
+		try {
+			String sql = "SELECT * FROM DONOR WHERE id = ?";
+			PreparedStatement p = c.prepareStatement(sql);
+			p.setInt(1, id);
+			ResultSet rs = p.executeQuery();
+			rs.next();
+			String name = rs.getString("name");
+			String adress = rs.getString("adress");
+			Integer phone = rs.getInt("phone");
+			String livingState = rs.getString("living state");
+			Donor d = new Donor(id, name, adress, phone, livingState);
+			rs.close();
+			p.close();
+			return d;
 		} catch (SQLException e) {
 			System.out.println("Database error.");
 			e.printStackTrace();

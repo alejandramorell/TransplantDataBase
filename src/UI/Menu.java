@@ -13,6 +13,7 @@ import transplant.pojos.Nurse;
 import transplant.pojos.Organ;
 import transplant.pojos.Patient;
 import transplant.pojos.Surgeon;
+import transplant.pojos.Transplant;
 
 import java.sql.Date;
 
@@ -178,6 +179,8 @@ public class Menu {
 		nurseMan.insertNurse(n); 
 			
 	}
+	
+	//TODO we cant search the donor by id because the id is just for the database
 	public static void registerOrgan(int id) throws IOException{
 		
 		//Organ must be linked with it's donor
@@ -189,6 +192,7 @@ public class Menu {
 		String bloodType = r.readLine();
 		
 		System.out.println("Donor id: ");
+		Integer donorId = r.readLine();
 		Donor donor = Integer.parseInt(r.readLine());
 		
 		//TODO revise the donor ID, we will need a getDonor(idDonor)?
@@ -246,7 +250,7 @@ public class Menu {
 		System.out.println("Speciality: ");
 		String address = r.readLine();
 		System.out.println("Phone: ");
-		Integer phone = Integer.parseInt(r.readLine());
+		Integer phone =. Integer.parseInt(r.readLine());
 		
 		
 		Patient p = new Patient( id, sex,  name,  surname,  Date.valueOf(dateOfBirth),  disease,  bloodType, Date.valueOf(admissionDate), address, phone);
@@ -313,13 +317,20 @@ public class Menu {
 			
 		}
 		
+		public static void checkTransplant(int id) throws IOException {
+			System.out.println("transplant: " + id + " information: ");
+			Transplant transplant = transplantMan.getTransplant(id);
+			System.out.println(transplant);
+			
+		}
+		
 		public static void nurseMenu(String email) {
 			while (true) {
 				try {
 
 					System.out.println("What do you want to do as the nurse?:");
 					System.out.println("1. View transplant information");
-					System.out.println("2. Set new transplant");
+					System.out.println("2. Register new transplant");
 					System.out.println("3. Modify transplant data");
 					System.out.println("4. Modify patient data");
 					System.out.println(". Assign surgeon to transplant");
@@ -435,11 +446,11 @@ public class Menu {
 			
 			
 			public static void assignOrgan(int patientId, String patientBloodType) throws IOException {
-				System.out.println("Let's search a compatible organ for the patient having in account that the patient has a blood type: " + patientBloodType);
+				System.out.println("Let's search a compatible organ, please introduce the organ that the patient needs" );
 				String type= r.readLine();
 				List<Organ> listOrgan = organMan.searchOrganByType(type);
 				System.out.println(listOrgan);
-				System.out.println("Please choose an organ, type its Id:");
+				System.out.println("Please choose an organ taking into account that the patient has a blood type: " + patientBloodType + " , type its Id:");
 				Integer organId = Integer.parseInt(r.readLine());
 				// Go to the owner's menu
 				organMan.assignOrganToPatient(organId, patientId);

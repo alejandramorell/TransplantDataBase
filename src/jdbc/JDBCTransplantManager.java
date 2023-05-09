@@ -73,6 +73,7 @@ public class JDBCTransplantManager implements TransplantManager{
 	}
 
 	@Override
+	//TODO change this method
 	public Transplant getTransplant(int id) {
 		try {
 			String sql = "SELECT * FROM TRANSPLANT WHERE id = ?";
