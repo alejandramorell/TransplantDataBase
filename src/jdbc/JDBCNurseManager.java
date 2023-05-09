@@ -98,20 +98,7 @@ public class JDBCNurseManager implements NurseManager{
 		return null;
 	}
 
-	@Override
-	public void assignNurseTransplant(int nurse_id,int transplant_id) {
-			try {
-				String sql = "INSERT INTO TRANSPLANT_NURSE (transplant_id, nurse_id) VALUES (?,?)";
-				PreparedStatement p = c.prepareStatement(sql);
-				p.setInt(1, transplant_id);
-				p.setInt(2, nurse_id);
-				p.executeUpdate();
-				p.close();
-			} catch (SQLException e) {
-				System.out.println("Database error.");
-				e.printStackTrace();
-			}
-	}
+	
 
 	@Override
 	public void assignSurgeonTransplant(int surgeon_id, int transplant_id) {

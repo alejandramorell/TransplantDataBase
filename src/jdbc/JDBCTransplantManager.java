@@ -100,22 +100,8 @@ public class JDBCTransplantManager implements TransplantManager{
 		return null;
 	}
 	
-	@Override
-	public void insertOrgan(Organ organ ) {
-		// IMPORTANT: Organ must have a donor
-		try {
-			String sql = "INSERT INTO ORGAN (type, bloodType, donorID) VALUES (?, ?, ?, ?)";
-			PreparedStatement p = c.prepareStatement(sql);
-			p.setString(1, organ.getType());
-			p.setString(2, organ.getBloodType());
-			p.setInt(3, organ.getDonor().getId());
-			p.executeUpdate();
-			p.close();
-		} catch (SQLException e) {
-			System.out.println("Database exception.");
-			e.printStackTrace();
-		}
-	}
+
+
 	
 	
 
