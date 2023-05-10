@@ -9,10 +9,13 @@ import java.util.List;
 
 import ifaces.*;
 import jdbc.*;
+import jpa.JPAUserManager;
+import transplant.pojos.Donor;
 import transplant.pojos.Nurse;
 import transplant.pojos.Organ;
 import transplant.pojos.Patient;
 import transplant.pojos.Surgeon;
+import transplant.pojos.Theatre;
 import transplant.pojos.Transplant;
 
 import java.sql.Date;
@@ -27,7 +30,8 @@ public class Menu {
 	private static PatientManager patientMan;
 	private static OrganManager organMan;
 	private static TransplantManager transplantMan;
-
+	private static UserManager userMan;
+	
 	public static void main(String[] args) {
 		ConnectionManager conMan = new ConnectionManager();
 		surgeonMan = new JDBCSurgeonManager(conMan.getConnection());
@@ -35,7 +39,7 @@ public class Menu {
 		patientMan = new JDBCPatientManager(conMan.getConnection());
 		organMan = new JDBCOrganManager(conMan.getConnection());
 		transplantMan = new JDBCTransplantManager(conMan.getConnection());
-		
+		userMan = new JPAUserManager();
 		
 		
 		while(true) {
@@ -156,9 +160,9 @@ public class Menu {
 		String speciality = r.readLine();
 		System.out.println("Hiring date: ");	
 		String date = r.readLine();
-		LocalDate hiringDate = LocalDate.parse(date, formatter);
+		Date hiringDate = Date.valueOf(date);
 			
-		Surgeon s = new Surgeon(name, adress, phone, speciality, Date.valueOf(hiringDate)); //look for the constructor with and without id
+		Surgeon s = new Surgeon(name, adress, phone, speciality, hiringDate); //look for the constructor with and without id
 		surgeonMan.insertSurgeon(s);
 			
 	}
@@ -180,24 +184,38 @@ public class Menu {
 			
 	}
 	
-	//TODO we cant search the donor by id because the id is just for the database
+	public static void registerDonor() throws IOException{
+		
+		System.out.println("Please input donor data: ");
+		System.out.println("Name: ");
+		String name = r.readLine();
+		
+		System.out.println("Adress: ");
+		String adress = r.readLine();
+		
+		System.out.println("Phone: ");
+		Integer phone = Integer.parseInt(r.readLine());
+		
+		System.out.println("Living state");
+		String livingState = r.readLine();
+		
+		Donor d = new Donor(name, adress, phone, livingState);
+		organMan.insertDonor(d); 
+			
+	}
+	
 	public static void registerOrgan(int id) throws IOException{
 		
-		//Organ must be linked with it's donor
 		System.out.println("Please input new organ's data: ");
 		System.out.println("Type: ");
 		String type = r.readLine();
 		
 		System.out.println("Blood type: ");
 		String bloodType = r.readLine();
-		
-		System.out.println("Donor id: ");
-		Integer donorId = r.readLine();
-		Donor donor = Integer.parseInt(r.readLine());
-		
-		//TODO revise the donor ID, we will need a getDonor(idDonor)?
-		Organ o = new Organ(type, bloodType,);
-		nurseMan.insertOrgan(o);
+				
+	
+		Organ o = new Organ(type, bloodType, organMan.getDonor(id));
+		organMan.insertOrgan(o);
 			
 	}
 	
@@ -206,20 +224,24 @@ public class Menu {
 		
 		System.out.println("Please input new transplant's data: ");
 		System.out.println("Date: ");
-		String date = r.readLine();
-		LocalDate hiringDate = LocalDate.parse(date, formatter);
+		String d = r.readLine();
+		Date date = Date.valueOf(d);
 		
-		System.out.println("Surgeon id: ");
-		Integer surId = Integer.parseInt(r.readLine());
-		Surgeon s = surgeonMan.getSurgeon(surId);
+		System.out.println("Type of organ");
+		String type = r.readLine();
+		List<Organ> listOrgan = organMan.searchOrganByType(type);
+		System.out.println(listOrgan);
+		System.out.println("Please, choose the id of the requested organ. ");
+		Integer requestedOrganId = Integer.parseInt(r.readLine());
+		Organ o = organMan.getOrgan(requestedOrganId);
 		
+		System.out.println("Input the theatre information: ");
+		Integer floor = Integer.parseInt(r.readLine());
+		Integer number = Integer.parseInt(r.readLine());
+		Theatre theatre = new Theatre(floor, number);
 		
-		
-		System.out.println("Phone: ");
-		Integer phone = Integer.parseInt(r.readLine());
-		
-		Nurse n = new Nurse(name, adress, phone);
-		nurseMan.insertNurse(n); 
+		Transplant transplant = new Transplant(date,o, theatre);
+		transplantMan.insertTransplant(transplant); 
 			
 	}
 		
@@ -239,21 +261,21 @@ public class Menu {
 		String surname = r.readLine();
 		System.out.println("Date of birth: ");	
 		String date = r.readLine();
-		LocalDate dateOfBirth = LocalDate.parse(date, formatter);
+		Date dateOfBirth = Date.valueOf(date);
 		System.out.println("Disease: ");
 		String disease = r.readLine();
 		System.out.println("Blood type: ");
 		String bloodType = r.readLine();
 		System.out.println("Admission date: ");
 		String date2 = r.readLine();
-		LocalDate admissionDate = LocalDate.parse(date2, formatter);
+		Date admissionDate = Date.valueOf(date2);
 		System.out.println("Speciality: ");
 		String address = r.readLine();
 		System.out.println("Phone: ");
-		Integer phone =. Integer.parseInt(r.readLine());
+		Integer phone = Integer.parseInt(r.readLine());
 		
 		
-		Patient p = new Patient( id, sex,  name,  surname,  Date.valueOf(dateOfBirth),  disease,  bloodType, Date.valueOf(admissionDate), address, phone);
+		Patient p = new Patient( id, sex,  name,  surname,  dateOfBirth,  disease,  bloodType, admissionDate, address, phone);
 		patientMan.insertPatient(p);
 					
 	}
@@ -285,6 +307,9 @@ public class Menu {
 
 					switch (choice) {
 					case 1: {
+						System.out.println("Input the name of the patient to see their information");
+						String name = r.readLine();
+						List<Patient> patient = patientMan.searchPatientByName(name);
 						System.out.println("Please input the patient's id: ");
 						int id = Integer.parseInt(r.readLine());
 						checkPatient(id);

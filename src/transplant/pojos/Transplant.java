@@ -10,7 +10,9 @@ public class Transplant implements Serializable {
 	private static final long serialVersionUID = 6640455937191882784L;
 	private Integer id; 
 	private Date registrationDate;
-	private RequestedOrgan requestedOrgan; 
+	private Organ requestedOrgan; 
+	private Patient patient;
+	private String requestedType;
 	private Theatre theatre;
 	
 	public Transplant() {
@@ -23,10 +25,12 @@ public class Transplant implements Serializable {
 		
 	}
 	
-	public Transplant(Date registrationDate, RequestedOrgan requestedOrgan, Organ organ, Theatre theatre) {
+	public Transplant(Date registrationDate,Organ requestedOrgan,Patient patient,String requestedType, Theatre theatre) {
 		super();
 		this.registrationDate = registrationDate;
 		this.requestedOrgan = requestedOrgan;
+		this.patient = patient;
+		this.requestedType = requestedType;
 		this.theatre = theatre;
 	}
 	public Integer getId() {
@@ -41,11 +45,24 @@ public class Transplant implements Serializable {
 	public void setRegistrationDate(Date registrationDate) {
 		this.registrationDate = registrationDate;
 	}
-	public RequestedOrgan getRequestedOrgan() {
+	public Organ getRequestedOrgan() {
 		return requestedOrgan;
 	}
-	public void setRequestedOrgan(RequestedOrgan requestedOrgan) {
+	public void setRequestedOrgan(Organ requestedOrgan) {
 		this.requestedOrgan = requestedOrgan;
+	}
+	
+	public Patient getPatient() {
+		return patient;
+	}
+	public void setPatient(Patient patient) {
+		this.patient = patient;
+	}
+	public String getRequestedType() {
+		return requestedType;
+	}
+	public void setRequestedType(String requestedType) {
+		this.requestedType = requestedType;
 	}
 	public Theatre getTheatre() {
 		return theatre;

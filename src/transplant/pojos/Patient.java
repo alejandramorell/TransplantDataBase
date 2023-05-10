@@ -23,6 +23,7 @@ public class Patient implements Serializable{
 	private Integer phone;
     private WaitingList waitingList; 
     private List<Organ> requestedOrgan;
+    private List<Transplant> transplants;
     
 	public Patient() {
 		super();

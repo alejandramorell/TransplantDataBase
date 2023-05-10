@@ -31,6 +31,15 @@ public class Donor implements Serializable{
 		this.livingState = livingState;
 		organs = new ArrayList<Organ>();
 	}
+	
+	public Donor(String name, String adress, Integer phone, String livingState) {
+		super();
+		this.name = name;
+		this.adress = adress;
+		this.phone = phone;
+		this.livingState = livingState;
+		organs = new ArrayList<Organ>();
+	}
 	public Integer getId() {
 		return id;
 	}

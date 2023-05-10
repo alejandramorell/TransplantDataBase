@@ -21,6 +21,12 @@ public class Theatre implements Serializable {
 		this.floor = floor;
 		this.number = number;
 	}
+	public Theatre( Integer floor, Integer number) {
+		super();
+		this.floor = floor;
+		this.number = number;
+	}
+	
 
 	public Integer getId() {
 		return id;

@@ -56,7 +56,7 @@ public class JDBCNurseManager implements NurseManager{
 	public List<Nurse> searchNurseByName(String name) {
 		List<Nurse> list = new ArrayList<Nurse>();
 		try {
-			String sql = "SELECT * FROM owners WHERE name LIKE ?";
+			String sql = "SELECT * FROM NURSE WHERE name LIKE ?";
 			PreparedStatement p = c.prepareStatement(sql);
 			p.setString(1, "%" + name + "%");
 			ResultSet rs = p.executeQuery();

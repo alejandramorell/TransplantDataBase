@@ -64,8 +64,7 @@ public class JDBCTransplantManager implements TransplantManager{
 			p.setDate(1, transplant.getRegistrationDate());
 			//TODO check if the methods with another type of data need a cast
 			p.setString(2, transplant.getRequestedOrgan().getType());
-			p.setString(3, transplant.getOrgan().getType());
-			p.setInt(4, transplant.getTheatre().getFloor());
+			p.setInt(3, transplant.getTheatre().getFloor());
 			p.close();
 		} catch (SQLException e) {
 			System.out.println("Database error.");

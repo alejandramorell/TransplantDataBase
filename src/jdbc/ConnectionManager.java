@@ -46,14 +46,14 @@ public class ConnectionManager {
 					+ "blood_type TEXT NOT NULL, "
 					+ "admission_date DATE NOT NULL, "	
 					//TODO change ingressDate to admissionDate everywhere
-					+ "address TEXT NOT NULL, "
+					+ "adress TEXT NOT NULL, "
 					+ "phone INTEGER NOT NULL )";
 			
 			s.executeUpdate(table2);
 			String table3 = "CREATE TABLE NURSE (id INTEGER PRIMARY KEY AUTOINCREMENT," 
 					+ " name TEXT NOT NULL,"
 					+ " phone INTEGER," 
-					+ " address TEXT NOT NULL," 
+					+ " adress TEXT NOT NULL," 
 					+ " phone INTEGER NOT NULL)";
 			
 			s.executeUpdate(table3);

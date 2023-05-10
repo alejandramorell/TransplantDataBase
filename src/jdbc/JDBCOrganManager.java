@@ -35,6 +35,20 @@ public class JDBCOrganManager implements OrganManager {
 				e.printStackTrace();
 			}
 		}
+	
+	@Override
+	public void insertDonor(Donor donor) {
+		try {
+				Statement s = c.createStatement();
+				String sql = "INSERT INTO DONOR (name, adress, phone, living_state) VALUES ('" + donor.getName() + "', "
+						+ donor.getAdress() + ", '" + donor.getPhone() + ", '" + donor.getLivingState()+"')";
+				s.executeUpdate(sql);
+				s.close();
+			} catch (SQLException e) {
+				System.out.println("Database exception.");
+				e.printStackTrace();
+			}
+		}
 
 	
 
