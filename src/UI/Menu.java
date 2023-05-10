@@ -92,6 +92,7 @@ public class Menu {
 			System.out.println("Password:");
 			String password = r.readLine();
 
+			//TODO userMan
 			transplant.pojos.User user = userMan.login(username, password);
 			
 			if (user != null) {
