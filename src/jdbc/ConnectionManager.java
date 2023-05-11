@@ -45,14 +45,12 @@ public class ConnectionManager {
 					+ "disease TEXT NOT NULL, "
 					+ "blood_type TEXT NOT NULL, "
 					+ "admission_date DATE NOT NULL, "	
-					//TODO change ingressDate to admissionDate everywhere
 					+ "adress TEXT NOT NULL, "
 					+ "phone INTEGER NOT NULL )";
 			
 			s.executeUpdate(table2);
 			String table3 = "CREATE TABLE NURSE (id INTEGER PRIMARY KEY AUTOINCREMENT," 
 					+ " name TEXT NOT NULL,"
-					+ " phone INTEGER," 
 					+ " adress TEXT NOT NULL," 
 					+ " phone INTEGER NOT NULL)";
 			
@@ -71,50 +69,46 @@ public class ConnectionManager {
 					+ "living_state TEXT NOT NULL)";
 			
 			s.executeUpdate(table5);
-			String table6 = "CREATE TABLE REQUESTED_ORGAN (id INTEGER PRIMARY KEY AUTOINCREMENT,"
-					+ "type TEXT NOT NULL,"
-					+ "patient_id INTEGER NOT NULL,"
-					+ "FOREIGN KEY (patient_id) REFERENCES PATIENT(id))";
-			
-			s.executeUpdate(table6);
-			String table7 = "CREATE TABLE THEATRE (id INTEGER PRIMARY KEY AUTOINCREMENT,"
+			String table6 = "CREATE TABLE THEATRE (id INTEGER PRIMARY KEY AUTOINCREMENT,"
 					+ "floor INTEGER NOT NULL,"
 					+ "number INTEGER NOT NULL)";
 			
-			s.executeUpdate(table7);
-			String table8 = "CREATE TABLE TRANSPLANT (id INTEGER PRIMARY KEY AUTOINCREMENT,"
-					+ "date DATE NOT NULL,"
-					+ "requested_organ INTEGER NOT NULL,"
+			s.executeUpdate(table6);
+			String table7 = "CREATE TABLE TRANSPLANT (id INTEGER PRIMARY KEY AUTOINCREMENT,"
+					+ "registration_date DATE NOT NULL,"
+					+ "requested_type TEXT NOT NULL,"
 					+ "organ_id INTEGER NOT NULL,"
-					+ "theatre_id INTEGER NOGT NULL,"
-					+ "FOREIGN KEY (requested_organ) REFERENCES REQUESTED_ORGAN(id),"
-					+ "FOREIGN KEY (organ) REFERENCES ORGAN(id),"
+					+ "theatre_id INTEGER NOT NULL,"
+					+ "patient_id INTEGER NOT NULL,"
+					+ "FOREIGN KEY (organ_id) REFERENCES ORGAN(id),"
+					+ "FOREIGN KEY (patient_id) REFERENCES PATIENT(id),"
 					+ "FOREIGN KEY (theatre_id) REFERENCES THEATRE(id))";
+			//TODO continue checking the tables with the new excel
 			
-			s.executeUpdate(table8);
-			String table9 = "CREATE TABLE TRANSPLANT_NURSE (transplant_id INTEGER REFERENCES TRANSPLANT(id),"
+			s.executeUpdate(table7);
+			String table8 = "CREATE TABLE TRANSPLANT_NURSE (transplant_id INTEGER REFERENCES TRANSPLANT(id),"
 					+ "nurse_id INTEGER REFERENCES NURSE(id),"
 					+ "PRIMARY KEY (nurse_id,transplant_id))";
 			
-			s.executeUpdate(table9);
-			String table10 = "CREATE TABLE TRANSPLANT_SURGEON (transplant_id INTEGER REFERENCES TRANSPLANT(id),"
+			s.executeUpdate(table8);
+			String table9 = "CREATE TABLE TRANSPLANT_SURGEON (transplant_id INTEGER REFERENCES TRANSPLANT(id),"
 					+ "surgeon_id INTEGER REFERENCES SURGEON(id),"
 					+ "PRIMARY KEY (surgeon_id,transplant_id))";
 			
-			s.executeUpdate(table10);
-			String table11 = "CREATE TABLE WAITING_LIST (id INTEGER PRIMARY KEY AUTOINCREMENT,"
+			s.executeUpdate(table9);
+			String table10 = "CREATE TABLE WAITING_LIST (id INTEGER PRIMARY KEY AUTOINCREMENT,"
 					+ "registration_date DATE NOT NULL," //TODO esto no seria admission date como en patient?? Seria necesario?porque como ya esta linkeado a patient...
 					+ "urgency TEXT NOT NULL,"
 					+ "date_of_birth DATE NOT NULL,"
 					+ "patient_id INTEGER NOT NULL,"
 					+ "FOREIGN KEY (patient_id) REFERENCES PATIENT(id))"; 
 			
-			s.executeUpdate(table11);
-			String table12 = "CREATE TABLE ORGAN_PATIENT (organ_id INTEGER REFERENCES ORGAN(id),"
+			s.executeUpdate(table10);
+			String table11 = "CREATE TABLE ORGAN_PATIENT (organ_id INTEGER REFERENCES ORGAN(id),"
 					+ "patient_id INTEGER REFERENCES PATIENT(id),"
 					+ "PRIMARY KEY (organ_id,patient_id))";
 			
-			s.executeUpdate(table12);
+			s.executeUpdate(table11);
 			s.close();
 			//c.commit(); changes that were waiting will be made at the same time
 			//later he remove this autocomit things

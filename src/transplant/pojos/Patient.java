@@ -21,7 +21,6 @@ public class Patient implements Serializable{
 	//TODO change ingressDate to admissionDate everywhere
 	private String address;
 	private Integer phone;
-    private WaitingList waitingList; 
     private List<Organ> requestedOrgan;
     private List<Transplant> transplants;
     
