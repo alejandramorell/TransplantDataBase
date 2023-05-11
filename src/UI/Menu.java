@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import dogclinic.pojos.Vet;
 import ifaces.*;
 import jdbc.*;
 import jpa.JPAUserManager;
@@ -38,7 +39,7 @@ public class Menu {
 		nurseMan = new JDBCNurseManager(conMan.getConnection());
 		patientMan = new JDBCPatientManager(conMan.getConnection());
 		organMan = new JDBCOrganManager(conMan.getConnection());
-		transplantMan = new JDBCTransplantManager(conMan.getConnection());
+		transplantMan = new JDBCTransplantManager(conMan.getConnection(), organMan, patientMan);
 		userMan = new JPAUserManager();
 		
 		
@@ -114,7 +115,6 @@ public class Menu {
 	}
 	
 	
-
 		public static void register() throws IOException {
 			while (true) {
 				
@@ -220,7 +220,7 @@ public class Menu {
 			
 	}
 	
-	//TODO finsh this method revising first the pojo's atributes
+	//TODO finish this method revising first the pojo's attributes
 	public static void registerTransplant() throws IOException{
 		
 		System.out.println("Please input new transplant's data: ");
@@ -236,12 +236,25 @@ public class Menu {
 		Integer requestedOrganId = Integer.parseInt(r.readLine());
 		Organ o = organMan.getOrgan(requestedOrganId);
 		
+		System.out.println("Name of the patient");
+		String patientName = r.readLine();
+		List<Patient> patients = patientMan.searchPatientByName(patientName);
+		System.out.println(patients);
+		
+		System.out.println("Input the id of the patient");
+		Integer patientId = Integer.parseInt(r.readLine());
+		Patient p = patientMan.getPatient(patientId);
+		
+		System.out.println("Request");
+		String request = r.readLine();
+		
 		System.out.println("Input the theatre information: ");
 		Integer floor = Integer.parseInt(r.readLine());
 		Integer number = Integer.parseInt(r.readLine());
 		Theatre theatre = new Theatre(floor, number);
 		
-		Transplant transplant = new Transplant(date,o, theatre);
+		
+		Transplant transplant = new Transplant(date,o,p, request, theatre);
 		transplantMan.insertTransplant(transplant); 
 			
 	}
@@ -291,8 +304,7 @@ public class Menu {
 			System.out.println(listSur);
 			System.out.println("Please choose a surgeon, type its Id: ");
 			Integer id = Integer.parseInt(r.readLine());
-			//Go to the surgeon's menu
-			surgeonMenu(email);
+			
 		}
 		
 		public static void surgeonMenu(String email) {
@@ -343,6 +355,7 @@ public class Menu {
 			
 		}
 		
+		//TODO 
 		public static void checkTransplant(int id) throws IOException {
 			System.out.println("transplant: " + id + " information: ");
 			Transplant transplant = transplantMan.getTransplant(id);
@@ -359,7 +372,7 @@ public class Menu {
 					System.out.println("2. Register new transplant");
 					System.out.println("3. Modify transplant data");
 					System.out.println("4. Modify patient data");
-					System.out.println(". Assign surgeon to transplant");
+					System.out.println("5. Assign surgeon to transplant");
 					
 					
 					int choice = Integer.parseInt(r.readLine());
@@ -371,20 +384,20 @@ public class Menu {
 						break;
 					}
 					case 2: {
-						//TODO finish this method
-						registerTransplant(transplant);
+						registerTransplant();
 						break;
 					}
 					case 3: {
+						//TODO 
 						updateTransplant(id);
 						break;
 					}
 					case 4: {
-						//TODO assignSurgeon(Surgeon id, transplant id);
-						break;
+						//TODO updatePatient()
+/						break;
 					}
 					case 5: {
-						//TODO assignNurse(Nurse id, transplant id);
+						//TODO assignTransplant()
 						break;
 					}
 					case 0: {
@@ -426,16 +439,18 @@ public class Menu {
 						break;
 					}
 					case 2: {
-						//TODO revise this method
+						//TODO finish
 						registerOrgan();
 						break;
 					}
 					case 3:{
+						//TODO modify
 						System.out.println("Please input the organ's id to remove it: ");
 						int id = Integer.parseInt(r.readLine());
 						removeOrgan(id);
 					}
 					case 4:{
+						//TODO
 						System.out.println("Please input the patient's id to remove it: ");
 						int id = Integer.parseInt(r.readLine());
 						removePatient(id);
@@ -480,6 +495,23 @@ public class Menu {
 				Integer organId = Integer.parseInt(r.readLine());
 				// Go to the owner's menu
 				organMan.assignOrganToPatient(organId, patientId);
+			}
+			
+			public static void assignTransplant(int surgeonId) throws IOException {
+				
+				System.out.println("Introduce the patient´s name to assign a surgeon to it´s transplant:");
+				String name = r.readLine();
+				List<Patient> patients = patientMan.searchPatientByName(name);
+				System.out.println(patients);
+				
+				System.out.println("Input the id of the patient:");
+				Integer patientId = Integer.parseInt(r.readLine());
+				Patient p = patientMan.getPatient(patientId);
+				
+				String patientName = p.getName();
+
+				// Go to the owner's menu
+				dogMan.assignDogToVet(dogId, vetId);
 			}
 		}
 	

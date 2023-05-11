@@ -10,4 +10,5 @@ public interface NurseManager {
 	public List<Nurse> searchNurseByName(String name);
 	public Nurse getNurse(int id);
 	public void assignSurgeonTransplant(int surgeon_id, int transplant_id); 
+	
 }

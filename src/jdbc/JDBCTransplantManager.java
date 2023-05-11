@@ -7,11 +7,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import dogclinic.pojos.Dog;
 import transplant.pojos.Organ;
 import transplant.pojos.Patient;
+import transplant.pojos.Theatre;
 import transplant.pojos.Transplant;
 import ifaces.*;
 
@@ -19,11 +22,19 @@ import ifaces.*;
 public class JDBCTransplantManager implements TransplantManager{
 	
 	private Connection c;
+	private OrganManager organMan;
+	private PatientManager patientMan;
+	private TransplantManager transplantMan;
 	
-	public JDBCTransplantManager(Connection c) {
+	public JDBCTransplantManager(Connection c, OrganManager organMan, PatientManager patientMan, TransplantManager transplantMan) {
+		super();
 		this.c = c;
+		this.organMan = organMan;
+		this.patientMan = patientMan;
+		this.transplantMan = transplantMan;
+		
 	}
-	
+
 	public JDBCTransplantManager()  {
 		
 		try {
@@ -73,27 +84,69 @@ public class JDBCTransplantManager implements TransplantManager{
 	}
 
 	@Override
-	//TODO change this method
-	public Transplant getTransplant(int id) {
+	//TODO this method would return only 1 transplant if there where more transplants in the same date
+	public Integer getTransplant(LocalDate date ) {
 		try {
-			String sql = "SELECT * FROM TRANSPLANT WHERE id = ?";
+			
+			String sql = "SELECT id FROM TRANSPLANT WHERE date = ?";
+			PreparedStatement p = c.prepareStatement(sql);
+			p.setDate(1, Date.valueOf(date));
+			ResultSet rs = p.executeQuery();
+			rs.next();
+			int id = rs.getInt("id");
+			rs.close();
+			p.close();
+			return id;			
+			
+		} catch (SQLException e) {
+			System.out.println("Database error.");
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public List<Transplant> getTransplants(LocalDate date) {
+		List<Transplant> list = new ArrayList<Transplant> ();
+		
+		try {
+			String sql = "SELECT * FROM TRANSPLANT WHERE date = ?";
+			PreparedStatement p = c.prepareStatement(sql);
+			p.setDate(1, Date.valueOf(date));
+			ResultSet rs = p.executeQuery();
+			
+			while (rs.next()) {
+				Integer transplantId = rs.getInt("id"); 
+				Date registrationDate = rs.getDate("registration_date");
+				Organ requestedOrgan = organMan.getOrgan(rs.getInt("organ_id")); 
+				Patient patient = patientMan.getPatient(rs.getInt("patient_id"));
+				String requestedType = rs.getString("requested_type");
+				Theatre theatre = transplantMan.getTheatre(rs.getInt("theatre_id"));
+			
+				Transplant t = new Transplant(registrationDate, requestedOrgan, patient, requestedType, theatre );
+				list.add(t);
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("Database error.");
+			e.printStackTrace();
+		}
+		return list;
+		
+	}
+	
+	public Theatre getTheatre(int id) {
+		try {
+			String sql = "SELECT * FROM THEATRE WHERE id = ?";
 			PreparedStatement p = c.prepareStatement(sql);
 			p.setInt(1, id);
 			ResultSet rs = p.executeQuery();
 			rs.next();
-			String sex = rs.getString("sex");
-			String n = rs.getString("name");
-			String surname = rs.getString("surname");
-			Date dob = rs.getDate("date of birth");
-			String disease = rs.getString("disease");
-			String bloodType = rs.getString("blood type");
-			Date admissionDate = rs.getDate("date of admission");
-			String adress = rs.getString("adress");
-			Integer phone= rs.getInt("phone");
-			Patient p1 = new Patient(id, sex, n, surname, dob, disease, bloodType, admissionDate, adress,phone);
+			Integer floor = rs.getInt("floor");
+			Integer number = rs.getInt("number");
+			Theatre t = new Theatre(id, floor, number);
 			rs.close();
 			p.close();
-			return p1;
+			return t;
 		} catch (SQLException e) {
 			System.out.println("Database error.");
 			e.printStackTrace();
@@ -101,9 +154,10 @@ public class JDBCTransplantManager implements TransplantManager{
 		return null;
 	}
 	
-
-
+	@Override
+	public Transplant getTransplant(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
-	
-
 }

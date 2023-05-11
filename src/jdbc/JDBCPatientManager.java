@@ -120,10 +120,6 @@ public class JDBCPatientManager implements PatientManager{
 	}
 	
 
-
-
-
-
 	@Override
 	public void updatePatient(Patient patient) {
 		try {
