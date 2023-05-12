@@ -7,7 +7,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-import dogclinic.pojos.Vet;
 import ifaces.*;
 import jdbc.*;
 import jpa.JPAUserManager;
@@ -18,6 +17,7 @@ import transplant.pojos.Patient;
 import transplant.pojos.Surgeon;
 import transplant.pojos.Theatre;
 import transplant.pojos.Transplant;
+import xml.XMLManagerImplementation;
 
 import java.sql.Date;
 
@@ -32,6 +32,7 @@ public class Menu {
 	private static OrganManager organMan;
 	private static TransplantManager transplantMan;
 	private static UserManager userMan;
+	private static XMLManager xmlMan = new XMLManagerImplementation();
 	
 	public static void main(String[] args) {
 		ConnectionManager conMan = new ConnectionManager();
@@ -39,7 +40,7 @@ public class Menu {
 		nurseMan = new JDBCNurseManager(conMan.getConnection());
 		patientMan = new JDBCPatientManager(conMan.getConnection());
 		organMan = new JDBCOrganManager(conMan.getConnection());
-		transplantMan = new JDBCTransplantManager(conMan.getConnection(), organMan, patientMan);
+		transplantMan = new JDBCTransplantManager(conMan.getConnection(), organMan, patientMan, transplantMan);
 		userMan = new JPAUserManager();
 		
 		
@@ -361,6 +362,15 @@ public class Menu {
 			Transplant transplant = transplantMan.getTransplant(id);
 			System.out.println(transplant);
 			
+		}
+		
+		
+		public static void organ2Xml(int id) throws IOException {
+			System.out.println("Your organs in XML are:");
+			List<Organ> listOrgan = organMan.searchOrganByDonor(id);
+			Donor donor = organMan.getDonor(id);
+			donor.setOrgans(listOrgan);
+			xmlMan.donor2Xml(donor);
 		}
 		
 		public static void nurseMenu(String email) {

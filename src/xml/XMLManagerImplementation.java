@@ -6,21 +6,21 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 
 import ifaces.XMLManager;
-import transplant.pojos.Organ;
+import transplant.pojos.Donor;
 
 public class XMLManagerImplementation implements XMLManager {
 
 	@Override
-	public void Organ2Xml(Organ organ) {
+	public void donor2Xml(Donor donor) {
 		try {
 			// Create the JAXBContext
-			JAXBContext jaxbContext = JAXBContext.newInstance(Organ.class);
+			JAXBContext jaxbContext = JAXBContext.newInstance(Donor.class);
 			// Get the marshaller
 			Marshaller marshaller = jaxbContext.createMarshaller();
 			// Pretty formatting
 			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 			File file = new File("./xmls/Organs.xml");
-			marshaller.marshal(organ, file);
+			marshaller.marshal(donor, file);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -28,8 +28,9 @@ public class XMLManagerImplementation implements XMLManager {
 	}
 
 	@Override
-	public Organ xml2Organ(File xml) {
+	public Donor xml2Donor(File xml) {
 		// TODO Auto-generated method stub
+		
 		return null;
 	}
 

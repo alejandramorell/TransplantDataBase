@@ -1,6 +1,7 @@
 package jdbc;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,6 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import dogclinic.pojos.Dog;
 import ifaces.OrganManager;
 import transplant.pojos.Donor;
 import transplant.pojos.Organ;
@@ -146,6 +148,28 @@ public class JDBCOrganManager implements OrganManager {
 			System.out.println("Database error.");
 			e.printStackTrace();
 		}
+	}
+	
+	@Override
+	public List<Organ> searchOrganByDonor(int id) {
+		List<Organ> list = new ArrayList<Organ>();
+		try {
+			String sql = "SELECT * FROM ORGAN WHERE donor_id = ?";
+			PreparedStatement p = c.prepareStatement(sql);
+			p.setInt(1, id);
+			ResultSet rs = p.executeQuery();
+			while (rs.next()) {
+				Integer organId = rs.getInt("id");
+				String type = rs.getString("type");
+				String bloodType = rs.getString("blood_type");
+				Organ or = new Organ(organId,type,bloodType);
+				list.add(or);
+			}
+		} catch (SQLException e) {
+			System.out.println("Database error.");
+			e.printStackTrace();
+		}
+		return list;
 	}
 	
 }

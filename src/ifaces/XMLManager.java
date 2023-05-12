@@ -2,11 +2,11 @@ package ifaces;
 
 import java.io.File;
 
-import transplant.pojos.Organ;
+import transplant.pojos.Donor;
 
 public interface XMLManager {
-	public void Organ2Xml(Organ organ);
-	public Organ xml2Organ(File xml);
+	public void donor2Xml(Donor d);
+	public Donor xml2Donor(File xml);
 		
 	
 
