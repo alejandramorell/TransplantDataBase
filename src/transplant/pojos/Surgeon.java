@@ -11,7 +11,7 @@ public class Surgeon implements Serializable {
 	private static final long serialVersionUID = 3276117047544912872L;
 	private Integer id; 
 	private String name; 
-	private String adress;
+	private String address;
 	private Integer phone;
 	private String speciality;
 	private Date hiring_date;
@@ -22,21 +22,21 @@ public class Surgeon implements Serializable {
 	}
 
 
-	public Surgeon(Integer id, String name, String adress, Integer phone, String speciality, Date hiring_date) {
+	public Surgeon(Integer id, String name, String address, Integer phone, String speciality, Date hiring_date) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.adress = adress;
+		this.address = address;
 		this.phone = phone;
 		this.speciality = speciality;
 		this.hiring_date = hiring_date;
 	}
 
 
-	public Surgeon(String name, String adress, Integer phone, String speciality, Date hiring_date) {
+	public Surgeon(String name, String address, Integer phone, String speciality, Date hiring_date) {
 		super();
 		this.name = name;
-		this.adress = adress;
+		this.address = address;
 		this.phone = phone;
 		this.speciality = speciality;
 		this.hiring_date = hiring_date;
@@ -64,12 +64,12 @@ public class Surgeon implements Serializable {
 
 
 	public String getAdress() {
-		return adress;
+		return address;
 	}
 
 
 	public void setAdress(String adress) {
-		this.adress = adress;
+		this.address = adress;
 	}
 
 
@@ -106,7 +106,7 @@ public class Surgeon implements Serializable {
 	
 	@Override
 	public String toString() {
-		return "Surgeon [id=" + id + ", name=" + name + ", adress=" + adress + ", phone=" + phone + ", speciality="
+		return "Surgeon [id=" + id + ", name=" + name + ", address=" + address + ", phone=" + phone + ", speciality="
 				+ speciality + ", hiring_date=" + hiring_date + "]";
 	}
 

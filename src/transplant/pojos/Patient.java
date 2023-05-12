@@ -46,7 +46,7 @@ public class Patient implements Serializable{
 	}
 
 	public Patient(String sex, String name, String surname, Date dateOfBirth, String disease, String bloodType,
-			Date admissionDate, String address, Integer phone, WaitingList waitingList) {
+			Date admissionDate, String address, Integer phone) {
 		super();
 		this.sex = sex;
 		this.name = name;
@@ -57,7 +57,6 @@ public class Patient implements Serializable{
 		this.admissionDate = admissionDate;
 		this.address = address;
 		this.phone = phone;
-		this.waitingList = waitingList;
 		requestedOrgan = new ArrayList<Organ>();
 	
 	}
@@ -140,14 +139,6 @@ public class Patient implements Serializable{
 
 	public void setPhone(Integer phone) {
 		this.phone = phone;
-	}
-
-	public WaitingList getWaitingList() {
-		return waitingList;
-	}
-
-	public void setWaitingList(WaitingList waitingList) {
-		this.waitingList = waitingList;
 	}
 
 	public List<Organ> getRequestedOrgan() {

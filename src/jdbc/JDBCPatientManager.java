@@ -1,6 +1,7 @@
 package jdbc;
 
 import java.sql.Connection;
+
 import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -11,10 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ifaces.PatientManager;
-import transplant.pojos.Organ;
 import transplant.pojos.Patient;
-import transplant.pojos.Surgeon;
-import transplant.pojos.WaitingList;
 
 public class JDBCPatientManager implements PatientManager{
 	private Connection c;

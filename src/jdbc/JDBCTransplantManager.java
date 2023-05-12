@@ -11,7 +11,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import dogclinic.pojos.Dog;
 import transplant.pojos.Organ;
 import transplant.pojos.Patient;
 import transplant.pojos.Theatre;
@@ -55,7 +54,7 @@ public class JDBCTransplantManager implements TransplantManager{
 		try {
 			Statement s = c.createStatement();
 			String sql = "INSERT INTO TRANSPLANT (id, date, requested_organ, organ_id, theatre_id)"
-					+ " VALUES ('" + transplant.getId() + "',"+ transplant.getRegistrationDate()+"', "+ transplant.getRequestedOrgan() + "', "+ transplant.getOrgan() +"', "+ 
+					+ " VALUES ('" + transplant.getId() + "',"+ transplant.getRegistrationDate()+"', "+ transplant.getRequestedOrgan() +"', "+ 
 					transplant.getTheatre() +"')";
 			s.executeUpdate(sql);
 			s.close();
@@ -115,7 +114,7 @@ public class JDBCTransplantManager implements TransplantManager{
 			ResultSet rs = p.executeQuery();
 			
 			while (rs.next()) {
-				Integer transplantId = rs.getInt("id"); 
+				//Integer transplantId = rs.getInt("id"); 
 				Date registrationDate = rs.getDate("registration_date");
 				Organ requestedOrgan = organMan.getOrgan(rs.getInt("organ_id")); 
 				Patient patient = patientMan.getPatient(rs.getInt("patient_id"));
@@ -133,6 +132,7 @@ public class JDBCTransplantManager implements TransplantManager{
 		return list;
 		
 	}
+	
 	
 	public Theatre getTheatre(int id) {
 		try {

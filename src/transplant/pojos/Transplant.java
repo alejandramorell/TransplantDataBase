@@ -15,9 +15,8 @@ public class Transplant implements Serializable {
 	private String requestedType;
 	private Theatre theatre;
 	
-	public Transplant() {
-		super();
-	}
+	
+	
 	public Transplant(Integer id, Date registrationDate) {
 		super();
 		this.id = id;
@@ -27,6 +26,7 @@ public class Transplant implements Serializable {
 	
 	public Transplant(Date registrationDate,Organ requestedOrgan,Patient patient,String requestedType, Theatre theatre) {
 		super();
+		//this.id = id;
 		this.registrationDate = registrationDate;
 		this.requestedOrgan = requestedOrgan;
 		this.patient = patient;
