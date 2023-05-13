@@ -205,20 +205,7 @@ public class JDBCTransplantManager implements TransplantManager{
 			}
 			return null;
 		}
-	
-	public void assignSurgeonToTransplant(int surgeonId, int transplantId) {
-		try {
-			String sql = "INSERT INTO TRANSPLANT_SURGEON (transplant_id, surgeon_id) VALUES (?,?)";
-			PreparedStatement p = c.prepareStatement(sql);
-			p.setInt(1, surgeonId);
-			p.setInt(2, transplantId);
-			p.executeUpdate();
-			p.close();
-		} catch (SQLException e) {
-			System.out.println("Database error.");
-			e.printStackTrace();
-		}
-	}
+
 	}
 	
 

@@ -420,6 +420,7 @@ public class Menu {
 						
 						System.out.println("Input the id of the surgeon:");
 						int surgeonId = Integer.parseInt(r.readLine());
+						assignTransplant(surgeonId);
 						
 						break;
 					}
@@ -547,7 +548,7 @@ public class Menu {
 				System.out.println(transplants);
 				System.out.println("Please input the transplant´s id to assign a surgeon for it: ");
 				int transplantId = Integer.parseInt(r.readLine());
-				transplantMan.assignSurgeonToTransplant(surgeonId, transplantId);
+				nurseMan.assignSurgeonTransplant(surgeonId, transplantId);
 				
 			}
 		}
