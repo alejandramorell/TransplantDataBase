@@ -133,6 +133,34 @@ public class JDBCTransplantManager implements TransplantManager{
 		
 	}
 	
+	public List<Transplant> getAllTransplants() {
+		List<Transplant> list = new ArrayList<Transplant> ();
+		
+		try {
+			String sql = "SELECT * FROM TRANSPLANT";
+			PreparedStatement p = c.prepareStatement(sql);
+			ResultSet rs = p.executeQuery();
+			
+			while (rs.next()) {
+				Integer id =  rs.getInt("id");
+				Date registrationDate = rs.getDate("registration_date");
+				Organ requestedOrgan = organMan.getOrgan(rs.getInt("organ_id")); 
+				Patient patient = patientMan.getPatient(rs.getInt("patient_id"));
+				String requestedType = rs.getString("requested_type");
+				Theatre theatre = transplantMan.getTheatre(rs.getInt("theatre_id"));
+			
+				Transplant t = new Transplant(id,registrationDate, requestedOrgan, patient, requestedType, theatre );
+				list.add(t);
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("Database error.");
+			e.printStackTrace();
+		}
+		return list;
+		
+	}
+	
 	
 	public Theatre getTheatre(int id) {
 		try {
@@ -156,8 +184,27 @@ public class JDBCTransplantManager implements TransplantManager{
 	
 	@Override
 	public Transplant getTransplant(int id) {
-		// TODO Auto-generated method stub
-		return null;
+			try {
+				String sql = "SELECT * FROM TRANSPLANT WHERE id = ?";
+				PreparedStatement p = c.prepareStatement(sql);
+				p.setInt(1, id);
+				ResultSet rs = p.executeQuery();
+				rs.next();
+				Date registrationDate = rs.getDate("registration_date");
+				Organ requestedOrgan = organMan.getOrgan(rs.getInt("organ_id")); 
+				Patient patient = patientMan.getPatient(rs.getInt("patient_id"));
+				String requestedType = rs.getString("requested_type");
+				Theatre theatre = transplantMan.getTheatre(rs.getInt("theatre_id"));
+			
+				Transplant t = new Transplant(id,registrationDate, requestedOrgan, patient, requestedType, theatre );rs.close();
+				p.close();
+				return t;
+			} catch (SQLException e) {
+				System.out.println("Database error.");
+				e.printStackTrace();
+			}
+			return null;
+		}
 	}
 	
-}
+

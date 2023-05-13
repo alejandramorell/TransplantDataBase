@@ -221,7 +221,7 @@ public class Menu {
 			
 	}
 	
-	//TODO finish this method revising first the pojo's attributes
+
 	public static void registerTransplant() throws IOException{
 		
 		System.out.println("Please input new transplant's data: ");
@@ -295,7 +295,7 @@ public class Menu {
 					
 	}
 
-		//TODO revise this method
+		//TODO why do we want this method?
 		public static void selectSurgeon() throws IOException{
 			
 			System.out.println("Let´s search by name: ");
@@ -309,7 +309,6 @@ public class Menu {
 		}
 		
 		public static void surgeonMenu(String email) {
-			//TODO offer the surgeon options
 			while (true) {
 				try {
 					System.out.println("Welcome surgeon");
@@ -323,15 +322,19 @@ public class Menu {
 					case 1: {
 						System.out.println("Input the name of the patient to see their information");
 						String name = r.readLine();
-						List<Patient> patient = patientMan.searchPatientByName(name);
-						System.out.println("Please input the patient's id: ");
+						List<Patient> patientsList = patientMan.searchPatientByName(name);
+						System.out.println(patientsList);
+						System.out.println("Please input the patient's id to check his/her information: ");
 						int id = Integer.parseInt(r.readLine());
 						checkPatient(id);
 						break;
 					}
 					case 2: {
-						//TODO this method
-						checkTransplant(id);
+						List<Transplant> transplants = transplantMan.getAllTransplants();
+						System.out.println(transplants);
+						System.out.println("Please input the transplant´s id to check it's information: ");
+						int transplantId = Integer.parseInt(r.readLine());
+						checkTransplant(transplantId);
 						break;
 					}
 					case 0: {
@@ -389,8 +392,7 @@ public class Menu {
 
 					switch (choice) {
 					case 1: {
-						//TODO use the same method as surgeon menu case 2
-						checkTransplant(id);
+						
 						break;
 					}
 					case 2: {
@@ -442,10 +444,13 @@ public class Menu {
 
 					switch (choice) {
 					case 1: {
+						System.out.println("Patient'd name: ");
+						String name = r.readLine();
+						List<Patient> patients = patientMan.searchPatientByName(name)
 						System.out.println("Please input the patient's id: ");
-						int id = Integer.parseInt(r.readLine());
-						Patient t = patientMan.getPatient(id);
-						assignOrgan(id, t.getBloodType());
+						int patientId = Integer.parseInt(r.readLine());
+						Patient t = patientMan.getPatient(patientId);
+						assignOrgan(patientId, t.getBloodType());
 						break;
 					}
 					case 2: {

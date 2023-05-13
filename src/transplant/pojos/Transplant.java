@@ -17,10 +17,14 @@ public class Transplant implements Serializable {
 	
 	
 	
-	public Transplant(Integer id, Date registrationDate) {
+	public Transplant(Integer id, Date registrationDate,Organ requestedOrgan,Patient patient,String requestedType, Theatre theatre) {
 		super();
 		this.id = id;
 		this.registrationDate = registrationDate;
+		this.requestedOrgan = requestedOrgan;
+		this.patient = patient;
+		this.requestedType = requestedType;
+		this.theatre = theatre;
 		
 	}
 	
