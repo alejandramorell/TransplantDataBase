@@ -392,7 +392,11 @@ public class Menu {
 
 					switch (choice) {
 					case 1: {
-						
+						List<Transplant> transplants = transplantMan.getAllTransplants();
+						System.out.println(transplants);
+						System.out.println("Please input the transplant´s id to check it's information: ");
+						int transplantId = Integer.parseInt(r.readLine());
+						checkTransplant(transplantId);
 						break;
 					}
 					case 2: {
@@ -401,15 +405,22 @@ public class Menu {
 					}
 					case 3: {
 						//TODO 
-						updateTransplant(id);
+						//updateTransplant(id);
 						break;
 					}
 					case 4: {
 						//TODO updatePatient()
-/						break;
+						break;
 					}
 					case 5: {
-						//TODO assignTransplant()
+						System.out.println("Introduce the surgeon's name to assign him to a transplant:");
+						String name = r.readLine();
+						List<Surgeon> surgeons = surgeonMan.searchSurgeonByName(name);
+						System.out.println(surgeons);
+						
+						System.out.println("Input the id of the surgeon:");
+						int surgeonId = Integer.parseInt(r.readLine());
+						
 						break;
 					}
 					case 0: {
@@ -532,20 +543,12 @@ public class Menu {
 			}
 			
 			public static void assignTransplant(int surgeonId) throws IOException {
+				List<Transplant> transplants = transplantMan.getAllTransplants();
+				System.out.println(transplants);
+				System.out.println("Please input the transplant´s id to assign a surgeon for it: ");
+				int transplantId = Integer.parseInt(r.readLine());
+				transplantMan.assignSurgeonToTransplant(surgeonId, transplantId);
 				
-				System.out.println("Introduce the patient´s name to assign a surgeon to it´s transplant:");
-				String name = r.readLine();
-				List<Patient> patients = patientMan.searchPatientByName(name);
-				System.out.println(patients);
-				
-				System.out.println("Input the id of the patient:");
-				Integer patientId = Integer.parseInt(r.readLine());
-				Patient p = patientMan.getPatient(patientId);
-				
-				String patientName = p.getName();
-
-				// Go to the owner's menu
-				dogMan.assignDogToVet(dogId, vetId);
 			}
 		}
 	
