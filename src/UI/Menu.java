@@ -435,7 +435,8 @@ public class Menu {
 
 					System.out.println("What do you want to do as the transplant unit?:");
 					System.out.println("1. Search for compatibility(assign organ to patient)");
-					System.out.println("2. Register new organ");
+					System.out.println("2. Register donor");
+					System.out.println("3. Register new organ(donor must be registered first)");
 					System.out.println("3. Remove organ");
 					System.out.println("4. Remove patient");
 					
@@ -444,9 +445,10 @@ public class Menu {
 
 					switch (choice) {
 					case 1: {
-						System.out.println("Patient'd name: ");
+						System.out.println("Patient's name: ");
 						String name = r.readLine();
-						List<Patient> patients = patientMan.searchPatientByName(name)
+						List<Patient> patients = patientMan.searchPatientByName(name);
+						System.out.println(patients);
 						System.out.println("Please input the patient's id: ");
 						int patientId = Integer.parseInt(r.readLine());
 						Patient t = patientMan.getPatient(patientId);
@@ -454,21 +456,38 @@ public class Menu {
 						break;
 					}
 					case 2: {
-						//TODO finish
-						registerOrgan();
+						registerDonor();
 						break;
 					}
 					case 3:{
-						//TODO modify
-						System.out.println("Please input the organ's id to remove it: ");
-						int id = Integer.parseInt(r.readLine());
-						removeOrgan(id);
+						System.out.println("Input the name of the donor to registrate a new organ");
+						String donorName = r.readLine();
+						List<Donor> donorList = organMan.searchDonorByName(donorName);
+						System.out.println(donorList);
+						System.out.println("Select the donor, type it's id");
+						int donorId = Integer.parseInt(r.readLine());
+						registerOrgan(donorId);
+						break;
+						
 					}
 					case 4:{
-						//TODO
-						System.out.println("Please input the patient's id to remove it: ");
-						int id = Integer.parseInt(r.readLine());
-						removePatient(id);
+						System.out.println("Please input the organ type remove it: ");
+						String type = r.readLine();
+						List<Organ> organs = organMan.searchOrganByType(type);
+						System.out.println(organs);
+						System.out.println("Now please input the id of the organ to remove it");
+						int organId = Integer.parseInt(r.readLine());
+						removeOrgan(organId);
+					}
+					case 5:{
+						
+						System.out.println("Please input the patient's name to remove it: ");
+						String patientName = r.readLine();
+						List<Patient> patients = patientMan.searchPatientByName(patientName);
+						System.out.println(patients);
+						System.out.println("Now select the patient to remove by indicating it's id");
+						int patientId = Integer.parseInt(r.readLine());
+						removePatient(patientId);
 						
 					}
 					case 0: {

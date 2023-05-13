@@ -1,6 +1,7 @@
 package jdbc;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,6 +12,7 @@ import java.util.List;
 import ifaces.OrganManager;
 import transplant.pojos.Donor;
 import transplant.pojos.Organ;
+import transplant.pojos.Patient;
 
 public class JDBCOrganManager implements OrganManager {
 	
@@ -26,7 +28,7 @@ public class JDBCOrganManager implements OrganManager {
 	public void insertOrgan(Organ organ) {
 		try {
 				Statement s = c.createStatement();
-				String sql = "INSERT INTO ORGAN (type, bloodType, donorId) VALUES ('" + organ.getType() + "', "
+				String sql = "INSERT INTO ORGAN (type, blood_type, donor_id) VALUES ('" + organ.getType() + "', "
 						+ organ.getBloodType() + ", '" + organ.getDonor().getId() +"')";
 				s.executeUpdate(sql);
 				s.close();
@@ -50,6 +52,33 @@ public class JDBCOrganManager implements OrganManager {
 			}
 		}
 
+	public List<Donor> searchDonorByName(String name) {
+		List<Donor> list = new ArrayList<Donor>();
+		try {
+			String sql = "SELECT * FROM DONOR WHERE name LIKE ?";
+			PreparedStatement p = c.prepareStatement(sql);
+			p.setString(1, "%" + name + "%"); 
+			ResultSet rs = p.executeQuery(); //
+			while (rs.next()) {
+				// Create a new donor
+			
+				Integer id = rs.getInt("id");
+				String n = rs.getString("name");
+				String address = rs.getString("address");
+				Integer phone= rs.getInt("phone");
+				String livingState = rs.getString("living_state");
+				
+				Donor d = new Donor(id, n, address,phone, livingState);
+				// IMPORTANT: I don't have the requested organs
+				// Add the Patient to the list
+				list.add(d);
+			}
+		} catch (SQLException e) {
+			System.out.println("Database error.");
+			e.printStackTrace();
+		}
+		return list;
+	}
 	
 
 	@Override
@@ -64,7 +93,7 @@ public class JDBCOrganManager implements OrganManager {
 				// Create a new Organ
 				Integer id = rs.getInt("id");
 				String t = rs.getString("type");
-				String bloodType = rs.getString("blood type");
+				String bloodType = rs.getString("blood_type");
 				Organ o = new Organ(id, t, bloodType);
 				list.add(o);
 			}
@@ -84,7 +113,7 @@ public class JDBCOrganManager implements OrganManager {
 			ResultSet rs = p.executeQuery();
 			rs.next();
 			String type = rs.getString("type");
-			String bloodType = rs.getString("blood type");
+			String bloodType = rs.getString("blood_type");
 			Organ o = new Organ(id, type, bloodType);
 			rs.close();
 			p.close();
@@ -106,7 +135,7 @@ public class JDBCOrganManager implements OrganManager {
 			String name = rs.getString("name");
 			String adress = rs.getString("adress");
 			Integer phone = rs.getInt("phone");
-			String livingState = rs.getString("living state");
+			String livingState = rs.getString("living_state");
 			Donor d = new Donor(id, name, adress, phone, livingState);
 			rs.close();
 			p.close();
