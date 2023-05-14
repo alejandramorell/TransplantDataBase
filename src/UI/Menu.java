@@ -17,6 +17,7 @@ import transplant.pojos.Patient;
 import transplant.pojos.Surgeon;
 import transplant.pojos.Theatre;
 import transplant.pojos.Transplant;
+import transplant.pojos.User;
 import xml.XMLManagerImplementation;
 
 import java.sql.Date;
@@ -94,8 +95,7 @@ public class Menu {
 			System.out.println("Password:");
 			String password = r.readLine();
 
-			//TODO userMan
-			transplant.pojos.User user = userMan.login(username, password);
+			User user = userMan.login(username, password);
 			
 			if (user != null) {
 				if (user.getRole().getName().equals("surgeon")) {

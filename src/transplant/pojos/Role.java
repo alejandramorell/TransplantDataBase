@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import javax.persistence.*;
+
 
 public class Role implements Serializable {
 
@@ -16,16 +18,20 @@ public class Role implements Serializable {
 	private String name;
 	private List<User> users;
 	
+
 	public Role() {
 		super();
 		this.users = new ArrayList<User>();
 	}
+	
+	
 
 	public Role(String name) {
 		super();
 		this.name = name;
 		this.users = new ArrayList<User>();
 	}
+
 
 	public Integer getId() {
 		return id;
@@ -50,6 +56,7 @@ public class Role implements Serializable {
 	public void setUsers(List<User> users) {
 		this.users = users;
 	}
+	
 	
 	public void addUser(User user) {
 		if (!users.contains(user)) {
@@ -80,4 +87,3 @@ public class Role implements Serializable {
 	}
 	
 }
-
