@@ -65,22 +65,23 @@ public class JDBCTransplantManager implements TransplantManager{
 	}
 	
 	
-	@Override
-	public void updateInformation(Transplant transplant) {
-		try {
-			String sql = "UPDATE TRANSPLANT SET" + " date = ?, " + " requested_organ = ?, " + " organ_id = ? " + " theatre_id = ? ";
-			PreparedStatement p;
-			p = c.prepareStatement(sql);
-			p.setDate(1, transplant.getRegistrationDate());
-			//TODO check if the methods with another type of data need a cast
-			p.setString(2, transplant.getRequestedOrgan().getType());
-			p.setInt(3, transplant.getTheatre().getFloor());
-			p.close();
-		} catch (SQLException e) {
-			System.out.println("Database error.");
-			e.printStackTrace();
-		}
-	}
+//		
+	/*@Override
+		public void updateInformation(Transplant transplant) {
+			try {
+				String sql = "UPDATE TRANSPLANT SET" + " date = ?, " + " requested_organ = ?, " + " organ_id = ? " + " theatre_id = ? ";
+				PreparedStatement p;
+				p = c.prepareStatement(sql);
+				p.setDate(1, transplant.getRegistrationDate());
+				//TODO check if the methods with another type of data need a cast
+				p.setString(2, transplant.getRequestedOrgan().getType());
+				p.setInt(3, transplant.getTheatre().getFloor());
+				p.close();
+			} catch (SQLException e) {
+				System.out.println("Database error.");
+				e.printStackTrace();
+			}
+		}*/
 
 	@Override
 	//TODO this method would return only 1 transplant if there where more transplants in the same date
@@ -103,7 +104,8 @@ public class JDBCTransplantManager implements TransplantManager{
 		}
 		return null;
 	}
-
+	
+	@Override
 	public List<Transplant> getTransplants(LocalDate date) {
 		List<Transplant> list = new ArrayList<Transplant> ();
 		
@@ -133,6 +135,7 @@ public class JDBCTransplantManager implements TransplantManager{
 		
 	}
 	
+	@Override
 	public List<Transplant> getAllTransplants() {
 		List<Transplant> list = new ArrayList<Transplant> ();
 		
@@ -161,7 +164,7 @@ public class JDBCTransplantManager implements TransplantManager{
 		
 	}
 	
-	
+	@Override
 	public Theatre getTheatre(int id) {
 		try {
 			String sql = "SELECT * FROM THEATRE WHERE id = ?";
@@ -181,6 +184,8 @@ public class JDBCTransplantManager implements TransplantManager{
 		}
 		return null;
 	}
+	
+	
 	
 	@Override
 	public Transplant getTransplant(int id) {

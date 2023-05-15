@@ -266,7 +266,7 @@ public class Menu {
 		System.out.println("Please input patient data: ");
 		System.out.println("Id: ");
 		Integer id = Integer.parseInt(r.readLine());
-		//TODO metodo que compruebe si hay id repetido
+		//TODO check if the patie's id already exists
 		System.out.println("Sex: ");
 		
 		String sex = r.readLine();
@@ -409,7 +409,13 @@ public class Menu {
 						break;
 					}
 					case 4: {
-						//TODO updatePatient()
+						System.out.println("Input the patient's name to change his information");
+						String patientName = r.readLine();
+						List<Patient> patients = patientMan.searchPatientByName(patientName);
+						System.out.println(patients);
+						System.out.println("Now input the patient´s id");
+						int patientId = Integer.parseInt(r.readLine());
+						updatePatient(patientId);
 						break;
 					}
 					case 5: {
@@ -531,6 +537,57 @@ public class Menu {
 				System.out.println("The patient has been removed. :(");
 			}
 			
+			public static void updatePatient(int patientId) throws IOException {
+				Patient p = patientMan.getPatient(patientId);
+				System.out.println("Type the new data, or press enter to keep actual data");
+				System.out.println("Sex (" + p.getSex() + "):");
+				String sex = r.readLine();
+				if (!sex.equals("")) {
+					p.setSex(sex);
+				}
+				System.out.println("Name (" + p.getName() + "):");
+				String name = r.readLine();
+				if (!name.equals("")) {
+					p.setName(name);
+				}
+				System.out.println("Surname (" + p.getSurname() + "):");
+				String surName = r.readLine();
+				if (!surName.equals("")) {
+					p.setSurname(surName);
+				}
+				System.out.println("Date of birth (" + p.getDateOfBirth() + "):");
+				String dob = r.readLine();
+				if (!dob.equals("")) {
+		
+					Date dobDate = Date.valueOf(dob);
+					p.setDateOfBirth(dobDate);
+				}
+				System.out.println("Disease (" + p.getDisease() + "):");
+				String disease = r.readLine();
+				if (!disease.equals("")) {
+					p.setDisease(disease);
+				}
+				System.out.println("Blood type (" + p.getBloodType() + "):");
+				String bloodType = r.readLine();
+				if (!bloodType.equals("")) {
+					p.setBloodType(bloodType);
+				}
+				System.out.println("Admission date (" + p.getAdmissionDate() + "):");
+				String date = r.readLine();
+				if (!date.equals("")) {
+		
+					Date admissionDate = Date.valueOf(date);
+					p.setAdmissionDate(admissionDate);
+				}
+				System.out.println("Phone (" + p.getPhone() + "):");
+				Integer phone = Integer.parseInt(r.readLine());
+				if (!phone.equals("")) {
+		
+					p.setPhone(phone);
+				}
+				patientMan.updatePatient(p);
+			}
+
 			
 			public static void assignOrgan(int patientId, String patientBloodType) throws IOException {
 				System.out.println("Let's search a compatible organ, please introduce the organ that the patient needs" );

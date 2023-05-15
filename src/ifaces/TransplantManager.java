@@ -10,7 +10,7 @@ public interface TransplantManager {
 
 	public void insertTransplant(Transplant transplant);
 	public Transplant getTransplant(int id); 
-	public void updateInformation(Transplant transplant);
+	//public void updateTransplant(Transplant transplant);
 	public Integer getTransplant(LocalDate date);
 	public Theatre getTheatre(int id);
 	public List<Transplant> getAllTransplants();
