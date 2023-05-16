@@ -2,8 +2,10 @@ package xml;
 
 import java.io.File;
 
+
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
 
 import ifaces.XMLManager;
 import transplant.pojos.Donor;
@@ -21,6 +23,7 @@ public class XMLManagerImplementation implements XMLManager {
 			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 			File file = new File("./xmls/Organs.xml");
 			marshaller.marshal(donor, file);
+			marshaller.marshal(donor, System.out); //TODO no sabemos si hay que ponerlo o no
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -29,9 +32,18 @@ public class XMLManagerImplementation implements XMLManager {
 
 	@Override
 	public Donor xml2Donor(File xml) {
-		// TODO Auto-generated method stub
+		try {
+		// Create the JAXBContext
+		JAXBContext jaxbC = JAXBContext.newInstance(Donor.class);
+		// Create the JAXBUnMarshaller
+		Unmarshaller jaxbU = jaxbC.createUnmarshaller();
+		// Create the object by reading from a file
+		Donor donor = (Donor) jaxbU.unmarshal(xml);
+		// Printout
+		System.out.println(donor);
 		
-		return null;
+	}catch (Exception e) {
+		e.printStackTrace();
 	}
-
+		return donor;//TODO hay que devolver el donor o como lo imprimo en el método no hace falta
 }
