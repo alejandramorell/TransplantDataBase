@@ -478,7 +478,7 @@ public class Menu {
 						break;
 					}
 					case 3:{
-						System.out.println("Input the name of the donor to registrate a new organ");
+						System.out.println("Input the name of the donor to registrate a                                              new organ");
 						String donorName = r.readLine();
 						List<Donor> donorList = organMan.searchDonorByName(donorName);
 						System.out.println(donorList);

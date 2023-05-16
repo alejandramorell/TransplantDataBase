@@ -23,7 +23,7 @@ public class XMLManagerImplementation implements XMLManager {
 			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 			File file = new File("./xmls/Organs.xml");
 			marshaller.marshal(donor, file);
-			marshaller.marshal(donor, System.out); //TODO no sabemos si hay que ponerlo o no
+//			marshaller.marshal(donor, System.out); //TODO no sabemos si hay que ponerlo o no
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -39,11 +39,11 @@ public class XMLManagerImplementation implements XMLManager {
 		Unmarshaller jaxbU = jaxbC.createUnmarshaller();
 		// Create the object by reading from a file
 		Donor donor = (Donor) jaxbU.unmarshal(xml);
-		// Printout
-		System.out.println(donor);
-		
+		// Return donor
+		return donor;//TODO hay que devolver el donor o como lo imprimo en el método no hace falta
+
 	}catch (Exception e) {
 		e.printStackTrace();
 	}
-		return donor;//TODO hay que devolver el donor o como lo imprimo en el método no hace falta
-}
+		return null;//TODO hay que devolver el donor o como lo imprimo en el método no hace falta
+}}

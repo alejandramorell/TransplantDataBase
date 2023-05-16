@@ -31,7 +31,7 @@ public class Donor implements Serializable{
 	private Integer phone;
 	@XmlElement
 	private String livingState;
-	@XmlTransient
+	@XmlTransient //Element and ElementWrapper
 	private List<Organ> organs;
 	
 	public Donor() {

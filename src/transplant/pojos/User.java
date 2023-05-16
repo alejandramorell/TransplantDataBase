@@ -1,18 +1,39 @@
 package transplant.pojos;
 
 import java.io.Serializable;
+
 import java.util.Objects;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.TableGenerator;
+
+
+@Entity
+@Table(name = "users")
 public class User implements Serializable  {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 3101935845760020270L;
+	@Id
+	@GeneratedValue(generator = "users")
+	@TableGenerator(name = "users", table = "sqlite_sequence",
+		pkColumnName = "name", valueColumnName = "seq", pkColumnValue = "users")
 	private Integer id;
+	@Column(unique = true)
 	private String username;
 	private String password;
 	private String email;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "roleId")
 	private Role role;
 	
 	public User() {

@@ -6,7 +6,8 @@ import java.util.List;
 import java.util.Objects;
 import javax.persistence.*;
 
-
+@Entity
+@Table(name="roles")
 public class Role implements Serializable {
 
 	/**
@@ -14,8 +15,13 @@ public class Role implements Serializable {
 	 */
 	private static final long serialVersionUID = 3498337693029250457L;
 
+	@Id
+	@GeneratedValue(generator = "roles")
+	@TableGenerator(name = "roles", table = "sqlite_sequence",
+		pkColumnName = "name", valueColumnName = "seq", pkColumnValue = "roles")
 	private Integer id;
 	private String name;
+	@OneToMany(mappedBy="role", fetch = FetchType.LAZY)
 	private List<User> users;
 	
 
@@ -23,7 +29,6 @@ public class Role implements Serializable {
 		super();
 		this.users = new ArrayList<User>();
 	}
-	
 	
 
 	public Role(String name) {
