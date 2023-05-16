@@ -25,7 +25,7 @@ public class Organ implements Serializable{
 	private String type;
 	@XmlElement
 	private String bloodType;
-	@XmlElement // Transient
+	@XmlTransient
 	private Donor donor;
 	
 	

@@ -9,6 +9,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
@@ -31,7 +32,8 @@ public class Donor implements Serializable{
 	private Integer phone;
 	@XmlElement
 	private String livingState;
-	@XmlTransient //Element and ElementWrapper
+	@XmlElement(name = "Organ")
+	@XmlElementWrapper(name = "Organs")
 	private List<Organ> organs;
 	
 	public Donor() {

@@ -160,7 +160,7 @@ public class Menu {
 		Integer phone = Integer.parseInt(r.readLine());
 		System.out.println("Speciality: ");
 		String speciality = r.readLine();
-		System.out.println("Hiring date: ");	
+		System.out.println("Hiring date (yyyy-MM-dd): ");	
 		String date = r.readLine();
 		Date hiringDate = Date.valueOf(date);
 			
@@ -225,7 +225,7 @@ public class Menu {
 	public static void registerTransplant() throws IOException{
 		
 		System.out.println("Please input new transplant's data: ");
-		System.out.println("Date: ");
+		System.out.println("Date (yyyy-MM-dd): ");
 		String d = r.readLine();
 		Date date = Date.valueOf(d);
 		
@@ -274,14 +274,14 @@ public class Menu {
 		String name = r.readLine();
 		System.out.println("Surname: ");
 		String surname = r.readLine();
-		System.out.println("Date of birth: ");	
+		System.out.println("Date of birth (yyyy-MM-dd): ");	
 		String date = r.readLine();
 		Date dateOfBirth = Date.valueOf(date);
 		System.out.println("Disease: ");
 		String disease = r.readLine();
 		System.out.println("Blood type: ");
 		String bloodType = r.readLine();
-		System.out.println("Admission date: ");
+		System.out.println("Admission date (yyyy-MM-dd): ");
 		String date2 = r.readLine();
 		Date admissionDate = Date.valueOf(date2);
 		System.out.println("Speciality: ");
@@ -368,7 +368,7 @@ public class Menu {
 		}
 		
 		
-		public static void organ2Xml(int id) throws IOException {
+		public static void donor2Xml(int id) throws IOException {
 			System.out.println("Your organs in XML are:");
 			List<Organ> listOrgan = organMan.searchOrganByDonor(id);
 			Donor donor = organMan.getDonor(id);
@@ -555,7 +555,7 @@ public class Menu {
 				if (!surName.equals("")) {
 					p.setSurname(surName);
 				}
-				System.out.println("Date of birth (" + p.getDateOfBirth() + "):");
+				System.out.println("Date of birth (yyyy-MM-dd) (" + p.getDateOfBirth() + "):");
 				String dob = r.readLine();
 				if (!dob.equals("")) {
 		
@@ -572,7 +572,7 @@ public class Menu {
 				if (!bloodType.equals("")) {
 					p.setBloodType(bloodType);
 				}
-				System.out.println("Admission date (" + p.getAdmissionDate() + "):");
+				System.out.println("Admission date (yyyy-MM-dd) (" + p.getAdmissionDate() + "):");
 				String date = r.readLine();
 				if (!date.equals("")) {
 		
