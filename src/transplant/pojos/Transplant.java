@@ -2,6 +2,7 @@ package transplant.pojos;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.List;
 import java.util.Objects;
 
 public class Transplant implements Serializable {
@@ -14,6 +15,7 @@ public class Transplant implements Serializable {
 	private Patient patient;
 	private String requestedType;
 	private Theatre theatre;
+	private List<Surgeon> surgeons;
 	
 	
 	

@@ -1,6 +1,8 @@
 package transplant.pojos;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Theatre implements Serializable {
@@ -10,9 +12,11 @@ public class Theatre implements Serializable {
 	private Integer id;
 	private Integer floor;
 	private Integer number;
+	private List<Transplant> transplants = null;
 	
 	public Theatre() {
 		super();
+		transplants = new ArrayList<Transplant>();
 	}
 	
 	public Theatre(Integer id, Integer floor, Integer number) {
@@ -20,6 +24,7 @@ public class Theatre implements Serializable {
 		this.id = id;
 		this.floor = floor;
 		this.number = number;
+		transplants = new ArrayList<Transplant>();
 	}
 	public Theatre( Integer floor, Integer number) {
 		super();
