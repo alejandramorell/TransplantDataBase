@@ -380,8 +380,8 @@ public class Menu {
 
 					System.out.println("What do you want to do as the nurse?:");
 					System.out.println("1. View transplant information");
-					System.out.println("2. Register new transplant");
-					System.out.println("3. Modify transplant data");
+					System.out.println("2. Register patient");
+					System.out.println("3. Register new transplant");
 					System.out.println("4. Modify patient data");
 					System.out.println("5. Assign surgeon to transplant");
 					
@@ -398,14 +398,14 @@ public class Menu {
 						break;
 					}
 					case 2: {
+						registerPatient();
+					}
+						
+					case 3: {
 						registerTransplant();
 						break;
 					}
-					case 3: {
-						//TODO 
-						//updateTransplant(id);
-						break;
-					}
+				
 					case 4: {
 						System.out.println("Input the patient's name to change his information");
 						String patientName = r.readLine();
@@ -476,7 +476,7 @@ public class Menu {
 						break;
 					}
 					case 3:{
-						System.out.println("Input the name of the donor to registrate a                                              new organ");
+						System.out.println("Input the name of the donor to registrate an organ");                                              new organ");
 						String donorName = r.readLine();
 						List<Donor> donorList = organMan.searchDonorByName(donorName);
 						System.out.println(donorList);

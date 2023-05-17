@@ -21,12 +21,10 @@ public class Patient implements Serializable{
 	//TODO change ingressDate to admissionDate everywhere
 	private String address;
 	private Integer phone;
-    private List<Organ> requestedOrgan;
-    private List<Transplant> transplants;
+	private List<Transplant> transplants;
     
 	public Patient() {
 		super();
-		requestedOrgan = new ArrayList<Organ>();
 	}
 	public Patient(Integer id, String sex, String name, String surname, Date dateOfBirth, String disease, String bloodType,
 			Date admissionDate, String address, Integer phone) {
@@ -41,7 +39,6 @@ public class Patient implements Serializable{
 		this.admissionDate = admissionDate;
 		this.address = address;
 		this.phone = phone;
-		requestedOrgan = new ArrayList<Organ>();
 	
 	}
 
@@ -57,7 +54,6 @@ public class Patient implements Serializable{
 		this.admissionDate = admissionDate;
 		this.address = address;
 		this.phone = phone;
-		requestedOrgan = new ArrayList<Organ>();
 	
 	}
 
@@ -141,13 +137,6 @@ public class Patient implements Serializable{
 		this.phone = phone;
 	}
 
-	public List<Organ> getRequestedOrgan() {
-		return requestedOrgan;
-	}
-
-	public void setRequestedOrgan(List<Organ> requestedOrgan) {
-		this.requestedOrgan = requestedOrgan;
-	}
 	
 	
 
@@ -155,7 +144,7 @@ public class Patient implements Serializable{
 	public String toString() {
 		return "Patient [id=" + id + ", sex=" + sex + ", name=" + name + ", surname=" + surname + ", dateOfBirth="
 				+ dateOfBirth + ", disease=" + disease + ", bloodType=" + bloodType + ", admissionDate=" + admissionDate
-				+ ", address=" + address + ", phone=" + phone + ", requestedOrgan=" + requestedOrgan + "]";
+				+ ", address=" + address + ", phone=" + phone + "]";
 	}
 	@Override
 	public int hashCode() {
