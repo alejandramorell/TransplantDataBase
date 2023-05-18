@@ -350,6 +350,7 @@ public class Menu {
 			}
 		}
 		
+		
 		public static void checkPatient(int id) throws IOException {
 			System.out.println("Patient: " + id + " information: ");
 			Patient patient = patientMan.getPatient(id);
