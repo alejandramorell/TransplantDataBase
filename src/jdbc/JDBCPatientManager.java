@@ -39,7 +39,7 @@ public class JDBCPatientManager implements PatientManager{
 	@Override
 	public void insertPatient(Patient patient) {
 		try {
-			String sql = "INSERT INTO PATIENT (id, sex, name, surname, date_of_birth, blood_type, admission_date, address, phone) VALUES (?, ?, ?, ?)";
+			String sql = "INSERT INTO PATIENT (id, sex, name, surname, date_of_birth, blood_type, admission_date, address, phone) VALUES (?, ?, ?, ?,?,?,?,?,?)";
 			PreparedStatement p = c.prepareStatement(sql);
 			p.setInt(1, patient.getId());
 			p.setString(2, patient.getSex());
@@ -49,7 +49,7 @@ public class JDBCPatientManager implements PatientManager{
 			p.setString(6, patient.getBloodType());
 			p.setDate(7, patient.getAdmissionDate());
 			p.setString(8, patient.getAddress());
-			p.setInt(8, patient.getPhone());
+			p.setInt(9, patient.getPhone());
 			p.executeUpdate();
 			p.close();
 		} catch (SQLException e) {

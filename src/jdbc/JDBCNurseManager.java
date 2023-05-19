@@ -51,7 +51,7 @@ public class JDBCNurseManager implements NurseManager{
 	@Override
 	public Nurse getNurseByEmail(String email) {
 		try {
-			String sql = "SELECT * FROM NURSE WHERE email = ?";
+			String sql = "SELECT * FROM users WHERE EMAIL = '?'";
 			PreparedStatement p = c.prepareStatement(sql);
 			p.setString(1, email);
 			ResultSet rs = p.executeQuery();
@@ -60,8 +60,7 @@ public class JDBCNurseManager implements NurseManager{
 			String name = rs.getString("name");
 			String address = rs.getString("address");
 			Integer phone = rs.getInt("phone");
-			String email1 = rs.getString("email");
-			Nurse n = new Nurse(id,name,address,phone,email1);
+			Nurse n = new Nurse(id,name,address,phone,email);
 			rs.close();
 			p.close();
 			return n;

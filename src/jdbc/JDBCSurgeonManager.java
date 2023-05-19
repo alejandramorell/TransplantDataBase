@@ -40,8 +40,8 @@ public class JDBCSurgeonManager implements SurgeonManager {
 	public void insertSurgeon(Surgeon surgeon) {
 		try {
 			Statement s = c.createStatement();
-			String sql = "INSERT INTO SURGEON (name, adress, phone, speciality, hiring_date, email) VALUES ('" + surgeon.getName() + "', "
-					+ surgeon.getAdress() + ", '" + surgeon.getPhone() + ", '" + surgeon.getSpeciality() + ", '" + surgeon.getHiring_date() + ", '"+surgeon.getEmail()+"')";
+			String sql = "INSERT INTO SURGEON (name, address, phone, speciality, hiring_date, email) VALUES ('" + surgeon.getName() + "', '"
+					+ surgeon.getAddress() + "', " + surgeon.getPhone() + ", '" + surgeon.getSpeciality() + "', " + surgeon.getHiring_date() + ", '"+surgeon.getEmail()+"')";
 			s.executeUpdate(sql);
 			s.close();
 		} catch (SQLException e) {
@@ -111,13 +111,13 @@ public class JDBCSurgeonManager implements SurgeonManager {
 			PreparedStatement p = c.prepareStatement(sql);
 			p.setString(1, email);
 			ResultSet rs = p.executeQuery();
-			rs.next();
+			
 			Integer id = rs.getInt("id");
 			String n = rs.getString("name");
-			String address = rs.getString("adress");
+			String address = rs.getString("address");
 			Integer phone = rs.getInt("phone");
 			String speciality = rs.getString("speciality");
-			Date hiringDate = rs.getDate("hiring date");
+			Date hiringDate = rs.getDate("hiring_date");
 			String email1 = rs.getString("email");
 			Surgeon s = new Surgeon(id,n,address,phone,speciality,hiringDate,email1);
 			rs.close();

@@ -35,7 +35,7 @@ public class ConnectionManager {
 					+ "address TEXT NOT NULL, "
 					+ "phone INTEGER NOT NULL, "
 					+ "speciality TEXT NOT NULL, "
-					+ "hiring_date DATE NOT NULL"
+					+ "hiring_date DATE NOT NULL, "
 					+ "email TEXT NOT NULL)";
 			s.executeUpdate(table);
 			String table2 = "CREATE TABLE PATIENT (id INTEGER PRIMARY KEY, " //we deleted the autoincrement in patients id so we can use ir to call each patient eventhough they have same name

@@ -121,6 +121,7 @@ public class Menu {
 				System.out.println("1. Surgeon");
 				System.out.println("2. Nurse");
 				System.out.println("3. Patient");
+				System.out.println("0. Return to main menu");
 			
 				int choice = Integer.parseInt(r.readLine());
 
@@ -140,7 +141,7 @@ public class Menu {
 				case 0: {
 					return;
 				}
-				}
+			}
 			}
 		}
 
@@ -313,7 +314,7 @@ public class Menu {
 		}
 		
 		public static void nurseMenu(String email) {
-			Nurse nurse = nurseMan.getNurseByEmail(email);
+			//Nurse nurse = nurseMan.getNurseByEmail(email);
 			
 			while (true) {
 				try {
