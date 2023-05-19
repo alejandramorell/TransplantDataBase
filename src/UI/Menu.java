@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import dogclinic.pojos.Owner;
 import ifaces.*;
 import jdbc.*;
 import jpa.JPAUserManager;
@@ -25,7 +26,6 @@ import java.sql.Date;
 public class Menu {
 	
 	private static BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
-	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 	
 	private static SurgeonManager surgeonMan; //it is and interface so i need to assign to surgeonMan a class that implements the interface 
 	private static NurseManager nurseMan;
@@ -106,7 +106,7 @@ public class Menu {
 					nurseMenu(user.getEmail());
 				}
 				else if (user.getRole().getName().equals("transplant unit")) {
-					transplantUnitMenu(user.getEmail()); 
+					transplantUnitMenu(); 
 				}
 			}
 			else {
@@ -153,6 +153,8 @@ public class Menu {
 		System.out.println("Name: ");
 		String name = r.readLine();
 		System.out.println("Adress: ");
+		System.out.println("Email:");
+		String email = r.readLine();
 		String adress = r.readLine();
 		System.out.println("Phone: ");
 		Integer phone = Integer.parseInt(r.readLine());
@@ -176,6 +178,9 @@ public class Menu {
 		System.out.println("Adress: ");
 		String adress = r.readLine();
 		
+		System.out.println("Email:");
+		String email = r.readLine();
+		
 		System.out.println("Phone: ");
 		Integer phone = Integer.parseInt(r.readLine());
 		
@@ -192,6 +197,9 @@ public class Menu {
 		
 		System.out.println("Adress: ");
 		String adress = r.readLine();
+		
+		System.out.println("Email:");
+		String email = r.readLine();
 		
 		System.out.println("Phone: ");
 		Integer phone = Integer.parseInt(r.readLine());
@@ -287,7 +295,6 @@ public class Menu {
 		System.out.println("Phone: ");
 		Integer phone = Integer.parseInt(r.readLine());
 		
-		
 		Patient p = new Patient( id, sex,  name,  surname,  dateOfBirth,  disease,  bloodType, admissionDate, address, phone);
 		patientMan.insertPatient(p);
 					
@@ -307,6 +314,8 @@ public class Menu {
 		}
 		
 		public static void surgeonMenu(String email) {
+			Surgeon surgeon = surgeonMan.getSurgeonByEmail(email);
+			
 			while (true) {
 				try {
 					System.out.println("Welcome surgeon");
@@ -376,6 +385,8 @@ public class Menu {
 		}
 		
 		public static void nurseMenu(String email) {
+			Nurse nurse = nurseMan.getNurseByEmail(email);
+			
 			while (true) {
 				try {
 
@@ -445,7 +456,7 @@ public class Menu {
 		}
 		
 		
-		public static void transplantUnitMenu(String email) {
+		public static void transplantUnitMenu() {
 			
 			while (true) {
 				try {
