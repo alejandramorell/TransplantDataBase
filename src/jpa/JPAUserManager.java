@@ -1,7 +1,6 @@
 package jpa;
 
 import java.util.List;
-
 import javax.persistence.*;
 
 import ifaces.UserManager;

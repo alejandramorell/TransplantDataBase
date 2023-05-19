@@ -1,19 +1,13 @@
 package jdbc;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 
 import ifaces.NurseManager;
 import transplant.pojos.Nurse;
-import transplant.pojos.Surgeon;
-import transplant.pojos.Transplant;
 
 public class JDBCNurseManager implements NurseManager{
 	
@@ -37,67 +31,6 @@ public class JDBCNurseManager implements NurseManager{
 		}
 		
 	}
-
-	@Override
-	public void insertNurse(Nurse nurse) {
-		try {
-			Statement s = c.createStatement();
-			String sql = "INSERT INTO NURSE (name, adress, phone) VALUES ('" + nurse.getName() + "', "
-					+ nurse.getAdress() + ", '" + nurse.getPhone() +"')";
-			s.executeUpdate(sql);
-			s.close();
-		} catch (SQLException e) {
-			System.out.println("Database exception.");
-			e.printStackTrace();
-		}
-	}
-
-	@Override
-	public List<Nurse> searchNurseByName(String name) {
-		List<Nurse> list = new ArrayList<Nurse>();
-		try {
-			String sql = "SELECT * FROM NURSE WHERE name LIKE ?";
-			PreparedStatement p = c.prepareStatement(sql);
-			p.setString(1, "%" + name + "%");
-			ResultSet rs = p.executeQuery();
-			while (rs.next()) {
-				// Create a new Nurse
-				Integer id = rs.getInt("id");
-				String n = rs.getString("name");
-				String address = rs.getString("address");
-				Integer phone = rs.getInt("phone");
-				Nurse nurse = new Nurse(id,n,address,phone);
-				list.add(nurse);
-			}
-		} catch (SQLException e) {
-			System.out.println("Database error.");
-			e.printStackTrace();
-		}
-		return list;
-	}
-
-	@Override
-	public Nurse getNurse(int id) {
-		try {
-			String sql = "SELECT * FROM NURSE WHERE id = ?";
-			PreparedStatement p = c.prepareStatement(sql);
-			p.setInt(1, id);
-			ResultSet rs = p.executeQuery();
-			rs.next();
-			String name = rs.getString("name");
-			String adress = rs.getString("adress");
-			Integer phone = rs.getInt("phone");
-			Nurse n = new Nurse(id, name, adress, phone);
-			rs.close();
-			p.close();
-			return n;
-		} catch (SQLException e) {
-			System.out.println("Database error.");
-			e.printStackTrace();
-		}
-		return null;
-	}
-
 	
 
 	@Override
@@ -115,5 +48,28 @@ public class JDBCNurseManager implements NurseManager{
 		}
 		
 	}
+	@Override
+	public Nurse getNurseByEmail(String email) {
+		try {
+			String sql = "SELECT * FROM NURSE WHERE email = ?";
+			PreparedStatement p = c.prepareStatement(sql);
+			p.setString(1, email);
+			ResultSet rs = p.executeQuery();
+			rs.next();
+			Integer id = rs.getInt("id");
+			String name = rs.getString("name");
+			String address = rs.getString("address");
+			Integer phone = rs.getInt("phone");
+			String email1 = rs.getString("email");
+			Nurse n = new Nurse(id,name,address,phone,email1);
+			rs.close();
+			p.close();
+			return n;
+		} catch (SQLException e) {
+			System.out.println("Database error.");
+			e.printStackTrace();
+		}
+		return null;
+	}	
 	
 }

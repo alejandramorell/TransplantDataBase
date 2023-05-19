@@ -42,8 +42,8 @@ public class JDBCOrganManager implements OrganManager {
 	public void insertDonor(Donor donor) {
 		try {
 				Statement s = c.createStatement();
-				String sql = "INSERT INTO DONOR (name, adress, phone, living_state) VALUES ('" + donor.getName() + "', "
-						+ donor.getAdress() + ", '" + donor.getPhone() + ", '" + donor.getLivingState()+"')";
+				String sql = "INSERT INTO DONOR (name, address, phone, living_state) VALUES ('" + donor.getName() + "', "
+						+ donor.getAddress() + ", '" + donor.getPhone() + ", '" + donor.getLivingState()+"')";
 				s.executeUpdate(sql);
 				s.close();
 			} catch (SQLException e) {
@@ -68,7 +68,7 @@ public class JDBCOrganManager implements OrganManager {
 				Integer phone= rs.getInt("phone");
 				String livingState = rs.getString("living_state");
 				
-				Donor d = new Donor(id, n, address,phone, livingState);
+				Donor d = new Donor(id, n, address, phone, livingState);
 				// IMPORTANT: I don't have the requested organs
 				// Add the Patient to the list
 				list.add(d);
@@ -133,10 +133,10 @@ public class JDBCOrganManager implements OrganManager {
 			ResultSet rs = p.executeQuery();
 			rs.next();
 			String name = rs.getString("name");
-			String adress = rs.getString("adress");
+			String address = rs.getString("adress");
 			Integer phone = rs.getInt("phone");
 			String livingState = rs.getString("living_state");
-			Donor d = new Donor(id, name, adress, phone, livingState);
+			Donor d = new Donor(id, name, address, phone, livingState);
 			rs.close();
 			p.close();
 			return d;

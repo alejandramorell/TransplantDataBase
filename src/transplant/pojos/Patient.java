@@ -15,7 +15,6 @@ public class Patient implements Serializable{
 	private String name;
 	private String surname;
 	private Date dateOfBirth;
-	private String disease;
 	private String bloodType;
 	private Date admissionDate;
 	private String address;
@@ -25,7 +24,7 @@ public class Patient implements Serializable{
 	public Patient() {
 		super();
 	}
-	public Patient(Integer id, String sex, String name, String surname, Date dateOfBirth, String disease, String bloodType,
+	public Patient(Integer id, String sex, String name, String surname, Date dateOfBirth, String bloodType,
 			Date admissionDate, String address, Integer phone) {
 		super();
 		this.id = id;
@@ -33,7 +32,6 @@ public class Patient implements Serializable{
 		this.name = name;
 		this.surname = surname;
 		this.dateOfBirth = dateOfBirth;
-		this.disease = disease;
 		this.bloodType = bloodType;
 		this.admissionDate = admissionDate;
 		this.address = address;
@@ -41,14 +39,13 @@ public class Patient implements Serializable{
 	
 	}
 
-	public Patient(String sex, String name, String surname, Date dateOfBirth, String disease, String bloodType,
+	public Patient(String sex, String name, String surname, Date dateOfBirth, String bloodType,
 			Date admissionDate, String address, Integer phone) {
 		super();
 		this.sex = sex;
 		this.name = name;
 		this.surname = surname;
 		this.dateOfBirth = dateOfBirth;
-		this.disease = disease;
 		this.bloodType = bloodType;
 		this.admissionDate = admissionDate;
 		this.address = address;
@@ -96,14 +93,6 @@ public class Patient implements Serializable{
 		this.dateOfBirth = dateOfBirth;
 	}
 
-	public String getDisease() {
-		return disease;
-	}
-
-	public void setDisease(String disease) {
-		this.disease = disease;
-	}
-
 	public String getBloodType() {
 		return bloodType;
 	}
@@ -124,8 +113,8 @@ public class Patient implements Serializable{
 		return address;
 	}
 
-	public void setAddress(String adress) {
-		this.address = adress;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 	public Integer getPhone() {
@@ -142,7 +131,7 @@ public class Patient implements Serializable{
 	@Override
 	public String toString() {
 		return "Patient [id=" + id + ", sex=" + sex + ", name=" + name + ", surname=" + surname + ", dateOfBirth="
-				+ dateOfBirth + ", disease=" + disease + ", bloodType=" + bloodType + ", admissionDate=" + admissionDate
+				+ dateOfBirth + ", bloodType=" + bloodType + ", admissionDate=" + admissionDate
 				+ ", address=" + address + ", phone=" + phone + "]";
 	}
 	@Override

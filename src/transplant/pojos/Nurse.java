@@ -8,7 +8,7 @@ public class Nurse implements Serializable {
 	private static final long serialVersionUID = -4062894783010869655L;
 	private Integer id;
 	private String name;
-	private String adress;
+	private String address;
 	private Integer phone;
 	private String email;
 
@@ -17,20 +17,20 @@ public class Nurse implements Serializable {
 		super();
 	}
 	
-	public Nurse(Integer id, String name, String adress, Integer phone, String email) {
+	public Nurse(Integer id, String name, String address, Integer phone, String email) {
 		super();		
 		this.id = id;
 		this.name = name;
-		this.adress = adress;
+		this.address = address;
 		this.phone = phone;
 		this.email = email;
 
 	}
 	
-	public Nurse(String name, String adress, Integer phone, String email) {
+	public Nurse(String name, String address, Integer phone, String email) {
 		super();		
 		this.name = name;
-		this.adress = adress;
+		this.address = address;
 		this.phone = phone;
 		this.email = email;
 
@@ -48,11 +48,11 @@ public class Nurse implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getAdress() {
-		return adress;
+	public String getAddress() {
+		return address;
 	}
-	public void setAdress(String adress) {
-		this.adress = adress;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 	public Integer getPhone() {
 		return phone;
@@ -75,7 +75,7 @@ public class Nurse implements Serializable {
 	
 	@Override
 	public String toString() {
-		return "Nurse [id=" + id + ", name=" + name + ", adress=" + adress + ", phone=" + phone + ", email= "+email+ "]";
+		return "Nurse [id=" + id + ", name=" + name + ", adress=" + address + ", phone=" + phone + ", email= "+email+ "]";
 	}
 
 	@Override
