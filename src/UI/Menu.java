@@ -50,7 +50,7 @@ public class Menu {
 		try {
 			// TODO Auto-generated method stub
 			
-			System.out.println("Welcome to the transplant application for hospitals");
+			System.out.println("\nWelcome to the transplant application for hospitals");
 			System.out.println("Choose an option:");
 			System.out.println("1: LOG IN");
 			System.out.println("2: REGISTER");
@@ -108,7 +108,7 @@ public class Menu {
 				}
 			}
 			else {
-				System.out.println("Wrong username/password combination.");
+				System.out.println("Wrong username and password combination.");
 			}
 		}
 	}
@@ -117,11 +117,12 @@ public class Menu {
 		public static void register() throws IOException {
 			while (true) {
 				
+				System.out.println("Register menu:");
 				System.out.println("Who do you want to register as?:");
-				System.out.println("1. Surgeon");
-				System.out.println("2. Nurse");
-				System.out.println("3. Patient");
-				System.out.println("0. Return to main menu");
+				System.out.println("1. SURGEON");
+				System.out.println("2. NURSE");
+				System.out.println("3. PATIENT");
+				System.out.println("0. RETURN TO MAIN MENU");
 			
 				int choice = Integer.parseInt(r.readLine());
 
