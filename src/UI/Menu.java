@@ -7,8 +7,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-import dogclinic.pojos.Owner;
 import ifaces.*;
+
 import jdbc.*;
 import jpa.JPAUserManager;
 import transplant.pojos.Donor;
@@ -63,7 +63,6 @@ public class Menu {
 				break;
 			}
 			case 2:{
-				//TODO register
 				register();
 				break;
 			}
@@ -75,17 +74,15 @@ public class Menu {
 		
 			
 		} catch (NumberFormatException e) {
-			// TODO Auto-generated catch block
-			System.out.println("Please type a numer!");
+			System.out.println("Please type a number!");
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		}
 	}
 	
-	//TODO finish this method
+	
 	public static void login()throws IOException {
 		while (true) {
 
@@ -153,9 +150,9 @@ public class Menu {
 		System.out.println("Name: ");
 		String name = r.readLine();
 		System.out.println("Adress: ");
+		String address = r.readLine();
 		System.out.println("Email:");
 		String email = r.readLine();
-		String adress = r.readLine();
 		System.out.println("Phone: ");
 		Integer phone = Integer.parseInt(r.readLine());
 		System.out.println("Speciality: ");
@@ -164,7 +161,7 @@ public class Menu {
 		String date = r.readLine();
 		Date hiringDate = Date.valueOf(date);
 			
-		Surgeon s = new Surgeon(name, adress, phone, speciality, hiringDate); //look for the constructor with and without id
+		Surgeon s = new Surgeon(name, address, phone, speciality, hiringDate, email); //look for the constructor with and without id
 		surgeonMan.insertSurgeon(s);
 			
 	}
@@ -184,91 +181,13 @@ public class Menu {
 		System.out.println("Phone: ");
 		Integer phone = Integer.parseInt(r.readLine());
 		
-		Nurse n = new Nurse(name, adress, phone);
+		Nurse n = new Nurse(name, adress, phone, email);
 		nurseMan.insertNurse(n); 
 			
 	}
 	
-	public static void registerDonor() throws IOException{
-		
-		System.out.println("Please input donor data: ");
-		System.out.println("Name: ");
-		String name = r.readLine();
-		
-		System.out.println("Adress: ");
-		String adress = r.readLine();
-		
-		System.out.println("Email:");
-		String email = r.readLine();
-		
-		System.out.println("Phone: ");
-		Integer phone = Integer.parseInt(r.readLine());
-		
-		System.out.println("Living state");
-		String livingState = r.readLine();
-		
-		Donor d = new Donor(name, adress, phone, livingState);
-		organMan.insertDonor(d); 
-			
-	}
-	
-	public static void registerOrgan(int id) throws IOException{
-		
-		System.out.println("Please input new organ's data: ");
-		System.out.println("Type: ");
-		String type = r.readLine();
-		
-		System.out.println("Blood type: ");
-		String bloodType = r.readLine();
-				
-	
-		Organ o = new Organ(type, bloodType, organMan.getDonor(id));
-		organMan.insertOrgan(o);
-			
-	}
-	
-
-	public static void registerTransplant() throws IOException{
-		
-		System.out.println("Please input new transplant's data: ");
-		System.out.println("Date (yyyy-MM-dd): ");
-		String d = r.readLine();
-		Date date = Date.valueOf(d);
-		
-		System.out.println("Type of organ");
-		String type = r.readLine();
-		List<Organ> listOrgan = organMan.searchOrganByType(type);
-		System.out.println(listOrgan);
-		System.out.println("Please, choose the id of the requested organ. ");
-		Integer requestedOrganId = Integer.parseInt(r.readLine());
-		Organ o = organMan.getOrgan(requestedOrganId);
-		
-		System.out.println("Name of the patient");
-		String patientName = r.readLine();
-		List<Patient> patients = patientMan.searchPatientByName(patientName);
-		System.out.println(patients);
-		
-		System.out.println("Input the id of the patient");
-		Integer patientId = Integer.parseInt(r.readLine());
-		Patient p = patientMan.getPatient(patientId);
-		
-		System.out.println("Request");
-		String request = r.readLine();
-		
-		System.out.println("Input the theatre information: ");
-		Integer floor = Integer.parseInt(r.readLine());
-		Integer number = Integer.parseInt(r.readLine());
-		Theatre theatre = new Theatre(floor, number);
-		
-		
-		Transplant transplant = new Transplant(date,o,p, request, theatre);
-		transplantMan.insertTransplant(transplant); 
-			
-	}
-		
-		
 	public static void registerPatient() throws IOException{
-			
+		
 		System.out.println("Please input patient data: ");
 		System.out.println("Id: ");
 		Integer id = Integer.parseInt(r.readLine());
@@ -300,6 +219,7 @@ public class Menu {
 					
 	}
 
+	
 		//TODO why do we want this method?
 		public static void selectSurgeon() throws IOException{
 			
@@ -366,14 +286,6 @@ public class Menu {
 			
 		}
 		
-		//TODO 
-		public static void checkTransplant(int id) throws IOException {
-			System.out.println("transplant: " + id + " information: ");
-			Transplant transplant = transplantMan.getTransplant(id);
-			System.out.println(transplant);
-			
-		}
-		
 		
 		public static void donor2Xml(int id) throws IOException {
 			System.out.println("Your organs in XML are:");
@@ -392,9 +304,8 @@ public class Menu {
 					System.out.println("What do you want to do as the nurse?:");
 					System.out.println("1. View transplant information");
 					System.out.println("2. Register new transplant");
-					System.out.println("3. Modify transplant data");
-					System.out.println("4. Modify patient data");
-					System.out.println("5. Assign surgeon to transplant");
+					System.out.println("3. Modify patient data");
+					System.out.println("4 Assign surgeon to transplant");
 					
 					
 					int choice = Integer.parseInt(r.readLine());
@@ -412,12 +323,8 @@ public class Menu {
 						registerTransplant();
 						break;
 					}
+
 					case 3: {
-						//TODO 
-						//updateTransplant(id);
-						break;
-					}
-					case 4: {
 						System.out.println("Input the patient's name to change his information");
 						String patientName = r.readLine();
 						List<Patient> patients = patientMan.searchPatientByName(patientName);
@@ -454,6 +361,114 @@ public class Menu {
 			}
 		}
 		
+		//TODO 
+		public static void checkTransplant(int id) throws IOException {
+					System.out.println("transplant: " + id + " information: ");
+					Transplant transplant = transplantMan.getTransplant(id);
+					System.out.println(transplant);
+					
+		}
+		
+		public static void registerTransplant() throws IOException{
+			
+			System.out.println("Please input new transplant's data: ");
+			System.out.println("Date (yyyy-MM-dd): ");
+			String d = r.readLine();
+			Date date = Date.valueOf(d);
+			
+			System.out.println("Type of organ");
+			String type = r.readLine();
+			List<Organ> listOrgan = organMan.searchOrganByType(type);
+			System.out.println(listOrgan);
+			System.out.println("Please, choose the id of the requested organ. ");
+			Integer requestedOrganId = Integer.parseInt(r.readLine());
+			Organ o = organMan.getOrgan(requestedOrganId);
+			
+			System.out.println("Name of the patient");
+			String patientName = r.readLine();
+			List<Patient> patients = patientMan.searchPatientByName(patientName);
+			System.out.println(patients);
+			
+			System.out.println("Input the id of the patient");
+			Integer patientId = Integer.parseInt(r.readLine());
+			Patient p = patientMan.getPatient(patientId);
+			
+			System.out.println("Request");
+			String request = r.readLine();
+			
+			System.out.println("Input the theatre information: ");
+			Integer floor = Integer.parseInt(r.readLine());
+			Integer number = Integer.parseInt(r.readLine());
+			Theatre theatre = new Theatre(floor, number);
+			
+			
+			Transplant transplant = new Transplant(date,o,p, request, theatre);
+			transplantMan.insertTransplant(transplant); 
+				
+		}
+		
+		public static void updatePatient(int patientId) throws IOException {
+			Patient p = patientMan.getPatient(patientId);
+			System.out.println("Type the new data, or press enter to keep actual data");
+			System.out.println("Sex (" + p.getSex() + "):");
+			String sex = r.readLine();
+			if (!sex.equals("")) {
+				p.setSex(sex);
+			}
+			System.out.println("Name (" + p.getName() + "):");
+			String name = r.readLine();
+			if (!name.equals("")) {
+				p.setName(name);
+			}
+			System.out.println("Surname (" + p.getSurname() + "):");
+			String surName = r.readLine();
+			if (!surName.equals("")) {
+				p.setSurname(surName);
+			}
+			System.out.println("Date of birth (yyyy-MM-dd) (" + p.getDateOfBirth() + "):");
+			String dob = r.readLine();
+			if (!dob.equals("")) {
+	
+				Date dobDate = Date.valueOf(dob);
+				p.setDateOfBirth(dobDate);
+			}
+			System.out.println("Disease (" + p.getDisease() + "):");
+			String disease = r.readLine();
+			if (!disease.equals("")) {
+				p.setDisease(disease);
+			}
+			System.out.println("Blood type (" + p.getBloodType() + "):");
+			String bloodType = r.readLine();
+			if (!bloodType.equals("")) {
+				p.setBloodType(bloodType);
+			}
+			System.out.println("Admission date (yyyy-MM-dd) (" + p.getAdmissionDate() + "):");
+			String date = r.readLine();
+			if (!date.equals("")) {
+	
+				Date admissionDate = Date.valueOf(date);
+				p.setAdmissionDate(admissionDate);
+			}
+			System.out.println("Phone (" + p.getPhone() + "):");
+			Integer phone = Integer.parseInt(r.readLine());
+			if (!phone.equals("")) {
+	
+				p.setPhone(phone);
+			}
+			patientMan.updatePatient(p);
+		}
+
+		
+		public static void assignTransplant(int surgeonId) throws IOException {
+			List<Transplant> transplants = transplantMan.getAllTransplants();
+			System.out.println(transplants);
+			System.out.println("Please input the transplant´s id to assign a surgeon for it: ");
+			int transplantId = Integer.parseInt(r.readLine());
+			nurseMan.assignSurgeonTransplant(surgeonId, transplantId);
+			
+		}
+		
+		
 		
 		public static void transplantUnitMenu() {
 			
@@ -487,7 +502,7 @@ public class Menu {
 						break;
 					}
 					case 3:{
-						System.out.println("Input the name of the donor to registrate an organ: ");                                              new organ");
+						System.out.println("Input the name of the donor to register a new organ: ");   
 						String donorName = r.readLine();
 						List<Donor> donorList = organMan.searchDonorByName(donorName);
 						System.out.println(donorList);
@@ -535,69 +550,6 @@ public class Menu {
 		}
 		
 		
-			
-			public static void removeOrgan(int id) throws IOException {
-				organMan.removeOrgan(id);
-				System.out.println("The organ has been removed. :(");
-			}
-			
-			public static void removePatient(int id) throws IOException {
-				patientMan.removePatient(id);
-				System.out.println("The patient has been removed. :(");
-			}
-			
-			public static void updatePatient(int patientId) throws IOException {
-				Patient p = patientMan.getPatient(patientId);
-				System.out.println("Type the new data, or press enter to keep actual data");
-				System.out.println("Sex (" + p.getSex() + "):");
-				String sex = r.readLine();
-				if (!sex.equals("")) {
-					p.setSex(sex);
-				}
-				System.out.println("Name (" + p.getName() + "):");
-				String name = r.readLine();
-				if (!name.equals("")) {
-					p.setName(name);
-				}
-				System.out.println("Surname (" + p.getSurname() + "):");
-				String surName = r.readLine();
-				if (!surName.equals("")) {
-					p.setSurname(surName);
-				}
-				System.out.println("Date of birth (yyyy-MM-dd) (" + p.getDateOfBirth() + "):");
-				String dob = r.readLine();
-				if (!dob.equals("")) {
-		
-					Date dobDate = Date.valueOf(dob);
-					p.setDateOfBirth(dobDate);
-				}
-				System.out.println("Disease (" + p.getDisease() + "):");
-				String disease = r.readLine();
-				if (!disease.equals("")) {
-					p.setDisease(disease);
-				}
-				System.out.println("Blood type (" + p.getBloodType() + "):");
-				String bloodType = r.readLine();
-				if (!bloodType.equals("")) {
-					p.setBloodType(bloodType);
-				}
-				System.out.println("Admission date (yyyy-MM-dd) (" + p.getAdmissionDate() + "):");
-				String date = r.readLine();
-				if (!date.equals("")) {
-		
-					Date admissionDate = Date.valueOf(date);
-					p.setAdmissionDate(admissionDate);
-				}
-				System.out.println("Phone (" + p.getPhone() + "):");
-				Integer phone = Integer.parseInt(r.readLine());
-				if (!phone.equals("")) {
-		
-					p.setPhone(phone);
-				}
-				patientMan.updatePatient(p);
-			}
-
-			
 			public static void assignOrgan(int patientId, String patientBloodType) throws IOException {
 				System.out.println("Let's search a compatible organ, please introduce the organ that the patient needs" );
 				String type= r.readLine();
@@ -609,14 +561,54 @@ public class Menu {
 				organMan.assignOrganToPatient(organId, patientId);
 			}
 			
-			public static void assignTransplant(int surgeonId) throws IOException {
-				List<Transplant> transplants = transplantMan.getAllTransplants();
-				System.out.println(transplants);
-				System.out.println("Please input the transplant´s id to assign a surgeon for it: ");
-				int transplantId = Integer.parseInt(r.readLine());
-				nurseMan.assignSurgeonTransplant(surgeonId, transplantId);
+			
+			public static void registerDonor() throws IOException{
 				
+				System.out.println("Please input donor data: ");
+				System.out.println("Name: ");
+				String name = r.readLine();
+				
+				System.out.println("Adress: ");
+				String adress = r.readLine();
+				
+						
+				System.out.println("Phone: ");
+				Integer phone = Integer.parseInt(r.readLine());
+				
+				System.out.println("Living state");
+				String livingState = r.readLine();
+				
+				Donor d = new Donor(name, adress, phone, livingState);
+				organMan.insertDonor(d); 
+					
 			}
+			
+			public static void registerOrgan(int id) throws IOException{
+				
+				System.out.println("Please input new organ's data: ");
+				System.out.println("Type: ");
+				String type = r.readLine();
+				
+				System.out.println("Blood type: ");
+				String bloodType = r.readLine();
+						
+			
+				Organ o = new Organ(type, bloodType, organMan.getDonor(id));
+				organMan.insertOrgan(o);
+					
+			}
+			
+			
+			public static void removeOrgan(int id) throws IOException {
+				organMan.removeOrgan(id);
+				System.out.println("The organ has been removed. :(");
+			}
+			
+			public static void removePatient(int id) throws IOException {
+				patientMan.removePatient(id);
+				System.out.println("The patient has been removed. :(");
+			}			
+			
 		}
 	
 
