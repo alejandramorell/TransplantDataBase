@@ -27,7 +27,7 @@ public class Donor implements Serializable{
 	@XmlAttribute
 	private String name;
 	@XmlElement
-	private String adress;
+	private String address;
 	@XmlElement
 	private Integer phone;
 	@XmlElement
@@ -40,20 +40,20 @@ public class Donor implements Serializable{
 		super();
 		organs = new ArrayList<Organ>();
 	}
-	public Donor(Integer id, String name, String adress, Integer phone, String livingState) {
+	public Donor(Integer id, String name, String address, Integer phone, String livingState) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.adress = adress;
+		this.address = address;
 		this.phone = phone;
 		this.livingState = livingState;
 		organs = new ArrayList<Organ>();
 	}
 	
-	public Donor(String name, String adress, Integer phone, String livingState) {
+	public Donor(String name, String address, Integer phone, String livingState) {
 		super();
 		this.name = name;
-		this.adress = adress;
+		this.address = address;
 		this.phone = phone;
 		this.livingState = livingState;
 		organs = new ArrayList<Organ>();
@@ -70,11 +70,11 @@ public class Donor implements Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getAdress() {
-		return adress;
+	public String getAddress() {
+		return address;
 	}
-	public void setAdress(String adress) {
-		this.adress = adress;
+	public void setAddress(String adress) {
+		this.address = address;
 	}
 	public Integer getPhone() {
 		return phone;
@@ -98,7 +98,7 @@ public class Donor implements Serializable{
 	
 	@Override
 	public String toString() {
-		return "Donor [id=" + id + ", name=" + name + ", adress=" + adress + ", phone=" + phone + ", livingState="
+		return "Donor [id=" + id + ", name=" + name + ", address=" + address + ", phone=" + phone + ", livingState="
 				+ livingState + ", organs=" + organs + "]";
 	}
 	@Override
