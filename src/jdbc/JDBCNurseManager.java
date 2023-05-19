@@ -42,8 +42,8 @@ public class JDBCNurseManager implements NurseManager{
 	public void insertNurse(Nurse nurse) {
 		try {
 			Statement s = c.createStatement();
-			String sql = "INSERT INTO NURSE (name, adress, phone) VALUES ('" + nurse.getName() + "', "
-					+ nurse.getAdress() + ", '" + nurse.getPhone() +"')";
+			String sql = "INSERT INTO NURSE (name, adress, phone,email) VALUES ('" + nurse.getName() + "', "
+					+ nurse.getAdress() + ", '" + nurse.getPhone() +", '"+nurse.getEmail()+"')";
 			s.executeUpdate(sql);
 			s.close();
 		} catch (SQLException e) {
@@ -66,7 +66,8 @@ public class JDBCNurseManager implements NurseManager{
 				String n = rs.getString("name");
 				String address = rs.getString("address");
 				Integer phone = rs.getInt("phone");
-				Nurse nurse = new Nurse(id,n,address,phone);
+				String email = rs.getString("email");
+				Nurse nurse = new Nurse(id,n,address,phone,email);
 				list.add(nurse);
 			}
 		} catch (SQLException e) {
@@ -87,7 +88,8 @@ public class JDBCNurseManager implements NurseManager{
 			String name = rs.getString("name");
 			String adress = rs.getString("adress");
 			Integer phone = rs.getInt("phone");
-			Nurse n = new Nurse(id, name, adress, phone);
+			String email = rs.getString("email");
+			Nurse n = new Nurse(id, name, adress, phone,email);
 			rs.close();
 			p.close();
 			return n;
@@ -115,5 +117,28 @@ public class JDBCNurseManager implements NurseManager{
 		}
 		
 	}
+	@Override
+	public Nurse getNurseByEmail(String email) {
+		try {
+			String sql = "SELECT * FROM NURSE WHERE email = ?";
+			PreparedStatement p = c.prepareStatement(sql);
+			p.setString(1, email);
+			ResultSet rs = p.executeQuery();
+			rs.next();
+			Integer id = rs.getInt("id");
+			String name = rs.getString("name");
+			String address = rs.getString("address");
+			Integer phone = rs.getInt("phone");
+			String email1 = rs.getString("email");
+			Nurse n = new Nurse(id,name,address,phone,email1);
+			rs.close();
+			p.close();
+			return n;
+		} catch (SQLException e) {
+			System.out.println("Database error.");
+			e.printStackTrace();
+		}
+		return null;
+	}	
 	
 }
