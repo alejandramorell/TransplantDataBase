@@ -182,7 +182,7 @@ public class Menu {
 		Integer phone = Integer.parseInt(r.readLine());
 		
 		Nurse n = new Nurse(name, adress, phone, email);
-		nurseMan.insertNurse(n); 
+		//nurseMan.insertNurse(n); 
 			
 	}
 	
@@ -202,8 +202,6 @@ public class Menu {
 		System.out.println("Date of birth (yyyy-MM-dd): ");	
 		String date = r.readLine();
 		Date dateOfBirth = Date.valueOf(date);
-		System.out.println("Disease: ");
-		String disease = r.readLine();
 		System.out.println("Blood type: ");
 		String bloodType = r.readLine();
 		System.out.println("Admission date (yyyy-MM-dd): ");
@@ -214,7 +212,7 @@ public class Menu {
 		System.out.println("Phone: ");
 		Integer phone = Integer.parseInt(r.readLine());
 		
-		Patient p = new Patient( id, sex,  name,  surname,  dateOfBirth,  disease,  bloodType, admissionDate, address, phone);
+		Patient p = new Patient( id, sex,  name,  surname,  dateOfBirth,   bloodType, admissionDate, address, phone);
 		patientMan.insertPatient(p);
 					
 	}
@@ -432,11 +430,7 @@ public class Menu {
 				Date dobDate = Date.valueOf(dob);
 				p.setDateOfBirth(dobDate);
 			}
-			System.out.println("Disease (" + p.getDisease() + "):");
-			String disease = r.readLine();
-			if (!disease.equals("")) {
-				p.setDisease(disease);
-			}
+		
 			System.out.println("Blood type (" + p.getBloodType() + "):");
 			String bloodType = r.readLine();
 			if (!bloodType.equals("")) {
