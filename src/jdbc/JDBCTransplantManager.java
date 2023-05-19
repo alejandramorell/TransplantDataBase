@@ -52,12 +52,16 @@ public class JDBCTransplantManager implements TransplantManager{
 	@Override
 	public void insertTransplant(Transplant transplant) {
 		try {
-			Statement s = c.createStatement();
-			String sql = "INSERT INTO TRANSPLANT (id, date, requested_organ, organ_id, theatre_id)"
-					+ " VALUES ('" + transplant.getId() + "',"+ transplant.getRegistrationDate()+"', "+ transplant.getRequestedOrgan() +"', "+ 
-					transplant.getTheatre() +"')";
-			s.executeUpdate(sql);
-			s.close();
+			String sql = "INSERT INTO dogs (id, registration_date, requested_type, organ_id,theatre_id,patient_id) VALUES (?, ?, ?, ?)";
+			PreparedStatement p = c.prepareStatement(sql);
+			p.setInt(1, transplant.getId());
+			p.setDate(2, transplant.getRegistrationDate());
+			p.setString(3, transplant.getRequestedType());
+			p.setInt(4, transplant.getRequestedOrgan().getId());
+			p.setInt(5, transplant.getTheatre().getId());
+			p.setInt(6, transplant.getPatient().getId());
+			p.executeUpdate();
+			p.close();
 		} catch (SQLException e) {
 			System.out.println("Database exception.");
 			e.printStackTrace();
