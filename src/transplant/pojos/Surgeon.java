@@ -15,6 +15,7 @@ public class Surgeon implements Serializable {
 	private Integer phone;
 	private String speciality;
 	private Date hiring_date;
+	private String email;
 	
 	
 	public Surgeon() {
@@ -22,7 +23,7 @@ public class Surgeon implements Serializable {
 	}
 
 
-	public Surgeon(Integer id, String name, String address, Integer phone, String speciality, Date hiring_date) {
+	public Surgeon(Integer id, String name, String address, Integer phone, String speciality, Date hiring_date, String email) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -30,16 +31,18 @@ public class Surgeon implements Serializable {
 		this.phone = phone;
 		this.speciality = speciality;
 		this.hiring_date = hiring_date;
+		this.email = email;
 	}
 
 
-	public Surgeon(String name, String address, Integer phone, String speciality, Date hiring_date) {
+	public Surgeon(String name, String address, Integer phone, String speciality, Date hiring_date, String email) {
 		super();
 		this.name = name;
 		this.address = address;
 		this.phone = phone;
 		this.speciality = speciality;
 		this.hiring_date = hiring_date;
+		this.email = email;
 	}
 
 
@@ -102,12 +105,21 @@ public class Surgeon implements Serializable {
 		this.hiring_date = hiring_date;
 	}
 
-
 	
+	public String getEmail() {
+		return email;
+	}
+
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+
 	@Override
 	public String toString() {
 		return "Surgeon [id=" + id + ", name=" + name + ", address=" + address + ", phone=" + phone + ", speciality="
-				+ speciality + ", hiring_date=" + hiring_date + "]";
+				+ speciality + ", hiring_date=" + hiring_date + ", email= "+email+ "]";
 	}
 
 

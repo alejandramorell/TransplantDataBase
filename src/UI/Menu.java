@@ -359,7 +359,6 @@ public class Menu {
 			}
 		}
 		
-		
 		public static void checkPatient(int id) throws IOException {
 			System.out.println("Patient: " + id + " information: ");
 			Patient patient = patientMan.getPatient(id);
@@ -392,8 +391,8 @@ public class Menu {
 
 					System.out.println("What do you want to do as the nurse?:");
 					System.out.println("1. View transplant information");
-					System.out.println("2. Register patient");
-					System.out.println("3. Register new transplant");
+					System.out.println("2. Register new transplant");
+					System.out.println("3. Modify transplant data");
 					System.out.println("4. Modify patient data");
 					System.out.println("5. Assign surgeon to transplant");
 					
@@ -410,14 +409,14 @@ public class Menu {
 						break;
 					}
 					case 2: {
-						registerPatient();
-					}
-						
-					case 3: {
 						registerTransplant();
 						break;
 					}
-				
+					case 3: {
+						//TODO 
+						//updateTransplant(id);
+						break;
+					}
 					case 4: {
 						System.out.println("Input the patient's name to change his information");
 						String patientName = r.readLine();
@@ -465,8 +464,8 @@ public class Menu {
 					System.out.println("1. Search for compatibility(assign organ to patient)");
 					System.out.println("2. Register donor");
 					System.out.println("3. Register new organ(donor must be registered first)");
-					System.out.println("3. Remove organ");
-					System.out.println("4. Remove patient");
+					System.out.println("4. Remove organ");
+					System.out.println("5. Remove patient");
 					
 					
 					int choice = Integer.parseInt(r.readLine());
@@ -488,7 +487,7 @@ public class Menu {
 						break;
 					}
 					case 3:{
-						System.out.println("Input the name of the donor to register a new organ");  
+						System.out.println("Input the name of the donor to registrate an organ: ");                                              new organ");
 						String donorName = r.readLine();
 						List<Donor> donorList = organMan.searchDonorByName(donorName);
 						System.out.println(donorList);

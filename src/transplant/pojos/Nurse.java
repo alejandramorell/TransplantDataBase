@@ -10,24 +10,30 @@ public class Nurse implements Serializable {
 	private String name;
 	private String adress;
 	private Integer phone;
+	private String email;
+
 	
 	public Nurse() {
 		super();
 	}
 	
-	public Nurse(Integer id, String name, String adress, Integer phone) {
+	public Nurse(Integer id, String name, String adress, Integer phone, String email) {
 		super();		
 		this.id = id;
 		this.name = name;
 		this.adress = adress;
 		this.phone = phone;
+		this.email = email;
+
 	}
 	
-	public Nurse(String name, String adress, Integer phone) {
+	public Nurse(String name, String adress, Integer phone, String email) {
 		super();		
 		this.name = name;
 		this.adress = adress;
 		this.phone = phone;
+		this.email = email;
+
 	}
 	
 	public Integer getId() {
@@ -53,7 +59,14 @@ public class Nurse implements Serializable {
 	}
 	public void setPhone(Integer phone) {
 		this.phone = phone;
+	}	
+	public String getEmail() {
+		return email;
 	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -62,7 +75,7 @@ public class Nurse implements Serializable {
 	
 	@Override
 	public String toString() {
-		return "Nurse [id=" + id + ", name=" + name + ", adress=" + adress + ", phone=" + phone + "]";
+		return "Nurse [id=" + id + ", name=" + name + ", adress=" + adress + ", phone=" + phone + ", email= "+email+ "]";
 	}
 
 	@Override
