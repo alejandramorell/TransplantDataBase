@@ -11,9 +11,9 @@ public class Transplant implements Serializable {
 	private static final long serialVersionUID = 6640455937191882784L;
 	private Integer id; 
 	private Date registrationDate;
+	private String requestedType;
 	private Organ requestedOrgan; 
 	private Patient patient;
-	private String requestedType;
 	private Theatre theatre;
 	private List<Surgeon> surgeons;
 	
