@@ -103,7 +103,7 @@ public class Menu {
 					nurseMenu(user.getEmail());
 				}
 				else if (user.getRole().getName().equals("transplant unit")) {
-					transplantUnitMenu(); 
+					transplantUnitMenu(user.getEmail());
 				}
 			}
 			else {
@@ -202,8 +202,6 @@ public class Menu {
 		System.out.println("Date of birth (yyyy-MM-dd): ");	
 		String date = r.readLine();
 		Date dateOfBirth = Date.valueOf(date);
-		System.out.println("Disease: ");
-		String disease = r.readLine();
 		System.out.println("Blood type: ");
 		String bloodType = r.readLine();
 		System.out.println("Admission date (yyyy-MM-dd): ");
@@ -214,7 +212,7 @@ public class Menu {
 		System.out.println("Phone: ");
 		Integer phone = Integer.parseInt(r.readLine());
 		
-		Patient p = new Patient( id, sex,  name,  surname,  dateOfBirth,  disease,  bloodType, admissionDate, address, phone);
+		Patient p = new Patient( id, sex,  name,  surname,  dateOfBirth,  bloodType, admissionDate, address, phone);
 		patientMan.insertPatient(p);
 					
 	}
@@ -470,7 +468,7 @@ public class Menu {
 		
 		
 		
-		public static void transplantUnitMenu() {
+		public static void transplantUnitMenu(user.getEmail()) {
 			
 			while (true) {
 				try {

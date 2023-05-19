@@ -26,6 +26,12 @@ public JPAUserManager() {
 		this.createRole(surgeon);
 		this.createRole(nurse);
 		this.createRole(transplantUnit);
+		
+		User user = new User("transplantUnit", "organ0", "tUnit@dataBase.com");
+		register(user);
+		Role role = getRole("transplant Unit"); 
+		assignRole(user, role);
+		
 	}
 }
 
