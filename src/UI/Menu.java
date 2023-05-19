@@ -15,6 +15,7 @@ import transplant.pojos.Donor;
 import transplant.pojos.Nurse;
 import transplant.pojos.Organ;
 import transplant.pojos.Patient;
+import transplant.pojos.Role;
 import transplant.pojos.Surgeon;
 import transplant.pojos.Theatre;
 import transplant.pojos.Transplant;
@@ -160,29 +161,40 @@ public class Menu {
 		System.out.println("Hiring date (yyyy-MM-dd): ");	
 		String date = r.readLine();
 		Date hiringDate = Date.valueOf(date);
-			
+		
+		
+		System.out.println("Username: ");
+		String username = r.readLine();
+		System.out.println("Password: ");
+		String password = r.readLine();
+		
+		
 		Surgeon s = new Surgeon(name, address, phone, speciality, hiringDate, email); //look for the constructor with and without id
 		surgeonMan.insertSurgeon(s);
-			
+		
+		User user = new User(username, password, email);
+		userMan.register(user);
+		Role role = userMan.getRole("surgeon"); 
+		userMan.assignRole(user, role);
+		
 	}
 		
 	public static void registerNurse() throws IOException{
 			
 		System.out.println("Please input nurse data: ");
-		System.out.println("Name: ");
-		String name = r.readLine();
-		
-		System.out.println("Adress: ");
-		String adress = r.readLine();
-		
-		System.out.println("Email:");
+	
+		System.out.println("Username: ");
+		String username = r.readLine();
+		System.out.println("Password: ");
+		String password = r.readLine();
+		System.out.println("Email: ");
 		String email = r.readLine();
 		
-		System.out.println("Phone: ");
-		Integer phone = Integer.parseInt(r.readLine());
+		User user = new User(username, password, email);
+		userMan.register(user);
+		Role role = userMan.getRole("nurse"); 
+		userMan.assignRole(user, role);
 		
-		Nurse n = new Nurse(name, adress, phone, email);
-		nurseMan.insertNurse(n); 
 			
 	}
 	
@@ -192,27 +204,34 @@ public class Menu {
 		System.out.println("Id: ");
 		Integer id = Integer.parseInt(r.readLine());
 		//TODO check if the patie's id already exists
-		System.out.println("Sex: ");
 		
+		System.out.println("Sex: ");
 		String sex = r.readLine();
+		
 		System.out.println("Name: ");
 		String name = r.readLine();
+		
 		System.out.println("Surname: ");
 		String surname = r.readLine();
+		
 		System.out.println("Date of birth (yyyy-MM-dd): ");	
 		String date = r.readLine();
 		Date dateOfBirth = Date.valueOf(date);
+		
 		System.out.println("Blood type: ");
 		String bloodType = r.readLine();
+		
 		System.out.println("Admission date (yyyy-MM-dd): ");
 		String date2 = r.readLine();
 		Date admissionDate = Date.valueOf(date2);
-		System.out.println("Speciality: ");
+		
+		System.out.println("Address: ");
 		String address = r.readLine();
+		
 		System.out.println("Phone: ");
 		Integer phone = Integer.parseInt(r.readLine());
 		
-		Patient p = new Patient( id, sex,  name,  surname,  dateOfBirth,  bloodType, admissionDate, address, phone);
+		Patient p = new Patient(id, sex,  name,  surname,  dateOfBirth,   bloodType, admissionDate, address, phone);
 		patientMan.insertPatient(p);
 					
 	}
@@ -430,11 +449,7 @@ public class Menu {
 				Date dobDate = Date.valueOf(dob);
 				p.setDateOfBirth(dobDate);
 			}
-			System.out.println("Disease (" + p.getDisease() + "):");
-			String disease = r.readLine();
-			if (!disease.equals("")) {
-				p.setDisease(disease);
-			}
+		
 			System.out.println("Blood type (" + p.getBloodType() + "):");
 			String bloodType = r.readLine();
 			if (!bloodType.equals("")) {
@@ -466,9 +481,7 @@ public class Menu {
 			
 		}
 		
-		
-		
-		public static void transplantUnitMenu(user.getEmail()) {
+		public static void transplantUnitMenu(String email){
 			
 			while (true) {
 				try {
