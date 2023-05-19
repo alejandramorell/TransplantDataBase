@@ -18,7 +18,6 @@ public class Patient implements Serializable{
 	private String disease;
 	private String bloodType;
 	private Date admissionDate;
-	//TODO change ingressDate to admissionDate everywhere
 	private String address;
 	private Integer phone;
 	private List<Transplant> transplants;

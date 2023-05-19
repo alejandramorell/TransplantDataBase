@@ -43,11 +43,10 @@ public class ConnectionManager {
 			        + "name TEXT NOT NULL,"
 					+ "surname TEXT NOT NULL, "
 					+ "date_of_birth DATE NOT NULL, "
-					+ "disease TEXT NOT NULL, "
 					+ "blood_type TEXT NOT NULL, "
 					+ "admission_date DATE NOT NULL, "	
 					+ "address TEXT NOT NULL, "
-					+ "requested_organ TEXT NOT NULL) ";
+					+ "phone INTEGER NOT NULL) ";
 			
 			s.executeUpdate(table2);
 		
