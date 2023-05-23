@@ -48,8 +48,6 @@ public class Menu {
 		
 		while(true) {
 		try {
-			// TODO Auto-generated method stub
-			
 			System.out.println("\nWelcome to the transplant application for hospitals");
 			System.out.println("Choose an option:");
 			System.out.println("1: LOG IN");

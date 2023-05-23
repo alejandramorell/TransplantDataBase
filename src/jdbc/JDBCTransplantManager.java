@@ -42,7 +42,6 @@ public class JDBCTransplantManager implements TransplantManager{
 			c.createStatement().execute("PRAGMA foreign_keys=ON");
 			System.out.println("Database connection opened.");
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			System.out.println("Database access error");
 			e.printStackTrace();
 		}
@@ -77,7 +76,6 @@ public class JDBCTransplantManager implements TransplantManager{
 				PreparedStatement p;
 				p = c.prepareStatement(sql);
 				p.setDate(1, transplant.getRegistrationDate());
-				//TODO check if the methods with another type of data need a cast
 				p.setString(2, transplant.getRequestedOrgan().getType());
 				p.setInt(3, transplant.getTheatre().getFloor());
 				p.close();
@@ -88,7 +86,7 @@ public class JDBCTransplantManager implements TransplantManager{
 		}*/
 
 	@Override
-	//TODO this method would return only 1 transplant if there where more transplants in the same date
+	//this method would return only 1 transplant if there where more transplants in the same date
 	public Integer getTransplant(LocalDate date ) {
 		try {
 			

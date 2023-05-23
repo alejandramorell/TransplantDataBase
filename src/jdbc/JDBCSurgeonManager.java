@@ -29,7 +29,6 @@ public class JDBCSurgeonManager implements SurgeonManager {
 			c.createStatement().execute("PRAGMA foreign_keys=ON");
 			System.out.println("Database connection opened.");
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			System.out.println("Database access error");
 			e.printStackTrace();
 		}

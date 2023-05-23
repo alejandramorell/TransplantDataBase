@@ -49,7 +49,6 @@ public class Organ implements Serializable{
 
 	public Organ() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public Integer getId() {
