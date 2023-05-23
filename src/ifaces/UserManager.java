@@ -8,6 +8,7 @@ import transplant.pojos.User;
 public interface UserManager {
 
 	public void register(User user);
+	public void deleteUser(User user);
 	public void createRole(Role role);
 	public Role getRole(String name);
 	public List<Role> getRoles();

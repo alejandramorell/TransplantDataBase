@@ -46,6 +46,15 @@ public void register(User user) {
 	em.getTransaction().commit();
 }
 
+//TODO check if this method is correct
+@Override 
+public void deleteUser (User user) {
+	em.getTransaction().begin();
+	em.remove(user);
+	em.getTransaction().commit();
+
+}
+
 @Override
 public void createRole(Role role) {
 	em.getTransaction().begin();
