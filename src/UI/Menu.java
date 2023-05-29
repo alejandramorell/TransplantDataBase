@@ -28,8 +28,7 @@ public class Menu {
 	
 	private static BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
 	
-	private static SurgeonManager surgeonMan; //it is and interface so i need to assign to surgeonMan a class that implements the interface 
-	private static NurseManager nurseMan;
+	private static SurgeonManager surgeonMan;
 	private static PatientManager patientMan;
 	private static OrganManager organMan;
 	private static TransplantManager transplantMan;
@@ -39,7 +38,6 @@ public class Menu {
 	public static void main(String[] args) {
 		ConnectionManager conMan = new ConnectionManager();
 		surgeonMan = new JDBCSurgeonManager(conMan.getConnection());
-		nurseMan = new JDBCNurseManager(conMan.getConnection());
 		patientMan = new JDBCPatientManager(conMan.getConnection());
 		organMan = new JDBCOrganManager(conMan.getConnection());
 		transplantMan = new JDBCTransplantManager(conMan.getConnection(), organMan, patientMan, transplantMan);
@@ -221,8 +219,8 @@ public class Menu {
 		System.out.println("Blood type: ");
 		String bloodType = r.readLine();
 		
-		System.out.println("Admission date (yyyy-MM-dd): ");
-		String date2 = r.readLine();
+		
+		LocalDate date2 = LocalDate.now();
 		Date admissionDate = Date.valueOf(date2);
 		
 		System.out.println("Address: ");
@@ -322,7 +320,7 @@ public class Menu {
 					System.out.println("1. View transplant information");
 					System.out.println("2. Register new transplant");
 					System.out.println("3. Modify patient data");
-					System.out.println("4 Assign surgeon to transplant");
+					System.out.println("4. Assign surgeon to transplant");
 					
 					
 					int choice = Integer.parseInt(r.readLine());
@@ -351,7 +349,7 @@ public class Menu {
 						updatePatient(patientId);
 						break;
 					}
-					case 5: {
+					case 4: {
 						System.out.println("Introduce the surgeon's name to assign him to a transplant:");
 						String name = r.readLine();
 						List<Surgeon> surgeons = surgeonMan.searchSurgeonByName(name);
@@ -380,9 +378,12 @@ public class Menu {
 		
 		//TODO 
 		public static void checkTransplant(int id) throws IOException {
-					System.out.println("transplant: " + id + " information: ");
-					Transplant transplant = transplantMan.getTransplant(id);
-					System.out.println(transplant);
+					
+					if(transplantMan.getTransplant(id)!=null) {
+						System.out.println("transplant: " + id + " information: ");
+						Transplant transplant = transplantMan.getTransplant(id);
+						System.out.println(transplant);
+					}
 					
 		}
 		
@@ -395,33 +396,41 @@ public class Menu {
 			
 			System.out.println("Type of organ");
 			String type = r.readLine();
-			List<Organ> listOrgan = organMan.searchOrganByType(type);
-			System.out.println(listOrgan);
-			System.out.println("Please, choose the id of the requested organ. ");
-			Integer requestedOrganId = Integer.parseInt(r.readLine());
-			Organ o = organMan.getOrgan(requestedOrganId);
-			
-			System.out.println("Name of the patient");
-			String patientName = r.readLine();
-			List<Patient> patients = patientMan.searchPatientByName(patientName);
-			System.out.println(patients);
-			
-			System.out.println("Input the id of the patient");
-			Integer patientId = Integer.parseInt(r.readLine());
-			Patient p = patientMan.getPatient(patientId);
-			
-			System.out.println("Request");
-			String request = r.readLine();
-			
-			System.out.println("Input the theatre information: ");
-			Integer floor = Integer.parseInt(r.readLine());
-			Integer number = Integer.parseInt(r.readLine());
-			Theatre theatre = new Theatre(floor, number);
-			
-			
-			Transplant transplant = new Transplant(date,o,p, request, theatre);
-			transplantMan.insertTransplant(transplant); 
+			List<Organ> listOrgan = null;
+			if(!organMan.searchOrganByType(type).isEmpty()) {
 				
+				listOrgan = organMan.searchOrganByType(type);
+				System.out.println(listOrgan);
+				System.out.println("Please, choose the id of the requested organ. ");
+				Integer requestedOrganId = Integer.parseInt(r.readLine());
+				Organ o = organMan.getOrgan(requestedOrganId);
+				
+				System.out.println("Name of the patient");
+				String patientName = r.readLine();
+				List<Patient> patients = null;
+				if(!patientMan.searchPatientByName(patientName).isEmpty()) {
+					
+					patients = patientMan.searchPatientByName(patientName);
+					System.out.println(patients);
+					System.out.println("Input the id of the patient");
+					Integer patientId = Integer.parseInt(r.readLine());
+					Patient p = patientMan.getPatient(patientId);
+					System.out.println("Request");
+					String request = r.readLine();
+					System.out.println("Input the theatre information: ");
+					Integer floor = Integer.parseInt(r.readLine());
+					Integer number = Integer.parseInt(r.readLine());
+					Theatre theatre = new Theatre(floor, number);
+					
+					
+					Transplant transplant = new Transplant(date,o,p, request, theatre);
+					transplantMan.insertTransplant(transplant); 
+				}else {
+					System.out.println("ERROR: there are no patients registered");
+				}
+			}else {
+				System.out.println("ERROR: there are no organ registered");
+			}
 		}
 		
 		public static void updatePatient(int patientId) throws IOException {
@@ -477,7 +486,7 @@ public class Menu {
 			System.out.println(transplants);
 			System.out.println("Please input the transplant´s id to assign a surgeon for it: ");
 			int transplantId = Integer.parseInt(r.readLine());
-			nurseMan.assignSurgeonTransplant(surgeonId, transplantId);
+			transplantMan.assignSurgeonTransplant(surgeonId, transplantId);
 			
 		}
 		

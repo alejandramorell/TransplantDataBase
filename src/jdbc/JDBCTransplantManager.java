@@ -66,6 +66,21 @@ public class JDBCTransplantManager implements TransplantManager{
 			e.printStackTrace();
 		}
 	}
+	@Override
+	public void assignSurgeonTransplant(int surgeon_id, int transplant_id) {
+		try {
+			String sql = "INSERT INTO TRANSPLANT_SURGEON (transplant_id, surgeon_id) VALUES (?,?)";
+			PreparedStatement p = c.prepareStatement(sql);
+			p.setInt(1, transplant_id);
+			p.setInt(2, surgeon_id);
+			p.executeUpdate();
+			p.close();
+		} catch (SQLException e) {
+			System.out.println("Database error.");
+			e.printStackTrace();
+		}
+		
+	}
 	
 	
 //		
@@ -120,10 +135,11 @@ public class JDBCTransplantManager implements TransplantManager{
 			while (rs.next()) {
 				//Integer transplantId = rs.getInt("id"); 
 				Date registrationDate = rs.getDate("registration_date");
-				Organ requestedOrgan = organMan.getOrgan(rs.getInt("organ_id")); 
-				Patient patient = patientMan.getPatient(rs.getInt("patient_id"));
 				String requestedType = rs.getString("requested_type");
+				Organ requestedOrgan = organMan.getOrgan(rs.getInt("organ_id")); 
 				Theatre theatre = transplantMan.getTheatre(rs.getInt("theatre_id"));
+				Patient patient = patientMan.getPatient(rs.getInt("patient_id"));
+				
 			
 				Transplant t = new Transplant(registrationDate, requestedOrgan, patient, requestedType, theatre );
 				list.add(t);
@@ -149,10 +165,10 @@ public class JDBCTransplantManager implements TransplantManager{
 			while (rs.next()) {
 				Integer id =  rs.getInt("id");
 				Date registrationDate = rs.getDate("registration_date");
-				Organ requestedOrgan = organMan.getOrgan(rs.getInt("organ_id")); 
-				Patient patient = patientMan.getPatient(rs.getInt("patient_id"));
 				String requestedType = rs.getString("requested_type");
+				Organ requestedOrgan = organMan.getOrgan(rs.getInt("organ_id")); 
 				Theatre theatre = transplantMan.getTheatre(rs.getInt("theatre_id"));
+				Patient patient = patientMan.getPatient(rs.getInt("patient_id"));
 			
 				Transplant t = new Transplant(id,registrationDate, requestedOrgan, patient, requestedType, theatre );
 				list.add(t);
@@ -198,17 +214,16 @@ public class JDBCTransplantManager implements TransplantManager{
 				ResultSet rs = p.executeQuery();
 				rs.next();
 				Date registrationDate = rs.getDate("registration_date");
-				Organ requestedOrgan = organMan.getOrgan(rs.getInt("organ_id")); 
-				Patient patient = patientMan.getPatient(rs.getInt("patient_id"));
 				String requestedType = rs.getString("requested_type");
+				Organ requestedOrgan = organMan.getOrgan(rs.getInt("organ_id")); 
 				Theatre theatre = transplantMan.getTheatre(rs.getInt("theatre_id"));
+				Patient patient = patientMan.getPatient(rs.getInt("patient_id"));
 			
 				Transplant t = new Transplant(id,registrationDate, requestedOrgan, patient, requestedType, theatre );rs.close();
 				p.close();
 				return t;
 			} catch (SQLException e) {
-				System.out.println("Database error.");
-				e.printStackTrace();
+				System.out.println("ERROR: the id doesn't corresspond to any transplant.");
 			}
 			return null;
 		}

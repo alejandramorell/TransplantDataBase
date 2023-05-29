@@ -98,7 +98,7 @@ public class JDBCOrganManager implements OrganManager {
 				list.add(o);
 			}
 		} catch (SQLException e) {
-			System.out.println("Database error.");
+			System.out.println("database error.");
 			e.printStackTrace();
 		}
 		return list;

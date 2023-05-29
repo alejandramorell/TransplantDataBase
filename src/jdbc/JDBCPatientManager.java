@@ -76,10 +76,10 @@ public class JDBCPatientManager implements PatientManager{
 				String sex = rs.getString("sex");
 				String n = rs.getString("name");
 				String surname = rs.getString("surname");
-				Date dob = rs.getDate("date of birth");
-				String bloodType = rs.getString("blood type");
-				Date admissionDate = rs.getDate("date of admission");
-				String adress = rs.getString("adress");
+				Date dob = rs.getDate("date_of_birth");
+				String bloodType = rs.getString("blood_type");
+				Date admissionDate = rs.getDate("admission_date");
+				String adress = rs.getString("address");
 				Integer phone= rs.getInt("phone");
 				Patient p1 = new Patient(id, sex, n, surname, dob,bloodType, admissionDate, adress,phone);
 				// IMPORTANT: I don't have the requested organs
@@ -105,10 +105,10 @@ public class JDBCPatientManager implements PatientManager{
 			String sex = rs.getString("sex");
 			String n = rs.getString("name");
 			String surname = rs.getString("surname");
-			Date dob = rs.getDate("date of birth");
-			String bloodType = rs.getString("blood type");
-			Date admissionDate = rs.getDate("date of admission");
-			String adress = rs.getString("adress");
+			Date dob = rs.getDate("date_of_birth");
+			String bloodType = rs.getString("blood_type");
+			Date admissionDate = rs.getDate("admission_date");
+			String adress = rs.getString("address");
 			Integer phone= rs.getInt("phone");
 			Patient p1 = new Patient(id, sex, n, surname, dob,bloodType, admissionDate, adress,phone);
 			rs.close();

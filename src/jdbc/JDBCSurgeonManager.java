@@ -62,10 +62,10 @@ public class JDBCSurgeonManager implements SurgeonManager {
 				// Create a new Surgeon
 				Integer id = rs.getInt("id");
 				String n = rs.getString("name");
-				String adress = rs.getString("adress");
+				String adress = rs.getString("address");
 				Integer phone = rs.getInt("phone");
 				String speciality = rs.getString("speciality");
-				Date hiringDate = rs.getDate("hiring date");
+				Date hiringDate = rs.getDate("hiring_date");
 				String email = rs.getString("email");
 				Surgeon s = new Surgeon(id, n, adress, phone, speciality, hiringDate,email);
 				// IMPORTANT: I don't have the dogs
@@ -88,10 +88,10 @@ public class JDBCSurgeonManager implements SurgeonManager {
 			ResultSet rs = p.executeQuery();
 			rs.next();
 			String name = rs.getString("name");
-			String adress = rs.getString("adress");
+			String adress = rs.getString("address");
 			Integer phone = rs.getInt("phone");
 			String speciality = rs.getString("speciality");
-			Date hiringDate = rs.getDate("hiring date");
+			Date hiringDate = rs.getDate("hiring_date");
 			String email = rs.getString("email");
 			Surgeon s = new Surgeon(id, name, adress, phone, speciality, hiringDate,email);
 			rs.close();

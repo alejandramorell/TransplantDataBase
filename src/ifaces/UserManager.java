@@ -14,4 +14,6 @@ public interface UserManager {
 	public List<Role> getRoles();
 	public void assignRole(User user, Role role);
 	public User login(String name, String password);
+	public User getNurseByEmail(String email); 
+
 }

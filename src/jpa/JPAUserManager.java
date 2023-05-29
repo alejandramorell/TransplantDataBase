@@ -1,5 +1,8 @@
 package jpa;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 import javax.persistence.*;
 
@@ -97,6 +100,21 @@ public Role getRole(String name) {
 	Role r = (Role) q.getSingleResult();
 	return r;
 }
+
+@Override
+public User getNurseByEmail(String email) {
+	try {
+		Query sql = em.createNativeQuery("SELECT * FROM users WHERE EMAIL = ?", User.class);
+		sql.setParameter(1, email);
+		User user = (User) sql.getSingleResult();
+		return user;
+		
+	} catch (NoResultException e) {
+		System.out.println("Database error.");
+		e.printStackTrace();
+	}
+	return null;
+}	
 
 }
 

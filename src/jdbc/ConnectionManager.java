@@ -54,7 +54,7 @@ public class ConnectionManager {
 					+ "type TEXT NOT NULL,"
 					+ "blood_type TEXT NOT NULL,"
 					+ "donor_id INTEGER NOT NULL,"
-					+ "FOREIGN KEY (donor_id) REFERENCES DONOR(id))";
+					+ "FOREIGN KEY (donor_id) REFERENCES DONOR(id) ON DELETE CASCADE)";
 			
 			s.executeUpdate(table3);
 			String table4 = "CREATE TABLE DONOR (id INTEGER PRIMARY KEY AUTOINCREMENT,"
@@ -75,14 +75,14 @@ public class ConnectionManager {
 					+ "organ_id INTEGER NOT NULL,"
 					+ "theatre_id INTEGER NOT NULL,"
 					+ "patient_id INTEGER NOT NULL,"
-					+ "FOREIGN KEY (organ_id) REFERENCES ORGAN(id),"
-					+ "FOREIGN KEY (patient_id) REFERENCES PATIENT(id),"
-					+ "FOREIGN KEY (theatre_id) REFERENCES THEATRE(id))";
+					+ "FOREIGN KEY (organ_id) REFERENCES ORGAN(id)ON DELETE CASCADE,"
+					+ "FOREIGN KEY (patient_id) REFERENCES PATIENT(id)ON DELETE CASCADE,"
+					+ "FOREIGN KEY (theatre_id) REFERENCES THEATRE(id) ON DELETE CASCADE)";
 			//TODO continue checking the tables with the new excel
 			
 			s.executeUpdate(table6);
 			String table9 = "CREATE TABLE TRANSPLANT_SURGEON (transplant_id INTEGER REFERENCES TRANSPLANT(id),"
-					+ "surgeon_id INTEGER REFERENCES SURGEON(id),"
+					+ "surgeon_id INTEGER REFERENCES SURGEON(id) ON DELETE CASCADE,"
 					+ "PRIMARY KEY (surgeon_id,transplant_id))";
 			
 			s.executeUpdate(table9);
