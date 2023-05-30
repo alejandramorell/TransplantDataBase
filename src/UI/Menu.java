@@ -81,7 +81,8 @@ public class Menu {
 	
 	
 	public static void login()throws IOException {
-		while (true) {
+		boolean finish = false;
+		while (!finish) {
 
 			System.out.println("Write the name and password of your user:");
 			System.out.println("Username:");
@@ -94,13 +95,16 @@ public class Menu {
 			if (user != null) {
 				if (user.getRole().getName().equals("surgeon")) {
 					surgeonMenu(user.getEmail());
+					finish = true;
 				}
 				
 				else if (user.getRole().getName().equals("nurse")) {
 					nurseMenu(user.getEmail());
+					finish = true;
 				}
 				else if (user.getRole().getName().equals("transplant unit")) {
 					transplantUnitMenu(user.getEmail());
+					finish = true;
 				}
 			}
 			else {
@@ -111,7 +115,8 @@ public class Menu {
 	
 	
 		public static void register() throws IOException {
-			while (true) {
+			boolean goBack = false;
+			while (!goBack) {
 				
 				System.out.println("Register menu:");
 				System.out.println("Who do you want to register as?:");
@@ -136,7 +141,7 @@ public class Menu {
 					break;
 				}
 				case 0: {
-					return;
+					goBack = true;
 				}
 			}
 			}
@@ -175,6 +180,8 @@ public class Menu {
 		Role role = userMan.getRole("surgeon"); 
 		userMan.assignRole(user, role);
 		
+		System.out.println("You have been succesfully registered as a surgeon!");
+		
 	}
 		
 	public static void registerNurse() throws IOException{
@@ -193,6 +200,7 @@ public class Menu {
 		Role role = userMan.getRole("nurse"); 
 		userMan.assignRole(user, role);
 		
+		System.out.println("You have been succesfully registered as a nurse!");
 			
 	}
 	
@@ -231,6 +239,9 @@ public class Menu {
 		
 		Patient p = new Patient(id, sex,  name,  surname,  dateOfBirth,   bloodType, admissionDate, address, phone);
 		patientMan.insertPatient(p);
+		
+		System.out.println("The patient has succesfully been registered!");
+
 					
 	}
 
@@ -251,12 +262,14 @@ public class Menu {
 		public static void surgeonMenu(String email) {
 			Surgeon surgeon = surgeonMan.getSurgeonByEmail(email);
 			
-			while (true) {
+			boolean goBack = false;
+			while (!goBack) {
 				try {
 					System.out.println("Welcome surgeon");
 					System.out.println("Choose an option please:");
 					System.out.println("1. Check patient information");
 					System.out.println("2. View transplant information");
+					System.out.println("0. Exit");
 					
 					int choice = Integer.parseInt(r.readLine());
 
@@ -280,7 +293,7 @@ public class Menu {
 						break;
 					}
 					case 0: {
-						return;
+						goBack = true;
 					}
 					}
 
@@ -302,7 +315,7 @@ public class Menu {
 		}
 		
 		
-		public static void donor2Xml(int id) throws IOException {
+		public static void donors2Xml(int id) throws IOException {
 			System.out.println("Your organs in XML are:");
 			List<Organ> listOrgan = organMan.searchOrganByDonor(id);
 			Donor donor = organMan.getDonor(id);
@@ -312,8 +325,8 @@ public class Menu {
 		
 		public static void nurseMenu(String email) {
 			//Nurse nurse = nurseMan.getNurseByEmail(email);
-			
-			while (true) {
+			boolean goBack = false;
+			while (!goBack) {
 				try {
 
 					System.out.println("What do you want to do as the nurse?:");
@@ -321,6 +334,7 @@ public class Menu {
 					System.out.println("2. Register new transplant");
 					System.out.println("3. Modify patient data");
 					System.out.println("4. Assign surgeon to transplant");
+					System.out.println("0. RETURN TO MAIN MENU");
 					
 					
 					int choice = Integer.parseInt(r.readLine());
@@ -362,7 +376,7 @@ public class Menu {
 						break;
 					}
 					case 0: {
-						return;
+						goBack = true;
 					}
 					}
 
@@ -425,6 +439,9 @@ public class Menu {
 					
 					Transplant transplant = new Transplant(date,o,p, request, theatre);
 					transplantMan.insertTransplant(transplant); 
+					System.out.println("The transplant has succesfully been registered!");
+
+					
 				}else {
 					System.out.println("ERROR: there are no patients registered");
 				}
@@ -478,6 +495,8 @@ public class Menu {
 				p.setPhone(phone);
 			}
 			patientMan.updatePatient(p);
+			System.out.println("The patient has succesfully been updated! ");
+
 		}
 
 		
@@ -492,7 +511,8 @@ public class Menu {
 		
 		public static void transplantUnitMenu(String email){
 			
-			while (true) {
+			boolean goBack = false;
+			while (!goBack) {
 				try {
 
 					System.out.println("What do you want to do as the transplant unit?:");
@@ -501,7 +521,8 @@ public class Menu {
 					System.out.println("3. Register new organ(donor must be registered first)");
 					System.out.println("4. Remove organ");
 					System.out.println("5. Remove patient");
-					
+					System.out.println("6. Export donors (with its organs) to XML");
+					System.out.println("0. RETURN TO MAIN MENU");
 					
 					int choice = Integer.parseInt(r.readLine());
 
@@ -550,10 +571,15 @@ public class Menu {
 						System.out.println("Now select the patient to remove by indicating it's id");
 						int patientId = Integer.parseInt(r.readLine());
 						removePatient(patientId);
-						
+					}
+					case 6:{
+						List<Donor> donors = organMan.getAllDonors();
+						for(Donor d:donors) {
+							donors2Xml(d.getId());
+						}
 					}
 					case 0: {
-						return;
+						goBack = true;
 					}
 					}
 
@@ -600,6 +626,8 @@ public class Menu {
 				
 				Donor d = new Donor(name, adress, phone, livingState);
 				organMan.insertDonor(d); 
+				System.out.println("The donor has succesfully been registered!");
+
 					
 			}
 			
@@ -615,6 +643,8 @@ public class Menu {
 			
 				Organ o = new Organ(type, bloodType, organMan.getDonor(id));
 				organMan.insertOrgan(o);
+				System.out.println("The organ has succesfully been registered!");
+
 					
 			}
 			

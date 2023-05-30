@@ -52,6 +52,7 @@ public class JDBCOrganManager implements OrganManager {
 			}
 		}
 
+	@Override
 	public List<Donor> searchDonorByName(String name) {
 		List<Donor> list = new ArrayList<Donor>();
 		try {
@@ -79,6 +80,32 @@ public class JDBCOrganManager implements OrganManager {
 		}
 		return list;
 	}
+	
+	@Override
+	public List<Donor> getAllDonors() {
+		List<Donor> list = new ArrayList<Donor>();
+		try {
+			String sql = "SELECT * FROM DONOR";
+			PreparedStatement p = c.prepareStatement(sql);
+			ResultSet rs = p.executeQuery(); //
+			while (rs.next()) {
+				// Create a new donor
+				Integer id = rs.getInt("id");
+				String n = rs.getString("name");
+				String address = rs.getString("address");
+				Integer phone= rs.getInt("phone");
+				String livingState = rs.getString("living_state");
+				
+				Donor d = new Donor(id, n, address, phone, livingState);
+				list.add(d);
+			}
+		} catch (SQLException e) {
+			System.out.println("Database error.");
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
 	
 
 	@Override

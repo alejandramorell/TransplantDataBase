@@ -25,14 +25,14 @@ public JPAUserManager() {
 	if (this.getRoles().isEmpty()) {
 		Role surgeon = new Role("surgeon");
 		Role nurse = new Role("nurse");
-		Role transplantUnit = new Role("transplant Unit");
+		Role transplantUnit = new Role("transplant unit");
 		this.createRole(surgeon);
 		this.createRole(nurse);
 		this.createRole(transplantUnit);
 		
 		User user = new User("transplantUnit", "organ0", "tUnit@dataBase.com");
 		register(user);
-		Role role = getRole("transplant Unit"); 
+		Role role = getRole("transplant unit"); 
 		assignRole(user, role);
 		
 	}

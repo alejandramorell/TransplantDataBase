@@ -25,7 +25,8 @@ public class Organ implements Serializable{
 	private String type;
 	@XmlElement
 	private String bloodType;
-	@XmlTransient
+	@XmlTransient 
+	//we made it Transient, because the donor is already shown before, and if nor we will be showing each donor and its organs infinite times. 
 	private Donor donor;
 	@XmlElement
 	private Transplant transplant;

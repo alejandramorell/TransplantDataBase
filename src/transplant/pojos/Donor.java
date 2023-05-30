@@ -73,7 +73,7 @@ public class Donor implements Serializable{
 	public String getAddress() {
 		return address;
 	}
-	public void setAddress(String adress) {
+	public void setAddress(String address) {
 		this.address = address;
 	}
 	public Integer getPhone() {
