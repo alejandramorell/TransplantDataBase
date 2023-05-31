@@ -86,8 +86,7 @@ public User login(String name, String password) {
 @Override
 public List<Role> getRoles() {
 	Query q = em.createNativeQuery("SELECT * FROM roles", Role.class); //READING
-	List<Role> roles = (List<Role>) q.getResultList(); //TODO check this casting
-	/// List<Role> roles.list = q.getResultList(); ????
+	List<Role> roles = (List<Role>) q.getResultList(); 
 	return roles;
 }
 

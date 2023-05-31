@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Donors>
+    <Donor name="rodrigo">
+        <address>asd</address>
+        <phone>123</phone>
+        <livingState>alive</livingState>
+        <Organs/>
+    </Donor>
+</Donors>

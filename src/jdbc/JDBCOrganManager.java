@@ -39,8 +39,8 @@ public class JDBCOrganManager implements OrganManager {
 	public void insertDonor(Donor donor) {
 		try {
 				Statement s = c.createStatement();
-				String sql = "INSERT INTO DONOR (name, address, phone, living_state) VALUES ('" + donor.getName() + "', "
-						+ donor.getAddress() + ", '" + donor.getPhone() + ", '" + donor.getLivingState()+"')";
+				String sql = "INSERT INTO DONOR (name, address, phone, living_state) VALUES ('" + donor.getName() + "', '"
+						+ donor.getAddress() + "', " + donor.getPhone() + ", '" + donor.getLivingState()+"')";
 				s.executeUpdate(sql);
 				s.close();
 		}catch (SQLException e) {
@@ -70,6 +70,9 @@ public class JDBCOrganManager implements OrganManager {
 				// Add the donor to the list
 				list.add(d);
 			}
+			rs.close();
+			p.close();
+			
 		} catch (SQLException e) {
 			System.out.println("Database error.");
 			e.printStackTrace();
@@ -95,6 +98,9 @@ public class JDBCOrganManager implements OrganManager {
 				Donor d = new Donor(id, n, address, phone, livingState);
 				list.add(d);
 			}
+			rs.close();
+			p.close();
+			
 		} catch (SQLException e) {
 			System.out.println("Database error.");
 			e.printStackTrace();
@@ -121,6 +127,8 @@ public class JDBCOrganManager implements OrganManager {
 				list.add(o);
 				
 			}
+			rs.close();
+			p.close();
 		} catch (SQLException e) {
 			System.out.println("database error.");
 			e.printStackTrace();
@@ -216,6 +224,8 @@ public class JDBCOrganManager implements OrganManager {
 				Organ or = new Organ(organId,type,bloodType);
 				list.add(or);
 			}
+			rs.close();
+			p.close();
 		} catch (SQLException e) {
 			System.out.println("Database error.");
 			e.printStackTrace();

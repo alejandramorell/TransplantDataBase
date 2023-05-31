@@ -58,6 +58,8 @@ public class JDBCSurgeonManager implements SurgeonManager {
 				// Add the Surgeon to the list
 				list.add(s);
 			}
+			rs.close();
+			p.close();
 		} catch (SQLException e) {
 			System.out.println("Database error.");
 			e.printStackTrace();

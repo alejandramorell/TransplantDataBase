@@ -68,7 +68,7 @@ public class JDBCTransplantManager implements TransplantManager{
 	}
 	
 	
-//		
+//TODO ver si esto lo borramos porque que este aqui comentado no nos sirve de nada
 	/*@Override
 		public void updateInformation(Transplant transplant) {
 			try {
@@ -88,8 +88,7 @@ public class JDBCTransplantManager implements TransplantManager{
 	@Override
 	//this method would return only 1 transplant if there where more transplants in the same date
 	public Integer getTransplant(LocalDate date ) {
-		try {
-			
+		try {			
 			String sql = "SELECT id FROM TRANSPLANT WHERE date = ?";
 			PreparedStatement p = c.prepareStatement(sql);
 			p.setDate(1, Date.valueOf(date));
@@ -129,7 +128,8 @@ public class JDBCTransplantManager implements TransplantManager{
 				Transplant t = new Transplant(registrationDate, requestedOrgan, patient, requestedType, theatre );
 				list.add(t);
 			}
-			
+			rs.close();
+			p.close();
 		} catch (SQLException e) {
 			System.out.println("Database error.");
 			e.printStackTrace();
@@ -158,7 +158,8 @@ public class JDBCTransplantManager implements TransplantManager{
 				Transplant t = new Transplant(id,registrationDate, requestedOrgan, patient, requestedType, theatre );
 				list.add(t);
 			}
-			
+			rs.close();
+			p.close();
 		} catch (SQLException e) {
 			System.out.println("Database error.");
 			e.printStackTrace();
@@ -192,27 +193,28 @@ public class JDBCTransplantManager implements TransplantManager{
 	
 	@Override
 	public Transplant getTransplant(int id) {
-			try {
-				String sql = "SELECT * FROM TRANSPLANT WHERE id = ?";
-				PreparedStatement p = c.prepareStatement(sql);
-				p.setInt(1, id);
-				ResultSet rs = p.executeQuery();
-				rs.next();
-				Date registrationDate = rs.getDate("registration_date");
-				String requestedType = rs.getString("requested_type");
-				Organ requestedOrgan = organMan.getOrgan(rs.getInt("organ_id")); 
-				Theatre theatre = transplantMan.getTheatre(rs.getInt("theatre_id"));
-				Patient patient = patientMan.getPatient(rs.getInt("patient_id"));
+		try {
+	 		String sql = "SELECT * FROM TRANSPLANT WHERE id = ?";
+			PreparedStatement p = c.prepareStatement(sql);
+			p.setInt(1, id);
+			ResultSet rs = p.executeQuery();
+			rs.next();
+			Date registrationDate = rs.getDate("registration_date");
+			String requestedType = rs.getString("requested_type");
+			Organ requestedOrgan = organMan.getOrgan(rs.getInt("organ_id")); 
+			Theatre theatre = transplantMan.getTheatre(rs.getInt("theatre_id"));
+			Patient patient = patientMan.getPatient(rs.getInt("patient_id"));
 			
-				Transplant t = new Transplant(id,registrationDate, requestedOrgan, patient, requestedType, theatre );rs.close();
-				p.close();
-				return t;
-			} catch (SQLException e) {
-				System.out.println("ERROR: the id doesn't corresspond to any transplant.");
-			}
-			return null;
+			Transplant t = new Transplant(id,registrationDate, requestedOrgan, patient, requestedType, theatre );rs.close();
+			rs.close();
+			p.close();
+			return t;
+		} catch (SQLException e) {
+			System.out.println("ERROR: the id doesn't corresspond to any transplant.");
 		}
-
+		return null;
 	}
+
+}
 	
 

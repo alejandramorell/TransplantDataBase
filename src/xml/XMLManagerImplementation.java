@@ -1,7 +1,7 @@
 package xml;
 
 import java.io.File;
-
+import java.util.List;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
@@ -9,20 +9,23 @@ import javax.xml.bind.Unmarshaller;
 
 import ifaces.XMLManager;
 import transplant.pojos.Donor;
+import transplant.pojos.Donors;
 
 public class XMLManagerImplementation implements XMLManager {
 
 	@Override
-	public void donor2Xml(Donor donor) {
+	public void donor2Xml(List<Donor> d) {
 		try {
 			// Create the JAXBContext
-			JAXBContext jaxbContext = JAXBContext.newInstance(Donor.class);
+			JAXBContext jaxbContext = JAXBContext.newInstance(Donors.class);
 			// Get the marshaller
 			Marshaller marshaller = jaxbContext.createMarshaller();
 			// Pretty formatting
 			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-			File file = new File("./xmls/Organs.xml");
-			marshaller.marshal(donor, file);
+			File file = new File("./xmls/Donors.xml");
+			Donors donors = new Donors();
+			donors.setDonors(d);
+			marshaller.marshal(donors, file);
 //			marshaller.marshal(donor, System.out); //Not necessary to show in console
 			
 		} catch (Exception e) {

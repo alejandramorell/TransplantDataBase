@@ -13,7 +13,7 @@ import javax.xml.bind.annotation.XmlType;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "Organ")
-@XmlType(propOrder = { "bloodType", "donor", "transplant"})
+@XmlType(propOrder = { "bloodType", "transplant"})
 
 public class Organ implements Serializable{
 

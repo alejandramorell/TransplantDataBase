@@ -71,6 +71,8 @@ public class JDBCPatientManager implements PatientManager{
 				// Add the Patient to the list
 				list.add(p1);
 			}
+			rs.close();
+			p.close();
 		} catch (SQLException e) {
 			System.out.println("Database error.");
 			e.printStackTrace();
