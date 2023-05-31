@@ -33,20 +33,6 @@ public class JDBCTransplantManager implements TransplantManager{
 		this.transplantMan = transplantMan;
 		
 	}
-
-	public JDBCTransplantManager()  {
-		
-		try {
-			Class.forName("org.sqlite.JDBC");
-			c = DriverManager.getConnection("jdbc:sqlite:./db/TransplantDataBase.db"); //creates the connection
-			c.createStatement().execute("PRAGMA foreign_keys=ON");
-			System.out.println("Database connection opened.");
-		} catch (Exception e) {
-			System.out.println("Database access error");
-			e.printStackTrace();
-		}
-		
-	}	
 	
 	@Override
 	public void insertTransplant(Transplant transplant) {

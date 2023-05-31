@@ -22,8 +22,6 @@ public class JDBCOrganManager implements OrganManager {
 		this.c = c;
 	}
 
-	
-
 	@Override
 	public void insertOrgan(Organ organ) {
 		try {
