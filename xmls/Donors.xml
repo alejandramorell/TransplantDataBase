@@ -4,18 +4,39 @@
         <address>asd</address>
         <phone>123</phone>
         <livingState>alive</livingState>
-        <Organs/>
+        <Organs>
+            <Organ type="bone marrow">
+                <bloodType>0-</bloodType>
+            </Organ>
+        </Organs>
     </Donor>
     <Donor name="pablo">
         <address>juan sanchez 7</address>
         <phone>123456123</phone>
         <livingState>dead</livingState>
-        <Organs/>
+        <Organs>
+            <Organ type="heart">
+                <bloodType>B+</bloodType>
+            </Organ>
+            <Organ type="liver">
+                <bloodType>B+</bloodType>
+            </Organ>
+            <Organ type="kidney">
+                <bloodType>B+</bloodType>
+            </Organ>
+            <Organ type="bone marrow">
+                <bloodType>B+</bloodType>
+            </Organ>
+        </Organs>
     </Donor>
     <Donor name="tomas">
         <address>ecuador</address>
         <phone>456789</phone>
         <livingState>alive</livingState>
-        <Organs/>
+        <Organs>
+            <Organ type="kidney">
+                <bloodType>A-</bloodType>
+            </Organ>
+        </Organs>
     </Donor>
 </Donors>

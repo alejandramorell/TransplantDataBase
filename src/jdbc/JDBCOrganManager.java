@@ -96,6 +96,7 @@ public class JDBCOrganManager implements OrganManager {
 				String livingState = rs.getString("living_state");
 				
 				Donor d = new Donor(id, n, address, phone, livingState);
+				d.setOrgans(searchOrgansByDonor(d.getId())); 
 				list.add(d);
 			}
 			rs.close();
@@ -210,7 +211,7 @@ public class JDBCOrganManager implements OrganManager {
 	}
 	
 	@Override
-	public List<Organ> searchOrganByDonor(int id) {
+	public List<Organ> searchOrgansByDonor(int id) {
 		List<Organ> list = new ArrayList<Organ>();
 		try {
 			String sql = "SELECT * FROM ORGAN WHERE donor_id = ?";

@@ -17,7 +17,7 @@ public interface OrganManager {
 	public List<Donor> getAllDonors();
 	public void removeOrgan(int id);
 	public void assignOrganToPatient(int organId, int patientId);
-	public List<Organ> searchOrganByDonor(int id);
+	public List<Organ> searchOrgansByDonor(int id);
 	
 	
 	

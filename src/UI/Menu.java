@@ -560,7 +560,7 @@ public class Menu {
 				case 0: {
 					goBack = true;
 				}
-				}
+			}
 
 			} catch (NumberFormatException e) {
 				System.out.println("Incorrect number");
