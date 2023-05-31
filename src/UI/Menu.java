@@ -102,7 +102,7 @@ public class Menu {
 					nurseMenu(user.getEmail());
 					finish = true;
 				}
-				else if (user.getRole().getName().equals("transplant unit")) {
+				else if (user.getRole().getName().equals("transplant Unit")) {
 					transplantUnitMenu(user.getEmail());
 					finish = true;
 				}
