@@ -1,7 +1,7 @@
 package jdbc;
 
 import java.sql.Connection;
-import java.sql.Date;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,7 +12,6 @@ import java.util.List;
 import ifaces.OrganManager;
 import transplant.pojos.Donor;
 import transplant.pojos.Organ;
-import transplant.pojos.Patient;
 
 public class JDBCOrganManager implements OrganManager {
 	
