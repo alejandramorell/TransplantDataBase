@@ -542,6 +542,7 @@ public class Menu {
 					System.out.println("Now please input the id of the organ to remove it");
 					int organId = Integer.parseInt(r.readLine());
 					removeOrgan(organId);
+					break;
 				}
 				case 5: {
 
@@ -552,10 +553,12 @@ public class Menu {
 					System.out.println("Now select the patient to remove by indicating it's id");
 					int patientId = Integer.parseInt(r.readLine());
 					removePatient(patientId);
+					break;
 				}
 				case 6: {
 					List<Donor> donors = organMan.getAllDonors();
 					donors2Xml(donors);
+					break;
 				}
 				case 0: {
 					goBack = true;
