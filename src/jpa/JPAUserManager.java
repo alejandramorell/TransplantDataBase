@@ -30,7 +30,7 @@ public JPAUserManager() {
 		this.createRole(nurse);
 		this.createRole(transplantUnit);
 		
-		User user = new User("transplantUnit", "organ0", "tUnit@dataBase.com");
+		User user = new User("transplantUnit","organ0","tUnit@dataBase.com");
 		register(user);
 		Role role = getRole("transplant unit"); 
 		assignRole(user, role);
@@ -88,8 +88,9 @@ public User login(String name, String password) {
 
 @Override
 public List<Role> getRoles() {
-	Query q = em.createNativeQuery("SELECT * FROM roles", Role.class);
-	List<Role> roles = (List<Role>) q.getResultList();
+	Query q = em.createNativeQuery("SELECT * FROM roles", Role.class); //READING
+	List<Role> roles = (List<Role>) q.getResultList(); //TODO check this casting
+	/// List<Role> roles.list = q.getResultList(); ????
 	return roles;
 }
 

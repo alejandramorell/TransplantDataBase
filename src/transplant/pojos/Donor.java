@@ -14,7 +14,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(propOrder = { "address", "donor"})
+@XmlType(propOrder = { "address", "phone", "livingState", "organs"})
 
 public class Donor implements Serializable{
 	

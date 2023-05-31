@@ -43,7 +43,7 @@ public class JDBCOrganManager implements OrganManager {
 						+ donor.getAddress() + ", '" + donor.getPhone() + ", '" + donor.getLivingState()+"')";
 				s.executeUpdate(sql);
 				s.close();
-			} catch (SQLException e) {
+		}catch (SQLException e) {
 				System.out.println("Database exception.");
 				e.printStackTrace();
 			}
@@ -56,7 +56,7 @@ public class JDBCOrganManager implements OrganManager {
 			String sql = "SELECT * FROM DONOR WHERE name LIKE ?";
 			PreparedStatement p = c.prepareStatement(sql);
 			p.setString(1, "%" + name + "%"); 
-			ResultSet rs = p.executeQuery(); //
+			ResultSet rs = p.executeQuery(); //Result set = object with the information selected by the query
 			while (rs.next()) {
 				// Create a new donor
 			
@@ -67,8 +67,7 @@ public class JDBCOrganManager implements OrganManager {
 				String livingState = rs.getString("living_state");
 				
 				Donor d = new Donor(id, n, address, phone, livingState);
-				// IMPORTANT: I don't have the requested organs
-				// Add the Patient to the list
+				// Add the donor to the list
 				list.add(d);
 			}
 		} catch (SQLException e) {
@@ -120,6 +119,7 @@ public class JDBCOrganManager implements OrganManager {
 				String bloodType = rs.getString("blood_type");
 				Organ o = new Organ(id, t, bloodType);
 				list.add(o);
+				
 			}
 		} catch (SQLException e) {
 			System.out.println("database error.");

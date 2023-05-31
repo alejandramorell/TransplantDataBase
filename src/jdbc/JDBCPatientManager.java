@@ -87,6 +87,7 @@ public class JDBCPatientManager implements PatientManager{
 			p.setInt(1, id);
 			ResultSet rs = p.executeQuery();
 			rs.next();
+			
 			String sex = rs.getString("sex");
 			String n = rs.getString("name");
 			String surname = rs.getString("surname");
@@ -96,6 +97,7 @@ public class JDBCPatientManager implements PatientManager{
 			String adress = rs.getString("address");
 			Integer phone= rs.getInt("phone");
 			Patient p1 = new Patient(id, sex, n, surname, dob,bloodType, admissionDate, adress,phone);
+			
 			rs.close();
 			p.close();
 			return p1;
