@@ -6,4 +6,16 @@
         <livingState>alive</livingState>
         <Organs/>
     </Donor>
+    <Donor name="pablo">
+        <address>juan sanchez 7</address>
+        <phone>123456123</phone>
+        <livingState>dead</livingState>
+        <Organs/>
+    </Donor>
+    <Donor name="tomas">
+        <address>ecuador</address>
+        <phone>456789</phone>
+        <livingState>alive</livingState>
+        <Organs/>
+    </Donor>
 </Donors>

@@ -25,8 +25,8 @@ public class JDBCOrganManager implements OrganManager {
 	public void insertOrgan(Organ organ) {
 		try {
 				Statement s = c.createStatement();
-				String sql = "INSERT INTO ORGAN (type, blood_type, donor_id) VALUES ('" + organ.getType() + "', "
-						+ organ.getBloodType() + ", '" + organ.getDonor().getId() +"')";
+				String sql = "INSERT INTO ORGAN (type, blood_type, donor_id) VALUES ('" + organ.getType() + "', '"
+						+ organ.getBloodType() + "', " + organ.getDonor().getId() +")";
 				s.executeUpdate(sql);
 				s.close();
 			} catch (SQLException e) {
@@ -165,7 +165,7 @@ public class JDBCOrganManager implements OrganManager {
 			ResultSet rs = p.executeQuery();
 			rs.next();
 			String name = rs.getString("name");
-			String address = rs.getString("adress");
+			String address = rs.getString("address");
 			Integer phone = rs.getInt("phone");
 			String livingState = rs.getString("living_state");
 			Donor d = new Donor(id, name, address, phone, livingState);

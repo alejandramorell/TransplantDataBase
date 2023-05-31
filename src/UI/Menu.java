@@ -304,6 +304,7 @@ public class Menu {
 	}
 
 	public static void donors2Xml(List<Donor> donors) throws IOException {
+		System.out.println("The donors and the organs they donate are: ");
 		xmlMan.donor2Xml(donors);
 	}
 

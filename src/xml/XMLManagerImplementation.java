@@ -46,8 +46,9 @@ public class XMLManagerImplementation implements XMLManager {
 		// Return donors
 		return donors;
 
-	}catch (Exception e) {
+		}catch (Exception e) {
 		e.printStackTrace();
-	}
+		}
 		return null;
-}}
+	}
+}
