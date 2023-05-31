@@ -25,8 +25,9 @@ public class XMLManagerImplementation implements XMLManager {
 			File file = new File("./xmls/Donors.xml");
 			Donors donors = new Donors();
 			donors.setDonors(d);
-			marshaller.marshal(donors, file);
-//			marshaller.marshal(donor, System.out); //Not necessary to show in console
+			//we use the POJO Donors because marshaller can only annotate 1 thing to XML
+			marshaller.marshal(donors, file); 
+//			marshaller.marshal(donors, System.out);   Not necessary to show in console
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -34,16 +35,16 @@ public class XMLManagerImplementation implements XMLManager {
 	}
 
 	@Override
-	public Donor xml2Donor(File xml) {
+	public Donors xml2Donor(File xml) {
 		try {
 		// Create the JAXBContext
-		JAXBContext jaxbC = JAXBContext.newInstance(Donor.class);
+		JAXBContext jaxbC = JAXBContext.newInstance(Donors.class);
 		// Create the JAXBUnMarshaller
 		Unmarshaller jaxbU = jaxbC.createUnmarshaller();
 		// Create the object by reading from a file
-		Donor donor = (Donor) jaxbU.unmarshal(xml);
-		// Return donor
-		return donor;
+		Donors donors = (Donors) jaxbU.unmarshal(xml);
+		// Return donors
+		return donors;
 
 	}catch (Exception e) {
 		e.printStackTrace();
