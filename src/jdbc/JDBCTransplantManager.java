@@ -1,7 +1,6 @@
 package jdbc;
 
 import java.sql.Connection;
-
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -66,24 +65,6 @@ public class JDBCTransplantManager implements TransplantManager{
 		}
 		
 	}
-	
-	
-//TODO ver si esto lo borramos porque que este aqui comentado no nos sirve de nada
-	/*@Override
-		public void updateInformation(Transplant transplant) {
-			try {
-				String sql = "UPDATE TRANSPLANT SET" + " date = ?, " + " requested_organ = ?, " + " organ_id = ? " + " theatre_id = ? ";
-				PreparedStatement p;
-				p = c.prepareStatement(sql);
-				p.setDate(1, transplant.getRegistrationDate());
-				p.setString(2, transplant.getRequestedOrgan().getType());
-				p.setInt(3, transplant.getTheatre().getFloor());
-				p.close();
-			} catch (SQLException e) {
-				System.out.println("Database error.");
-				e.printStackTrace();
-			}
-		}*/
 
 	@Override
 	//this method would return only 1 transplant if there where more transplants in the same date
