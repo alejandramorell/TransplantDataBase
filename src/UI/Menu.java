@@ -163,8 +163,7 @@ public class Menu {
 		System.out.println("Password: ");
 		String password = r.readLine();
 
-		Surgeon s = new Surgeon(name, address, phone, speciality, hiringDate, email); // look for the constructor with
-																						// and without id
+		Surgeon s = new Surgeon(name, address, phone, speciality, hiringDate, email); 
 		surgeonMan.insertSurgeon(s);
 
 		User user = new User(username, password, email);
@@ -304,7 +303,7 @@ public class Menu {
 	}
 
 	public static void donors2Xml(List<Donor> donors) throws IOException {
-		System.out.println("The donors and the organs they donate are: ");
+		System.out.println("The information was succesfully uploaded to XML: ");
 		xmlMan.donor2Xml(donors);
 	}
 
@@ -318,7 +317,8 @@ public class Menu {
 				System.out.println("1. View transplant information");
 				System.out.println("2. Register new transplant");
 				System.out.println("3. Modify patient data");
-				System.out.println("4. Assign surgeon to transplant");
+				System.out.println("4. View patient information");
+				System.out.println("5. Assign surgeon to transplant");
 				System.out.println("0. RETURN TO MAIN MENU");
 
 				int choice = Integer.parseInt(r.readLine());
@@ -338,7 +338,7 @@ public class Menu {
 				}
 
 				case 3: {
-					System.out.println("Input the patient's name to change his information");
+					System.out.println("Input the patient's name to change their information");
 					String patientName = r.readLine();
 					List<Patient> patients = patientMan.searchPatientByName(patientName);
 					System.out.println(patients);
@@ -348,6 +348,17 @@ public class Menu {
 					break;
 				}
 				case 4: {
+					System.out.println("Input the patient's name to see their information");
+					String patientName = r.readLine();
+					List<Patient> patients = patientMan.searchPatientByName(patientName);
+					System.out.println(patients);
+					System.out.println("Now input the patient´s id");
+					int patientId = Integer.parseInt(r.readLine());
+					checkPatient(patientId);
+					break;
+					
+				}
+				case 5: {
 					System.out.println("Introduce the surgeon's name to assign him to a transplant:");
 					String name = r.readLine();
 					List<Surgeon> surgeons = surgeonMan.searchSurgeonByName(name);
@@ -374,7 +385,7 @@ public class Menu {
 		}
 	}
 
-	// TODO
+
 	public static void checkTransplant(int id) throws IOException {
 
 		if (transplantMan.getTransplant(id) != null) {
@@ -465,17 +476,26 @@ public class Menu {
 		}
 		System.out.println("Admission date (yyyy-MM-dd) (" + p.getAdmissionDate() + "):");
 		String date = r.readLine();
+		
 		if (!date.equals("")) {
 
 			Date admissionDate = Date.valueOf(date);
 			p.setAdmissionDate(admissionDate);
 		}
+		
+		System.out.println("Address (" + p.getAddress() + "):");
+		String address = r.readLine();
+		if (!address.equals("")) {
+			p.setAddress(address);
+		}
+		
 		System.out.println("Phone (" + p.getPhone() + "):");
 		Integer phone = Integer.parseInt(r.readLine());
 		if (!phone.equals("")) {
 
 			p.setPhone(phone);
 		}
+		
 		patientMan.updatePatient(p);
 		System.out.println("The patient has succesfully been updated! ");
 

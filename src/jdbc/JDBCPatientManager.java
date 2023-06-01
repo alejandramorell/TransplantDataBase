@@ -41,9 +41,6 @@ public class JDBCPatientManager implements PatientManager{
 		}
 	
 	}
-	
-		
-
 
 	@Override
 	public List<Patient> searchPatientByName(String name) {
@@ -113,7 +110,7 @@ public class JDBCPatientManager implements PatientManager{
 	@Override
 	public void updatePatient(Patient patient) {
 		try {
-			String sql = "UPDATE PATIENT SET" + " sex = ?, " + " name = ?, " + " surname = ? " + " date_of_birth = ? " +  " blood_type = ? " + " admission_date = ? " + " adress = ? " + " WHERE id = ?";
+			String sql = "UPDATE PATIENT SET" + " sex = ?, " + " name = ?, " + " surname = ?, " + " date_of_birth = ?, " +  " blood_type = ?, " + " admission_date = ?, " + " address = ?, " + " phone = ? " + "WHERE id = ?";
 			PreparedStatement p;
 			p = c.prepareStatement(sql);
 			p.setString(1, patient.getSex());
@@ -123,7 +120,8 @@ public class JDBCPatientManager implements PatientManager{
 			p.setString(6, patient.getBloodType());
 			p.setDate(7, patient.getAdmissionDate());
 			p.setString(8, patient.getAddress());
-			p.setInt(9, patient.getId());
+			p.setInt(9, patient.getPhone());
+			p.setInt(10, patient.getId());
 			p.executeUpdate();
 			p.close();
 		} catch (SQLException e) {
@@ -148,8 +146,5 @@ public class JDBCPatientManager implements PatientManager{
 			}
 		
 	}
-	
-
-
 
 }

@@ -9,7 +9,6 @@ import transplant.pojos.*;
 
 public class JPAUserManager implements UserManager {	
 
-
 EntityManager em;
 
 public JPAUserManager() {
@@ -18,7 +17,7 @@ public JPAUserManager() {
 	em.getTransaction().begin();
 	em.createNativeQuery("PRAGMA foreign_keys=ON").executeUpdate();
 	em.getTransaction().commit();
-	// Create the needed roles
+	
 	if (this.getRoles().isEmpty()) {
 		Role surgeon = new Role("surgeon");
 		Role nurse = new Role("nurse");
@@ -46,7 +45,7 @@ public void register(User user) {
 	em.getTransaction().commit();
 }
 
-//TODO check if this method is correct
+
 @Override 
 public void deleteUser (User user) {
 	em.getTransaction().begin();
@@ -85,7 +84,7 @@ public User login(String name, String password) {
 
 @Override
 public List<Role> getRoles() {
-	Query q = em.createNativeQuery("SELECT * FROM roles", Role.class); //READING
+	Query q = em.createNativeQuery("SELECT * FROM roles", Role.class);
 	List<Role> roles = (List<Role>) q.getResultList(); 
 	return roles;
 }

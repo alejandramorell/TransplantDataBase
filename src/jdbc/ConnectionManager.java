@@ -38,7 +38,7 @@ public class ConnectionManager {
 					+ "email TEXT NOT NULL)";
 			s.executeUpdate(table);
 			
-			String table2 = "CREATE TABLE PATIENT (id INTEGER PRIMARY KEY, " //we deleted the autoincrement in patients id so we can use ir to call each patient eventhough they have same name
+			String table2 = "CREATE TABLE PATIENT (id INTEGER PRIMARY KEY, " 
 				    + "sex TEXT NOT NULL, "
 			        + "name TEXT NOT NULL,"
 					+ "surname TEXT NOT NULL, "
@@ -84,14 +84,9 @@ public class ConnectionManager {
 					+ "PRIMARY KEY (surgeon_id,transplant_id))";			
 			s.executeUpdate(table7);
 			
-			//TODO continue checking the tables with the new excel
-		
 			s.close();
-			//c.commit(); changes that were waiting will be made at the same time
-			//later he remove this autocomit things
 			
 		} catch (SQLException e) {
-			// Check if the exception is because the tables already exist
 			if (e.getMessage().contains("already exist")) {
 				return;
 			}
