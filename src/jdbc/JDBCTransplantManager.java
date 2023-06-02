@@ -78,6 +78,7 @@ public class JDBCTransplantManager implements TransplantManager{
 		}
 		
 	}
+	@Override
 	public Theatre getTheatreById(int id) {
 		try {
 		String sql = "SELECT * FROM THEATRE WHERE id LIKE ?";
@@ -121,26 +122,7 @@ public class JDBCTransplantManager implements TransplantManager{
 		return null;
 	}
 
-	@Override
-	//this method would return only 1 transplant if there where more transplants in the same date
-	public Integer getTransplant(LocalDate date ) {
-		try {			
-			String sql = "SELECT id FROM TRANSPLANT WHERE date = ?";
-			PreparedStatement p = c.prepareStatement(sql);
-			p.setDate(1, Date.valueOf(date));
-			ResultSet rs = p.executeQuery();
-			rs.next();
-			int id = rs.getInt("id");
-			rs.close();
-			p.close();
-			return id;			
-			
-		} catch (SQLException e) {
-			System.out.println("Database error.");
-			e.printStackTrace();
-		}
-		return null;
-	}
+	
 	
 	
 	
@@ -221,15 +203,7 @@ public class JDBCTransplantManager implements TransplantManager{
 		return null;
 	}
 
-	public Connection getC() {
-		return c;
-	}
-
-	public void setC(Connection c) {
-		this.c = c;
-	}
 	
-
 
 }
 	

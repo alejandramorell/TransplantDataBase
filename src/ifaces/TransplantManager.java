@@ -13,7 +13,6 @@ public interface TransplantManager {
 	public Theatre getTheatre(int floor, int number);
 	public Theatre getTheatreById(int id);
 	public Transplant getTransplant(int id); 
-	public Integer getTransplant(LocalDate date);
 	public Theatre getTheatre(int id);
 	public List<Transplant> getAllTransplants();
 	public void assignSurgeonTransplant(int surgeon_id, int transplant_id);
