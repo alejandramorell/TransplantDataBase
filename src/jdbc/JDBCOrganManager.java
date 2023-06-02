@@ -196,19 +196,7 @@ public class JDBCOrganManager implements OrganManager {
 		}
 
 }
-	public void assignOrganToPatient(int organId, int patientId) {
-		try {
-			String sql = "INSERT INTO ORGAN_PATIENT (organId, patientId) VALUES (?,?)";
-			PreparedStatement p = c.prepareStatement(sql);
-			p.setInt(1, organId);
-			p.setInt(2, patientId);
-			p.executeUpdate();
-			p.close();
-		} catch (SQLException e) {
-			System.out.println("Database error.");
-			e.printStackTrace();
-		}
-	}
+	
 	
 	@Override
 	public List<Organ> searchOrgansByDonor(int id) {

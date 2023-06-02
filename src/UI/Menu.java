@@ -233,19 +233,19 @@ public class Menu {
 		System.out.println("The patient has succesfully been registered!");
 
 	}
-
-	// TODO why do we want this method?
-	public static void selectSurgeon() throws IOException {
-
-		System.out.println("Let´s search by name: ");
-		System.out.println("Name: ");
-		String name = r.readLine();
-		List<Surgeon> listSur = surgeonMan.searchSurgeonByName(name);
-		System.out.println(listSur);
-		System.out.println("Please choose a surgeon, type its Id: ");
-		Integer id = Integer.parseInt(r.readLine());
-
-	}
+	
+		// TODO why do we want this method?
+		/*public static void selectSurgeon() throws IOException {
+	
+			System.out.println("Let´s search by name: ");
+			System.out.println("Name: ");
+			String name = r.readLine();
+			List<Surgeon> listSur = surgeonMan.searchSurgeonByName(name);
+			System.out.println(listSur);
+			System.out.println("Please choose a surgeon, type its Id: ");
+			Integer id = Integer.parseInt(r.readLine());
+	
+		}*/
 
 	public static void surgeonMenu(String email) {
 		Surgeon surgeon = surgeonMan.getSurgeonByEmail(email);
@@ -325,6 +325,7 @@ public class Menu {
 
 				switch (choice) {
 				case 1: {
+					System.out.println("LIST OF ALL TRANSPLANTS:");
 					List<Transplant> transplants = transplantMan.getAllTransplants();
 					System.out.println(transplants);
 					System.out.println("Please input the transplant´s id to check it's information: ");
@@ -361,6 +362,7 @@ public class Menu {
 				case 5: {
 					System.out.println("Introduce the surgeon's name to assign him to a transplant:");
 					String name = r.readLine();
+					System.out.println("LIST OF SURGEONS");
 					List<Surgeon> surgeons = surgeonMan.searchSurgeonByName(name);
 					System.out.println(surgeons);
 
@@ -427,12 +429,18 @@ public class Menu {
 				System.out.println("Request");
 				String request = r.readLine();
 				System.out.println("Input the theatre information: ");
+				System.out.println("Floor: ");
 				Integer floor = Integer.parseInt(r.readLine());
+				System.out.println("Number: ");
 				Integer number = Integer.parseInt(r.readLine());
-				Theatre theatre = new Theatre(floor, number);
-
-				Transplant transplant = new Transplant(date, o, p, request, theatre);
+				Theatre t = new Theatre(floor, number);
+				transplantMan.insertTheatre(t);
+				
+				t = transplantMan.getTheatre(floor,number);
+				
+				Transplant transplant = new Transplant(date, request,o, t,p);
 				transplantMan.insertTransplant(transplant);
+				
 				System.out.println("The transplant has succesfully been registered!");
 
 			} else {
@@ -490,9 +498,10 @@ public class Menu {
 		}
 		
 		System.out.println("Phone (" + p.getPhone() + "):");
-		Integer phone = Integer.parseInt(r.readLine());
-		if (!phone.equals("")) {
-
+		String phoneString = r.readLine();
+		
+		if (!phoneString.equals("")) {
+			Integer phone = Integer.parseInt(phoneString);
 			p.setPhone(phone);
 		}
 		
@@ -502,6 +511,7 @@ public class Menu {
 	}
 
 	public static void assignTransplant(int surgeonId) throws IOException {
+		System.out.println("LIST OF TRANSPLANTS");
 		List<Transplant> transplants = transplantMan.getAllTransplants();
 		System.out.println(transplants);
 		System.out.println("Please input the transplant´s id to assign a surgeon for it: ");
@@ -517,7 +527,7 @@ public class Menu {
 			try {
 
 				System.out.println("What do you want to do as the transplant unit?:");
-				System.out.println("1. Search for compatibility(assign organ to patient)");
+				System.out.println("1. Search for compatibility");
 				System.out.println("2. Register donor");
 				System.out.println("3. Register new organ(donor must be registered first)");
 				System.out.println("4. Remove organ");
@@ -536,7 +546,7 @@ public class Menu {
 					System.out.println("Please input the patient's id: ");
 					int patientId = Integer.parseInt(r.readLine());
 					Patient t = patientMan.getPatient(patientId);
-					assignOrgan(patientId, t.getBloodType());
+					look4Organ(patientId, t.getBloodType());
 					break;
 				}
 				case 2: {
@@ -596,16 +606,14 @@ public class Menu {
 		}
 	}
 
-	public static void assignOrgan(int patientId, String patientBloodType) throws IOException {
+	public static void look4Organ(int patientId, String patientBloodType) throws IOException {
 		System.out.println("Let's search a compatible organ, please introduce the organ that the patient needs");
 		String type = r.readLine();
 		List<Organ> listOrgan = organMan.searchOrganByType(type);
+		System.out.println("Organs that are available");
 		System.out.println(listOrgan);
-		System.out.println("Please choose an organ taking into account that the patient has a blood type: "
-				+ patientBloodType + " , type its Id:");
-		Integer organId = Integer.parseInt(r.readLine());
-		// Go to the owner's menu
-		organMan.assignOrganToPatient(organId, patientId);
+		
+		
 	}
 
 	public static void registerDonor() throws IOException {

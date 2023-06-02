@@ -19,25 +19,27 @@ public class Transplant implements Serializable {
 	
 	
 	
-	public Transplant(Integer id, Date registrationDate,Organ requestedOrgan,Patient patient,String requestedType, Theatre theatre) {
+	public Transplant(Integer id, Date registrationDate,String requestedType,Organ requestedOrgan,Theatre theatre,Patient patient) {
 		super();
 		this.id = id;
 		this.registrationDate = registrationDate;
-		this.requestedOrgan = requestedOrgan;
-		this.patient = patient;
 		this.requestedType = requestedType;
+		this.requestedOrgan = requestedOrgan;
 		this.theatre = theatre;
+		this.patient = patient;
+		
+		
 		
 	}
 	
-	public Transplant(Date registrationDate,Organ requestedOrgan,Patient patient,String requestedType, Theatre theatre) {
+	public Transplant(Date registrationDate, String request, Organ o, Theatre theatre, Patient patient) {
 		super();
-		//this.id = id;
 		this.registrationDate = registrationDate;
-		this.requestedOrgan = requestedOrgan;
-		this.patient = patient;
-		this.requestedType = requestedType;
+		this.requestedType = request;
+		this.requestedOrgan = o;
 		this.theatre = theatre;
+		this.patient = patient;
+		
 	}
 	public Integer getId() {
 		return id;

@@ -21,12 +21,6 @@
             <Organ type="liver">
                 <bloodType>B+</bloodType>
             </Organ>
-            <Organ type="kidney">
-                <bloodType>B+</bloodType>
-            </Organ>
-            <Organ type="bone marrow">
-                <bloodType>B+</bloodType>
-            </Organ>
         </Organs>
     </Donor>
     <Donor name="tomas">

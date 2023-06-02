@@ -117,11 +117,11 @@ public class JDBCPatientManager implements PatientManager{
 			p.setString(2, patient.getName());
 			p.setString(3, patient.getSurname());
 			p.setDate(4, patient.getDateOfBirth());
-			p.setString(6, patient.getBloodType());
-			p.setDate(7, patient.getAdmissionDate());
-			p.setString(8, patient.getAddress());
-			p.setInt(9, patient.getPhone());
-			p.setInt(10, patient.getId());
+			p.setString(5, patient.getBloodType());
+			p.setDate(6, patient.getAdmissionDate());
+			p.setString(7, patient.getAddress());
+			p.setInt(8, patient.getPhone());
+			p.setInt(9, patient.getId());
 			p.executeUpdate();
 			p.close();
 		} catch (SQLException e) {
