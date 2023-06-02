@@ -42,9 +42,8 @@ public class JDBCSurgeonManager implements SurgeonManager {
 			String sql = "SELECT * FROM SURGEON WHERE name LIKE ?";
 			PreparedStatement p = c.prepareStatement(sql);
 			p.setString(1, "%" + name + "%"); 
-			ResultSet rs = p.executeQuery(); //
+			ResultSet rs = p.executeQuery(); 
 			while (rs.next()) {
-				// Create a new Surgeon
 				Integer id = rs.getInt("id");
 				String n = rs.getString("name");
 				String adress = rs.getString("address");
@@ -53,8 +52,6 @@ public class JDBCSurgeonManager implements SurgeonManager {
 				Date hiringDate = rs.getDate("hiring_date");
 				String email = rs.getString("email");
 				Surgeon s = new Surgeon(id, n, adress, phone, speciality, hiringDate,email);
-				// IMPORTANT: I don't have the dogs
-				// Add the Surgeon to the list
 				list.add(s);
 			}
 			rs.close();

@@ -58,8 +58,6 @@ public class JDBCOrganManager implements OrganManager {
 			p.setString(1, "%" + name + "%"); 
 			ResultSet rs = p.executeQuery(); //Result set = object with the information selected by the query
 			while (rs.next()) {
-				// Create a new donor
-			
 				Integer id = rs.getInt("id");
 				String n = rs.getString("name");
 				String address = rs.getString("address");
@@ -67,7 +65,6 @@ public class JDBCOrganManager implements OrganManager {
 				String livingState = rs.getString("living_state");
 				
 				Donor d = new Donor(id, n, address, phone, livingState);
-				// Add the donor to the list
 				list.add(d);
 			}
 			rs.close();
@@ -88,7 +85,7 @@ public class JDBCOrganManager implements OrganManager {
 			PreparedStatement p = c.prepareStatement(sql);
 			ResultSet rs = p.executeQuery(); //
 			while (rs.next()) {
-				// Create a new donor
+				
 				Integer id = rs.getInt("id");
 				String n = rs.getString("name");
 				String address = rs.getString("address");

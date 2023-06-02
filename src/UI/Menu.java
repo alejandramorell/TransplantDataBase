@@ -234,18 +234,7 @@ public class Menu {
 
 	}
 	
-		// TODO why do we want this method?
-		/*public static void selectSurgeon() throws IOException {
-	
-			System.out.println("Let´s search by name: ");
-			System.out.println("Name: ");
-			String name = r.readLine();
-			List<Surgeon> listSur = surgeonMan.searchSurgeonByName(name);
-			System.out.println(listSur);
-			System.out.println("Please choose a surgeon, type its Id: ");
-			Integer id = Integer.parseInt(r.readLine());
-	
-		}*/
+		
 
 	public static void surgeonMenu(String email) {
 		Surgeon surgeon = surgeonMan.getSurgeonByEmail(email);
@@ -263,7 +252,7 @@ public class Menu {
 
 				switch (choice) {
 				case 1: {
-					System.out.println("Input the name of the patient to see their information");
+					System.out.println("Input the name of the patient to see his information");
 					String name = r.readLine();
 					List<Patient> patientsList = patientMan.searchPatientByName(name);
 					System.out.println(patientsList);
