@@ -16,7 +16,6 @@ public interface TransplantManager {
 	public Integer getTransplant(LocalDate date);
 	public Theatre getTheatre(int id);
 	public List<Transplant> getAllTransplants();
-	public List<Transplant> getTransplants(LocalDate date);
 	public void assignSurgeonTransplant(int surgeon_id, int transplant_id);
 
 	

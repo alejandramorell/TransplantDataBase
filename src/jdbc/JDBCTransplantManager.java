@@ -142,37 +142,7 @@ public class JDBCTransplantManager implements TransplantManager{
 		return null;
 	}
 	
-	@Override
-	public List<Transplant> getTransplants(LocalDate date) {
-		List<Transplant> list = new ArrayList<Transplant> ();
-		
-		try {
-			String sql = "SELECT * FROM TRANSPLANT WHERE date = ?";
-			PreparedStatement p = c.prepareStatement(sql);
-			p.setDate(1, Date.valueOf(date));
-			ResultSet rs = p.executeQuery();
-			
-			while (rs.next()) {
-				//Integer transplantId = rs.getInt("id"); 
-				Date registrationDate = rs.getDate("registration_date");
-				String requestedType = rs.getString("requested_type");
-				Organ requestedOrgan = organMan.getOrgan(rs.getInt("organ_id")); 
-				Theatre theatre = getTheatreById(rs.getInt("theatre_id"));
-				Patient patient = patientMan.getPatient(rs.getInt("patient_id"));
-				
-			
-				Transplant t = new Transplant(registrationDate,requestedType,requestedOrgan,theatre,patient );
-				list.add(t);
-			}
-			rs.close();
-			p.close();
-		} catch (SQLException e) {
-			System.out.println("Database error.");
-			e.printStackTrace();
-		}
-		return list;
-		
-	}
+	
 	
 	@Override
 	public List<Transplant> getAllTransplants() {
