@@ -17,6 +17,7 @@ import java.sql.Date;
 
 public class Menu {
 
+	//prueba menu
 	private static BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
 
 	private static SurgeonManager surgeonMan;
