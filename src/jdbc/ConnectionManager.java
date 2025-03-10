@@ -14,7 +14,7 @@ public class ConnectionManager {
 	public ConnectionManager() { 
 		try {
 			Class.forName("org.sqlite.JDBC");
-			c = DriverManager.getConnection("jdbc:sqlite:./db/TransplantDataBase.db");
+			c = DriverManager.getConnection("jdbc:sqlite:./db/NeuroPed.db");
 			c.createStatement().execute("PRAGMA foreign_keys=ON"); //we activate a FK
 			System.out.println("Database connection opened.");
 			createTables();
@@ -29,60 +29,49 @@ public class ConnectionManager {
 		try {
 			//c.setAutoCommit(false); when i want to make multiple changes at same time, the db is not going to do it inmediatly
 			Statement s = c.createStatement();
-			String table = "CREATE TABLE SURGEON (id INTEGER PRIMARY KEY AUTOINCREMENT, "
-					+ "name TEXT NOT NULL, "
-					+ "address TEXT NOT NULL, "
-					+ "phone INTEGER NOT NULL, "
-					+ "speciality TEXT NOT NULL, "
-					+ "hiring_date DATE NOT NULL, "
-					+ "email TEXT NOT NULL)";
-			s.executeUpdate(table);
 			
-			String table2 = "CREATE TABLE PATIENT (id INTEGER PRIMARY KEY, " 
+			String table1 = "CREATE TABLE PATIENT (id INTEGER PRIMARY KEY AUTOINCREMENT, " 
 				    + "sex TEXT NOT NULL, "
 			        + "name TEXT NOT NULL,"
 					+ "surname TEXT NOT NULL, "
 					+ "date_of_birth DATE NOT NULL, "
-					+ "blood_type TEXT NOT NULL, "
-					+ "admission_date DATE NOT NULL, "	
-					+ "address TEXT NOT NULL, "
-					+ "phone INTEGER NOT NULL) ";
+					+ "pathology TEXT NOT NULL, "	
+					+ "diagnosis TEXT NOT NULL) ";
+			s.executeUpdate(table1);
+			
+			String table2 = "CREATE TABLE STAFF (id INTEGER PRIMARY KEY AUTOINCREMENT, "
+					+ "name TEXT NOT NULL, "
+					+ "surname TEXT NOT NULL, "
+					+ "field TEXT NOT NULL, "
+					+ "patient_id INTEGER NOT NULL,"
+					+ "FOREIGN KEY (patient_id) REFERENCES PATIENT(id) ON DELETE CASCADE)";
 			s.executeUpdate(table2);
+						
 		
-			String table3 = "CREATE TABLE ORGAN (id INTEGER PRIMARY KEY AUTOINCREMENT,"
+			String table3 = "CREATE TABLE TEST (id INTEGER PRIMARY KEY AUTOINCREMENT,"
 					+ "type TEXT NOT NULL,"
-					+ "blood_type TEXT NOT NULL,"
-					+ "donor_id INTEGER NOT NULL,"
-					+ "FOREIGN KEY (donor_id) REFERENCES DONOR(id) ON DELETE CASCADE)";
+					+ "result TEXT NOT NULL,"
+					+ "dateOfTest DATE NOT NULL,"
+					+ "patient_id INTEGER NOT NULL,"
+					+ "treatment_id INTEGER NOT NULL,"
+					+ "FOREIGN KEY (patient_id) REFERENCES PATIENT(id) ON DELETE CASCADE,"
+					+ "FOREIGN KEY (treatment_id) REFERENCES TREATMENT(id) ON DELETE CASCADE)";
 			s.executeUpdate(table3);
 			
-			String table4 = "CREATE TABLE DONOR (id INTEGER PRIMARY KEY AUTOINCREMENT,"
-					+ "name TEXT NOT NULL,"
-					+ "address TEXT NOT NULL,"
-					+ "phone INTEGER NOT NULL,"
-					+ "living_state TEXT NOT NULL)";			
+						
+			String table4 = "CREATE TABLE TREATMENT (id INTEGER PRIMARY KEY AUTOINCREMENT,"
+					+ "days INTEGER NOT NULL,"
+					+ "hoursPerDay INTEGER NOT NULL,"
+					+ "goals TEXT NOT NULL,"
+					+ "technology TEXT NOT NULL,"
+					+ "patient_id INTEGER NOT NULL,"
+					+ "FOREIGN KEY (patient_id) REFERENCES PATIENT(id) ON DELETE CASCADE)";
 			s.executeUpdate(table4);
 			
-			String table5 = "CREATE TABLE THEATRE (id INTEGER PRIMARY KEY AUTOINCREMENT,"
-					+ "floor INTEGER NOT NULL,"
-					+ "number INTEGER NOT NULL)";			
+			String table5 = "CREATE TABLE TREATMENT_STAFF (treatment_id INTEGER REFERENCES TREATMENT(id),"
+					+ "staff_id INTEGER REFERENCES STAFF(id) ON DELETE CASCADE,"
+					+ "PRIMARY KEY (treatment_id,staff_id))";			
 			s.executeUpdate(table5);
-			
-			String table6 = "CREATE TABLE TRANSPLANT (id INTEGER PRIMARY KEY AUTOINCREMENT,"
-					+ "registration_date DATE NOT NULL,"
-					+ "requested_type TEXT NOT NULL,"
-					+ "organ_id INTEGER NOT NULL,"
-					+ "theatre_id INTEGER NOT NULL,"
-					+ "patient_id INTEGER NOT NULL,"
-					+ "FOREIGN KEY (organ_id) REFERENCES ORGAN(id)ON DELETE CASCADE,"
-					+ "FOREIGN KEY (patient_id) REFERENCES PATIENT(id)ON DELETE CASCADE,"
-					+ "FOREIGN KEY (theatre_id) REFERENCES THEATRE(id) ON DELETE CASCADE)";					
-			s.executeUpdate(table6);
-			
-			String table7 = "CREATE TABLE TRANSPLANT_SURGEON (transplant_id INTEGER REFERENCES TRANSPLANT(id),"
-					+ "surgeon_id INTEGER REFERENCES SURGEON(id) ON DELETE CASCADE,"
-					+ "PRIMARY KEY (surgeon_id,transplant_id))";			
-			s.executeUpdate(table7);
 			
 			s.close();
 			
@@ -102,9 +91,17 @@ public class ConnectionManager {
 	public void closeConnection() {
 		try {
 			c.close();
+			System.out.println("Database closed.");
 		} catch (SQLException e) {
 			System.out.println("Database error.");
 			e.printStackTrace();
 		}
+	}
+	
+	public static void main(String[] args) {
+		ConnectionManager conMan = new ConnectionManager();
+		conMan.createTables();
+		System.out.println("Tables created.");
+		conMan.closeConnection();
 	}
 }

@@ -1,6 +1,7 @@
 package UI;
 
 import java.io.BufferedReader;
+
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.time.LocalDate;
@@ -8,19 +9,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import ifaces.*;
-
+import pojos.*;
 import jdbc.*;
 import jpa.JPAUserManager;
-import transplant.pojos.Donor;
-import transplant.pojos.Nurse;
-import transplant.pojos.Organ;
-import transplant.pojos.Patient;
-import transplant.pojos.Role;
-import transplant.pojos.Surgeon;
-import transplant.pojos.Theatre;
-import transplant.pojos.Transplant;
-import transplant.pojos.User;
-import xml.XMLManagerImplementation;
 
 import java.sql.Date;
 
@@ -33,14 +24,14 @@ public class Menu {
 	private static OrganManager organMan;
 	private static TransplantManager transplantMan;
 	private static UserManager userMan;
-	private static XMLManager xmlMan = new XMLManagerImplementation();
+	//private static XMLManager xmlMan = new XMLManagerImplementation();
 
 	public static void main(String[] args) {
 		ConnectionManager conMan = new ConnectionManager();
 		surgeonMan = new JDBCSurgeonManager(conMan.getConnection());
 		patientMan = new JDBCPatientManager(conMan.getConnection());
 		organMan = new JDBCOrganManager(conMan.getConnection());
-		transplantMan = new JDBCTransplantManager(conMan.getConnection(), organMan, patientMan, transplantMan);
+		transplantMan = new JDBCTreatmentManager(conMan.getConnection(), organMan, patientMan, transplantMan);
 		userMan = new JPAUserManager();
 
 		while (true) {

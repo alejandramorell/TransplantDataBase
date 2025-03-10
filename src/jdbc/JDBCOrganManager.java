@@ -10,8 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ifaces.OrganManager;
-import transplant.pojos.Donor;
-import transplant.pojos.Organ;
+import pojos.Donor;
+import pojos.Organ;
 
 public class JDBCOrganManager implements OrganManager {
 	

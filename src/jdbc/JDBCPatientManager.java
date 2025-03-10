@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ifaces.PatientManager;
-import transplant.pojos.Patient;
+import pojos.Patient;
 
 public class JDBCPatientManager implements PatientManager{
 	private Connection c;
@@ -62,7 +62,7 @@ public class JDBCPatientManager implements PatientManager{
 				Date admissionDate = rs.getDate("admission_date");
 				String adress = rs.getString("address");
 				Integer phone= rs.getInt("phone");
-				Patient p1 = new Patient(id, sex, n, surname, dob,bloodType, admissionDate, adress,phone);
+				Patient p1 = new Patient(sex, n, surname, dob,bloodType, admissionDate, adress,phone);
 				// IMPORTANT: I don't have the requested organs
 				// Add the Patient to the list
 				list.add(p1);
@@ -94,7 +94,7 @@ public class JDBCPatientManager implements PatientManager{
 			Date admissionDate = rs.getDate("admission_date");
 			String adress = rs.getString("address");
 			Integer phone= rs.getInt("phone");
-			Patient p1 = new Patient(id, sex, n, surname, dob,bloodType, admissionDate, adress,phone);
+			Patient p1 = new Patient(sex, n, surname, dob,bloodType, admissionDate, adress,phone);
 			
 			rs.close();
 			p.close();

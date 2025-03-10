@@ -1,10 +1,11 @@
 package jpa;
 
 import java.util.List;
+
 import javax.persistence.*;
 
 import ifaces.UserManager;
-import transplant.pojos.*;
+import pojos.*;
 
 
 public class JPAUserManager implements UserManager {	
@@ -13,22 +14,20 @@ EntityManager em;
 
 public JPAUserManager() {
 	
-	em = Persistence.createEntityManagerFactory("transplant-provider").createEntityManager();
+	em = Persistence.createEntityManagerFactory("np-provider").createEntityManager();
 	em.getTransaction().begin();
 	em.createNativeQuery("PRAGMA foreign_keys=ON").executeUpdate();
 	em.getTransaction().commit();
 	
 	if (this.getRoles().isEmpty()) {
-		Role surgeon = new Role("surgeon");
-		Role nurse = new Role("nurse");
-		Role transplantUnit = new Role("transplant unit");
-		this.createRole(surgeon);
-		this.createRole(nurse);
-		this.createRole(transplantUnit);
+		Role supervisor = new Role("supervisor");
+		Role staff = new Role("staff");
+		this.createRole(supervisor);
+		this.createRole(staff);
 		
-		User user = new User("transplantUnit","organ0","tUnit@dataBase.com");
+		User user = new User("Lucia","NeuroPed");
 		register(user);
-		Role role = getRole("transplant unit"); 
+		Role role = getRole("supervisor"); 
 		assignRole(user, role);
 		
 	}
@@ -96,21 +95,6 @@ public Role getRole(String name) {
 	Role r = (Role) q.getSingleResult();
 	return r;
 }
-
-@Override
-public User getNurseByEmail(String email) {
-	try {
-		Query sql = em.createNativeQuery("SELECT * FROM users WHERE EMAIL = ?", User.class);
-		sql.setParameter(1, email);
-		User user = (User) sql.getSingleResult();
-		return user;
-		
-	} catch (NoResultException e) {
-		System.out.println("Database error.");
-		e.printStackTrace();
-	}
-	return null;
-}	
 
 }
 

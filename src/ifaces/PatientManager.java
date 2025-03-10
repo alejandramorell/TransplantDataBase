@@ -2,7 +2,7 @@ package ifaces;
 
 import java.util.List;
 
-import transplant.pojos.*;
+import pojos.*;
 
 public interface PatientManager {
 
