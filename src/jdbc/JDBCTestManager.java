@@ -9,24 +9,25 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import ifaces.OrganManager;
-import pojos.Donor;
-import pojos.Organ;
+import ifaces.TestManager;
+import pojos.Test;
+import pojos.Treatment;
 
-public class JDBCOrganManager implements OrganManager {
+
+public class JDBCTestManager implements TestManager {
 	
 	private Connection c;
 	
-	public JDBCOrganManager(Connection c) {
+	public JDBCTestManager(Connection c) {
 		this.c = c;
 	}
 
 	@Override
-	public void insertOrgan(Organ organ) {
+	public void insertTest(Test test) {
 		try {
 				Statement s = c.createStatement();
-				String sql = "INSERT INTO ORGAN (type, blood_type, donor_id) VALUES ('" + organ.getType() + "', '"
-						+ organ.getBloodType() + "', " + organ.getDonor().getId() +")";
+				String sql = "INSERT INTO TEST (type, result, dateOfTest, patient_id, treatmentId ) VALUES ('" + test.getType() + "', '"
+						+ test.getResult() + "', " + test.getDateOfTest() + "', " + test.getPatient().getId() + "', " + test.getTreatment().getId() + ")";
 				s.executeUpdate(sql);
 				s.close();
 			} catch (SQLException e) {
@@ -36,11 +37,11 @@ public class JDBCOrganManager implements OrganManager {
 		}
 	
 	@Override
-	public void insertDonor(Donor donor) {
+	public void insertTreatment(Treatment treatment) {
 		try {
 				Statement s = c.createStatement();
-				String sql = "INSERT INTO DONOR (name, address, phone, living_state) VALUES ('" + donor.getName() + "', '"
-						+ donor.getAddress() + "', " + donor.getPhone() + ", '" + donor.getLivingState()+"')";
+				String sql = "INSERT INTO TREATMENT (days, hoursPerDay, goals, technology,patient_id) VALUES ('" + treatment.getDays() + "', '"
+						+ treatment.getHoursPerDay()+ "', " + treatment.getGoals() + ", '" + treatment.getTechnology() + + treatment.getPatient().getId()+"')";
 				s.executeUpdate(sql);
 				s.close();
 		}catch (SQLException e) {
@@ -50,22 +51,21 @@ public class JDBCOrganManager implements OrganManager {
 		}
 
 	@Override
-	public List<Donor> searchDonorByName(String name) {
-		List<Donor> list = new ArrayList<Donor>();
+	public List<Treatment> searchTreatmentById(Integer id) {
+		List<Treatment> list = new ArrayList<Treatment>();
 		try {
-			String sql = "SELECT * FROM DONOR WHERE name LIKE ?";
+			String sql = "SELECT * FROM TREATMENT WHERE id LIKE ?";
 			PreparedStatement p = c.prepareStatement(sql);
-			p.setString(1, "%" + name + "%"); 
+			p.setString(1, "%" + id + "%"); 
 			ResultSet rs = p.executeQuery(); //Result set = object with the information selected by the query
 			while (rs.next()) {
-				Integer id = rs.getInt("id");
-				String n = rs.getString("name");
-				String address = rs.getString("address");
-				Integer phone= rs.getInt("phone");
-				String livingState = rs.getString("living_state");
+				Integer days = rs.getInt("days");
+				Integer hoursPerDay = rs.getInt("hoursPerDay");
+				String goals = rs.getString("goals");
+				String technology = rs.getString("technology");
 				
-				Donor d = new Donor(id, n, address, phone, livingState);
-				list.add(d);
+				Treatment t = new Treatment(id,days, hoursPerDay, goals, technology);
+				list.add(t);
 			}
 			rs.close();
 			p.close();

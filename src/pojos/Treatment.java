@@ -14,9 +14,15 @@ public class Treatment implements Serializable {
 	private int hoursPerDay;
 	private String goals;
 	private String technology;
-	private Patient patient;
+	
+	//1:N A TREATMENT CAN HAVE MANY TESTS
+	private List<Test> tests;
+	
+	//N-N : A TREATMENT CAN BE APLIED BY MANY STAFF MEMBERS
 	private List<Staff> staffMembers;
-			
+	
+	//N-N : A TREATMENT CAN BE APLIED TO MANY PATIENTS
+	private List<Patient> patients;
 	
 	public Treatment(Integer id,Integer days, Integer hoursPerDay, String goals, String technology,Patient patient, Staff staff) {
 		super();

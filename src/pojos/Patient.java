@@ -17,6 +17,13 @@ public class Patient implements Serializable{
 	private Date dateOfBirth;
 	private String pathology;
 	private String diagnosis;
+	
+	//N:1- A PATIENT BELONGS TO A SINGLE STAFF MEMBER
+	private Staff staff;
+	
+	//N:N - A PATIENT CAN RECEIVE SEVERAL TREATMENTS
+    private List<Treatment> treatments; 
+    
     
 	public Patient() {
 		super();
