@@ -1,4 +1,4 @@
-package transplant.pojos;
+package pojos;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -15,13 +15,8 @@ public class Role implements Serializable {
 	 */
 	private static final long serialVersionUID = 3498337693029250457L;
 
-	@Id
-	@GeneratedValue(generator = "roles")
-	@TableGenerator(name = "roles", table = "sqlite_sequence",
-		pkColumnName = "name", valueColumnName = "seq", pkColumnValue = "roles")
 	private Integer id;
 	private String name;
-	@OneToMany(mappedBy="role", fetch = FetchType.LAZY)
 	private List<User> users;
 	
 

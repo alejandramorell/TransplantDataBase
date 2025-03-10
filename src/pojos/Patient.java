@@ -1,4 +1,4 @@
-package transplant.pojos;
+package pojos;
 
 import java.io.Serializable;
 import java.sql.Date;
@@ -15,41 +15,35 @@ public class Patient implements Serializable{
 	private String name;
 	private String surname;
 	private Date dateOfBirth;
-	private String bloodType;
-	private Date admissionDate;
-	private String address;
-	private Integer phone;
-	private List<Transplant> transplants;
+	private String pathology;
+	private String diagnosis;
     
 	public Patient() {
 		super();
 	}
-	public Patient(Integer id, String sex, String name, String surname, Date dateOfBirth, String bloodType,
-			Date admissionDate, String address, Integer phone) {
+	
+	public Patient(Integer id, String sex, String name, String surname, Date dateOfBirth, String pathology, 
+			String diagnosis) {
 		super();
 		this.id = id;
 		this.sex = sex;
 		this.name = name;
 		this.surname = surname;
 		this.dateOfBirth = dateOfBirth;
-		this.bloodType = bloodType;
-		this.admissionDate = admissionDate;
-		this.address = address;
-		this.phone = phone;
+		this.pathology = pathology;
+		this.diagnosis = diagnosis;
 	
 	}
 
-	public Patient(String sex, String name, String surname, Date dateOfBirth, String bloodType,
-			Date admissionDate, String address, Integer phone) {
+	public Patient(String sex, String name, String surname, Date dateOfBirth, String pathology, 
+			String diagnosis) {
 		super();
 		this.sex = sex;
 		this.name = name;
 		this.surname = surname;
 		this.dateOfBirth = dateOfBirth;
-		this.bloodType = bloodType;
-		this.admissionDate = admissionDate;
-		this.address = address;
-		this.phone = phone;
+		this.pathology = pathology;
+		this.diagnosis = diagnosis;
 	
 	}
 
@@ -93,46 +87,22 @@ public class Patient implements Serializable{
 		this.dateOfBirth = dateOfBirth;
 	}
 
-	public String getBloodType() {
-		return bloodType;
+	public String getPathology() {
+		return pathology;
 	}
-
-	public void setBloodType(String bloodType) {
-		this.bloodType = bloodType;
+	public void setPathology(String pathology) {
+		this.pathology = pathology;
 	}
-
-	public Date getAdmissionDate() {
-		return admissionDate;
+	public String getDiagnosis() {
+		return diagnosis;
 	}
-
-	public void setAdmissionDate(Date ingressDate) {
-		this.admissionDate = ingressDate;
+	public void setDiagnosis(String diagnosis) {
+		this.diagnosis = diagnosis;
 	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	public Integer getPhone() {
-		return phone;
-	}
-
-	public void setPhone(Integer phone) {
-		this.phone = phone;
-	}
-
-	
-	
-
 	@Override
 	public String toString() {
 		return "Patient [id=" + id + ", sex=" + sex + ", name=" + name + ", surname=" + surname + ", dateOfBirth="
-				+ dateOfBirth + ", bloodType=" + bloodType + ", admissionDate=" + admissionDate
-				+ ", address=" + address + ", phone=" + phone + "]";
+				+ dateOfBirth + ", pathology=" + pathology + ", diagnosis=" + diagnosis + "]";
 	}
 	@Override
 	public int hashCode() {
