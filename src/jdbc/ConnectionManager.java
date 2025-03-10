@@ -36,24 +36,25 @@ public class ConnectionManager {
 					+ "surname TEXT NOT NULL, "
 					+ "date_of_birth DATE NOT NULL, "
 					+ "pathology TEXT NOT NULL, "	
-					+ "diagnosis TEXT NOT NULL, "
-					+ "staff_id INTEGER NOT NULL, "
-					+ "FOREIGN KEY (staff_id) REFERENCES STAFF(id) ON DELETE CASCADE)";
-	
+					+ "diagnosis TEXT NOT NULL) ";
 			s.executeUpdate(table1);
 			
 			String table2 = "CREATE TABLE STAFF (id INTEGER PRIMARY KEY AUTOINCREMENT, "
 					+ "name TEXT NOT NULL, "
 					+ "surname TEXT NOT NULL, "
-					+ "field TEXT NOT NULL)";
-					s.executeUpdate(table2);
+					+ "field TEXT NOT NULL, "
+					+ "patient_id INTEGER NOT NULL,"
+					+ "FOREIGN KEY (patient_id) REFERENCES PATIENT(id) ON DELETE CASCADE)";
+			s.executeUpdate(table2);
 						
 		
 			String table3 = "CREATE TABLE TEST (id INTEGER PRIMARY KEY AUTOINCREMENT,"
 					+ "type TEXT NOT NULL,"
 					+ "result TEXT NOT NULL,"
 					+ "dateOfTest DATE NOT NULL,"
+					+ "patient_id INTEGER NOT NULL,"
 					+ "treatment_id INTEGER NOT NULL,"
+					+ "FOREIGN KEY (patient_id) REFERENCES PATIENT(id) ON DELETE CASCADE,"
 					+ "FOREIGN KEY (treatment_id) REFERENCES TREATMENT(id) ON DELETE CASCADE)";
 			s.executeUpdate(table3);
 			
@@ -62,18 +63,15 @@ public class ConnectionManager {
 					+ "days INTEGER NOT NULL,"
 					+ "hoursPerDay INTEGER NOT NULL,"
 					+ "goals TEXT NOT NULL,"
-					+ "technology TEXT NOT NULL)";
-					s.executeUpdate(table4);
+					+ "technology TEXT NOT NULL,"
+					+ "patient_id INTEGER NOT NULL,"
+					+ "FOREIGN KEY (patient_id) REFERENCES PATIENT(id) ON DELETE CASCADE)";
+			s.executeUpdate(table4);
 			
 			String table5 = "CREATE TABLE TREATMENT_STAFF (treatment_id INTEGER REFERENCES TREATMENT(id),"
 					+ "staff_id INTEGER REFERENCES STAFF(id) ON DELETE CASCADE,"
 					+ "PRIMARY KEY (treatment_id,staff_id))";			
 			s.executeUpdate(table5);
-			
-			String table6 = "CREATE TABLE TREATMENT_PATIENT (treatment_id INTEGER REFERENCES TREATMENT(id),"
-					+ "patient_id INTEGER REFERENCES TREATMENT(id) ON DELETE CASCADE,"
-					+ "PRIMARY KEY (treatment_id,patient_id))";			
-			s.executeUpdate(table6);
 			
 			s.close();
 			

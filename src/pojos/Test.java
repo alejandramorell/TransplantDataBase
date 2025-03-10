@@ -13,9 +13,9 @@ public class Test implements Serializable{
 	private String type;
 	private String result;
 	private Date dateOfTest;
+	private Patient patient; //duda si utilizar el id del paciente como int o el paciente entero
+	private Treatment treatmentId; //duda si utilizar el id del paciente como int o el paciente entero
 	
-	//1:N - A TEST BELONGS TO A SINGLE TREATMENT
-	private Treatment treatmentId; 
 	
 	public Test(Integer id,String type, Date dateOfTest) {
 		super();
@@ -81,12 +81,12 @@ public class Test implements Serializable{
 	}
 
 	
-	public Treatment getTreatment() {
+	public Treatment getTreatmentId() {
 		return treatmentId;
 	}
 
 
-	public void setTreatment(Treatment treatmentId) {
+	public void setTreatmentId(Treatment treatmentId) {
 		this.treatmentId = treatmentId;
 	}
 

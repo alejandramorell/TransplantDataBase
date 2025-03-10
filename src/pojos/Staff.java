@@ -2,7 +2,6 @@ package pojos;
 
 import java.io.Serializable;
 import java.sql.Date;
-import java.util.List;
 import java.util.Objects;
 
 
@@ -14,12 +13,8 @@ public class Staff implements Serializable {
 	private String name; 
 	private String surname;
 	private String field;
-	
-	//RELATIONSHIP 1:N - A MEMBER OF STAFF HAS MANY PATIENTS
-	private List<Patient> patients;
-	
-	//RELATIONSHIP N:N - A STAFF CAN PARTICIPATE IN MANY TREATMENTS AND A TREATMENT CAN BE DONE BY MANY STAFF MEMBERS
-	private List<Treatment> treatments;
+	private Patient patient;
+	//private int idPaciente o private Paciente paciente
 	
 	public Staff() {
 		super();
